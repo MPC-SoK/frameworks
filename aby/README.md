@@ -1,4 +1,4 @@
-ABY was developed by Daniel Demmler, Thomas Schneider and Michael Zohner in the [ENCRYPTO group](https://www.encrypto.informatik.tu-darmstadt.de/encrypto/) at TU Darmstadt.
+ABY was developed by Daniel Demmler, Thomas Schneider and Michael Zohner in the [ENCRYPTO group](https://www.informatik.tu-darmstadt.de/encrypto/home_page/index.en.jsp) at TU Darmstadt.
 
 ## Docker setup
 
@@ -45,4 +45,4 @@ compile a single program but we have yet to find it).
 
 For more details on the ABY libraries, we recommend the helpful, though
 incomplete, [Developer
-Guide](https://www.encrypto.informatik.tu-darmstadt.de/fileadmin/user_upload/Group_ENCRYPTO/code/ABY/devguide.pdf).
+Guide](https://www.informatik.tu-darmstadt.de/media/encrypto/encrypto_code/abydevguide.pdf)
