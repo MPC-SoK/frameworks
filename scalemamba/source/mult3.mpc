@@ -1,0 +1,10 @@
+# a = sint.get_private_input_from(0)
+# b = sint.get_private_input_from(1)
+# c = sint.get_private_input_from(2)
+
+a = sint(20)
+b = sint(3)
+c = sint(9)
+prod = a * b * c
+prod.reveal_to(0)
+

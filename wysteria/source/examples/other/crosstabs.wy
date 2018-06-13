@@ -1,0 +1,86 @@
+
+(* eventually we want to use arrays as input for each participant *)
+(*
+let size = 10 in
+let last = size - 1 in
+
+let input = array [size] of {#id:0,#val:0} in
+let _ = 
+  let reader = sysop run "cat < tab1_data" in
+  for i = 0 to last do
+    let tabi = sysop recv {#i:nat,#value:nat} reader in
+    let x = tabi.#i in 
+    let v = tabi.#value in 
+    update input[i] <- { #id: x, #val: v }
+  done
+in
+*)
+
+
+let parts = { !Alice, !Bob, !Charlie } in
+let answer @par ( parts ) =
+
+  (* takes the sum of elements in an array
+   * arr is the list
+   * asize is the index of the last element 
+   *)
+  let arraysum = \(arr : array {#id:nat,#val:nat}) . \ (asize : nat) . 
+    let solnnoreq @sec( parts ) = 
+    let sum = array [1] of {#sumv:0} in 
+      let result = 
+      for i = 0 to asize do
+        let sval = select sum[0].#sumv in
+        let aval = select arr[i].#val  in
+        let pval = (sval + aval) in
+        update sum[0] <- {#sumv:pval}
+      done
+    in select sum[0].#sumv
+    in solnnoreq
+  in
+
+
+  (* build a test array
+   * contents : [0 2 4 6 8 10 12 14 16 18]
+   *)
+  let testarr = array[10] of {#id:0,#val:0} in
+  let _ = for i = 0 to 9 do
+    let newval = i + i in 
+    update testarr[i] <- {#id:i,#val:newval}
+    done
+  in
+
+  let 
+
+(* test array sum function *)
+(arraysum testarr) 9
+in wire parts:answer
+
+
+
+
+
+
+
+
+(*
+let tmp @par( parts ) =
+
+  let f = \ (w:W parts nat).
+      let sum @sec( parts ) =
+        wfold parts [w; 0; \(n1:nat).
+                           \(p:ps{true}).
+                           \(n2:nat).  n1 + n2 ]
+      in sum
+  in
+
+  let w1 = wire { !Alice }:10 in
+  let w2 = wire { !Bob }:20 in
+  let w3 = wire { !Charlie }:30 in
+
+  let wire_input = ((w1 ++ w2) ++ w3) in
+
+  f wire_input
+
+in wire parts:tmp
+
+*)

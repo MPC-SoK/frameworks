@@ -1,0 +1,6 @@
+a = sint.get_raw_input_from(0)
+b = sint.get_raw_input_from(1)
+c = sint.get_raw_input_from(2)
+
+prod = a * b * c
+print_ln('Mult3 prod = %s', prod.reveal());

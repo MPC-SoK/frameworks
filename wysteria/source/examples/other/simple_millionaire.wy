@@ -1,0 +1,11 @@
+
+let result @par({!Alice,!Bob,!Charlie})=
+let a = wire { !Alice }:4 in
+let b = wire { !Bob }:5 in
+let c = wire { !Charlie }:7 in
+let w = (a ++ b) ++ c in 
+
+let out @sec({!Alice,!Bob,!Charlie}) = w[!Alice] > ( w[!Bob] + w[!Charlie] ) in
+out
+in wire{!Alice,!Bob,!Charlie}:result
+

@@ -1,0 +1,5 @@
+modulus:32
+comp-parties:3
+threshold:1
+input-parties:2
+output-parties:1

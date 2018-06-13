@@ -1,0 +1,25 @@
+
+(* tests multiplication *)
+(*
+let tmp @par( { !Alice, !Bob}) =
+
+  let f = \ (w:W { !Alice, !Bob} nat ).
+      let product @sec( { !Alice, !Bob}) =
+          w[!Alice] * w[!Bob] 
+      in product
+  in
+
+  let w1 = wire { !Alice }:3 in
+  let w2 = wire { !Bob }:2 in
+
+  let wire_input = (w1 ++ w2) in
+
+  f wire_input
+
+in wire { !Alice, !Bob }:tmp
+
+*)
+
+let x = 2 in
+let y = 3 in
+x * y

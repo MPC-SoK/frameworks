@@ -1,0 +1,11 @@
+--- src/Offline/FHE_Factory.cpp	2018-06-11 18:05:36.000000000 +0000
++++ src/Offline/FHE_Factory.correct.cpp	2018-06-12 20:28:42.920000000 +0000
+@@ -224,7 +224,7 @@
+   // Step 2 first step
+   printf("ZKPoK Agree Random\n");
+   uint8_t seed[stat_sec / 8];
+-  AgreeRandom(P, seed, stat_sec);
++  AgreeRandom(P, seed, stat_sec / 8);
+   vector<int> e(stat_sec);
+   int c= 0;
+   for (int i= 0; i < stat_sec / 8; i++)

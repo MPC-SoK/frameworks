@@ -1,0 +1,16 @@
+
+(* tests secure multiplication *)
+
+let parts = { !Alice, !Bob, !Charlie } in
+let result @par( parts ) =
+
+  let w = wire { !Alice }:5 in
+  let w = (wire { !Bob }:2) ++ w in
+  let w = (wire { !Charlie}:1) ++ w in
+
+  let product @sec( parts ) =
+    (w[!Alice] * w[!Bob] ) * w[!Charlie]
+  in product
+
+in wire { parts }:result
+

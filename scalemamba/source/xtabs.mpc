@@ -1,0 +1,35 @@
+
+def mux(cond, trueVal, falseVal):
+    return trueVal + (cond == 0) * (falseVal - trueVal)
+
+nRows = 5;
+BINS = 3;
+
+# Assume each party's IDs are distinct 
+idA = [sint(i) for i in range(nRows)]
+idB = [sint(i*2) for i in range(nRows)]
+
+catA = [sint(2) for _ in range(nRows)]
+valB = [sint(i*3) for i in range(nRows)]
+
+catCount = Array(BINS, sint)
+catSum = Array(BINS, sint)
+
+for i in range(BINS):
+    catCount[i] = sint(0)
+    catSum[i] = sint(0)
+
+match = sint(0)
+for i in range(nRows):
+    for j in range(nRows):
+        match = (idA[i] == idB[j])
+        for k in range(BINS):
+            catMatch = (catA[i] == k)
+            catCount[k] = mux(match * catMatch, catCount[k] + 1, catCount[k])
+            catSum[k] = mux(match * catMatch, catSum[k] + valB[j], catSum[k])
+
+print("Category Sums: ")
+for i in range(BINS):
+    catCount[i].reveal_to(1,15)
+    catSum[i].reveal_to(0)
+print_ln()

@@ -1,0 +1,38 @@
+/* 
+ * compute inner product of two vectors 
+ */
+
+#define LEN 10
+#parties 2
+
+/* define some types */
+typedef int_t 32 int
+typedef uint_t 6 sint
+
+typedef struct_t array
+{
+    int data[LEN];
+}
+
+/* define computation parameters */
+#input 1 array
+#output 1 int
+#input 2 array
+#output 2 int
+
+
+function void main() {
+
+    array xinput = input1;
+    array yinput = input2;
+
+    int result = 0;
+
+    for(sint i=0; i<LEN; i++) {
+        result = result + (xinput.data[i] * yinput.data[i]);
+    }
+
+    output1 = result;
+    output2 = result;
+
+}

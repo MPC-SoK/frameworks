@@ -1,0 +1,19 @@
+package com.github.mpcsok.oblivm_benchmarker.mult3;
+
+int main@n@m(int@n x, int@m y){
+  secure int32 a1 = x$0~32$;
+  secure int32 b1 = x$32~64$;
+  secure int32 c1 = x$64~96$;
+
+  secure int32 a2 = y$0~32$;
+  secure int32 b2 = y$32~64$;
+  secure int32 c2 = y$64~96$;
+
+  secure int a = a1 + a2;
+  secure int b = b1 + b2;
+  secure int c = c1 + c2;
+
+  secure int result = a * b * c;
+
+  return result;
+}

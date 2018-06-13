@@ -1,0 +1,44 @@
+def test(actual, expected):
+    if isinstance(actual, (sint, sgf2n)):
+        actual = actual.reveal()
+    print_ln('expected %s, got %s', expected, actual)
+
+def mux(cond, trueVal, falseVal):
+    return trueVal + (cond == 0) * (falseVal - trueVal)
+
+
+nRowsA = 5;
+nRowsB = 5;
+catMin = 1;
+catMax = 3;
+
+# Assume each party's IDs are distinct 
+idA = [sint.get_raw_input_from(0) for _ in range(nRowsA)]
+idB = [sint.get_raw_input_from(1) for _ in range(nRowsB)]
+
+catA = [sint.get_raw_input_from(0) for _ in range(nRowsA)]
+valB = [sint.get_raw_input_from(1) for _ in range(nRowsB)]
+
+nCat = catMax - catMin + 1
+catCount = Array(nCat, sint)
+catSum = Array(nCat, sint)
+
+for i in range(nCat):
+    catCount[i] = sint(0)
+    catSum[i] = sint(0)
+
+match = sint(0)
+for i in range(nRowsA):
+    for j in range(nRowsB):
+        match = (idA[i] == idB[j])
+        for k in range(nCat):
+            catMatch = (catA[i] == catMin + k)
+            catCount[k] = mux(match * catMatch, catCount[k] + 1, catCount[k])
+            catSum[k] = mux(match * catMatch, catSum[k] + valB[j], catSum[k])
+
+test(catCount[0], 2)
+test(catSum[0], 14)
+test(catCount[1], 1)
+test(catSum[1], 8)
+test(catCount[2], 1)
+test(catSum[2], 6)

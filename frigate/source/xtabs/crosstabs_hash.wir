@@ -1,0 +1,89 @@
+/*
+Compute a simple crosstabulation
+
+Party A has a two column array: 
+Column 0 is a unique identifier (e.g. SSN as an int)
+Column 1 is a value (e.g. salary)
+
+Party B has a two column array: 
+Column 0 is a unique identifier (e.g. SSN as an int)
+Column 1 is a classe (e.g. age group) -- This is assumed to be a small number in the range 0 ... BINS-1
+
+This script computes the sum of salaries by age group, i.e., it computes the sum of A column 1 grouped by B column 1.
+The result is a vector of length BINS
+
+We imagine the parties have pre-processed the data by randomly picking a (deterministic) hash function, and hashing each SSN into one of HASHBUCKETS buckets.
+Each bucket can hold BUCKETSIZE people
+
+Thus each party holds a database organized as follows
+
+DB[bucket][index in bucket][0] = SSN
+DB[bucket][index in bucket][1] = salary
+
+DB[bucket][index in bucket][0] = SSN
+DB[bucket][index in bucket][1] = age
+
+*/
+
+#define DBSIZE 10000
+#define ENTRYSIZE 32
+#define BINS 5
+#define HASHBUCKETS 1000
+#define BUCKETSIZE 10
+#parties 2
+
+typedef int_t 32 int
+
+typedef uint_t 6 sint
+
+typedef struct_t mdata
+{
+	int data[HASHBUCKETS][BUCKETSIZE][2];
+}
+
+typedef struct_t ctdata
+{
+	int data[BINS];
+}
+
+#input 1 mdata
+#output 1 ctdata
+#input 2 mdata
+#output 2 ctdata
+
+function void main()
+{
+	mdata x = input1;
+	mdata y = input2;
+    
+    int xinput[HASHBUCKETS][BUCKETSIZE][2];
+    int yinput[HASHBUCKETS][BUCKETSIZE][2];
+    
+    int result[BINS];
+
+    xinput = x.data;
+    yinput = y.data;
+	ctdata out;
+
+    for(sint i=0;i<HASHBUCKETS;i++)
+    {
+        for(sint j=0;j<BUCKETSIZE;j++)
+        {
+			for(sint k=0;k<BUCKETSIZE;k++)
+			{
+			if( xinput[i][j][0] == yinput[i][k][0] ) {
+				for( int m=0; m<BINS; m++ ) {
+					if( (yinput[i][k][1]%BINS) == m ){
+						result[m] = result[m] +  xinput[i][j][1];
+					}
+				}
+			}
+			}
+        }
+    }
+
+    out.data = result;
+
+    output1 = out;
+    output2 = out;
+}

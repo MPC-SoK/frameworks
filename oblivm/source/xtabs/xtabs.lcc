@@ -1,0 +1,60 @@
+package com.github.mpcsok.oblivm_benchmarker.xtabs;
+
+int main@n@m(int@n x, int@m y){
+
+  secure int32 category = x$0~32$;
+
+  public int32 N = (n-32)/(32*2);
+  public int32 M = m/(32*2);
+
+  secure int32[public (n-32)/(32*2)] alcIds;
+  secure int32[public (n-32)/(32*2)] alcCats;
+  secure int32[public m/(32*2)] bbIds;
+  secure int32[public m/(32*2)] bbVals;
+  
+  for(public int32 i=0; i<N; i = i + 1){
+    alcIds[i] = x$64*i+32~64*i+64$;
+    alcCats[i] = x$64*i+64~64*i+96$;
+  }
+
+  for(public int32 i=0; i<M; i = i + 1){
+    bbIds[i] = y$64*i~64*i+32$;
+    bbVals[i] = y$64*i+32~64*i+64$;
+  }
+
+  secure int32[secure (n-32)/(32*2)] comIds;
+  secure int32[secure (n-32)/(32*2)] comCats;
+  secure int32[secure (n-32)/(32*2)] comVals; 
+  
+  secure int32 nIntersect = 0;
+  for(public int32 i=0; i<N; i = i + 1){
+    for(public int32 j=0; j<M; j = j + 1){
+      if(alcIds[i] == bbIds[j]){
+        comIds[nIntersect] = alcIds[i];
+	comCats[nIntersect] = alcCats[i];
+	comVals[nIntersect] = bbVals[j];
+	nIntersect = nIntersect + 1;
+      }
+    }
+  }
+
+  secure int32 nMatch = 0;
+  secure int32 total = 0;
+  for(public int32 i=0; i<(n-32)/(32*2); i = i + 1){
+    if(i < nIntersect){
+      if(comCats[i] == category){
+        total = total + comVals[i];
+        nMatch = nMatch + 1;
+      }
+    }
+  }
+
+  int32 zero = 0;
+  int32 ret;
+  if(nMatch == 0)
+    ret = zero;
+  else
+    ret = total / nMatch;
+
+  return ret;
+}

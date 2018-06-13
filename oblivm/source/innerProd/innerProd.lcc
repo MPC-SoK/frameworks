@@ -1,0 +1,30 @@
+package com.github.mpcsok.oblivm_benchmarker.innerProd;
+
+int main@n@m(int@n x, int@m y){
+  secure int32[public (n/32)] alc;
+  secure int32[public (m/32)] bb;
+  public int32 N = n/32;
+  public int32 M = m/32;
+  
+  for(public int32 i=0; i<N; i=i+1){
+    alc[i] = x$32*i~32*(i+1)$;
+  }
+  
+  for(public int32 i=0; i<M; i=i+1){
+    bb[i] = y$32*i~32*(i+1)$;
+  }
+
+  public int min;
+  if(N < M){
+    min=N;
+  } else {
+    min=M;
+  }
+
+  secure int32 sum = 0;
+  for(public int32 i=0; i<min; i=i+1){
+    sum = sum + (alc[i] * bb[i]);
+  } 
+
+  return sum;
+}

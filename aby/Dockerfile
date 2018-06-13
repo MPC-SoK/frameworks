@@ -1,0 +1,16 @@
+FROM ubuntu:latest
+WORKDIR /root
+RUN apt-get update && apt-get install -y \
+  g++ \
+  git \
+  make \
+  libgmp-dev \
+  libglib2.0-dev \
+  libssl-dev \
+  vim
+ADD source/ /root/source
+ADD README.md .
+ADD install.sh .
+RUN ["bash", "install.sh"]
+CMD ["/bin/bash"]
+

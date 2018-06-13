@@ -1,0 +1,25 @@
+#include<obliv.oh>
+
+#include"innerProd.h"
+
+void dotProd(void *args){
+  protocolIO *io = args;
+  int v1Size = ocBroadcastInt(io->input.size, 1);
+  int v2Size = ocBroadcastInt(io->input.size, 2);
+  
+  obliv int* v1 = malloc(sizeof(obliv int) * v1Size);
+  obliv int* v2 = malloc(sizeof(obliv int) * v2Size);
+
+  feedOblivIntArray(v1, io->input.arr, v1Size, 1);
+  feedOblivIntArray(v2, io->input.arr, v2Size, 2);
+  
+  int vMinSize = v1Size<v2Size?v1Size:v2Size;
+
+  obliv int sum = 0;
+  for(int i=0; i<vMinSize; i++){
+    sum += v1[i]*v2[i];
+  }
+  
+  revealOblivInt(&(io->result), sum, 0);
+  
+}

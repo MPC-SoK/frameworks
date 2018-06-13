@@ -1,0 +1,55 @@
+# Sharemind MPC example programs
+# Copyright (C) 2018 Sharemind
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+INCLUDE("${CMAKE_CURRENT_SOURCE_DIR}/profiles/DebianStretch.cmake" REQUIRED)
+
+SET(CMAKE_BUILD_TYPE Release)
+
+SET(SHAREMIND_INSTALL_PREFIX "${CMAKE_CURRENT_SOURCE_DIR}/prefix")
+
+SET(F "${CMAKE_CURRENT_BINARY_DIR}/myconfig.cmake")
+# Clear
+FILE(WRITE  "${F}" "")
+
+# Release
+FILE(APPEND "${F}" "SET(CMAKE_BUILD_TYPE Release)\n")
+FILE(APPEND "${F}" "ADD_DEFINITIONS(\"-DNDEBUG\")\n")
+FILE(APPEND "${F}" "IF(UNIX)\n")
+FILE(APPEND "${F}" "SET(CMAKE_SHARED_LIBRARY_LINK_C_FLAGS \"\")\n") # Only on Linux
+FILE(APPEND "${F}" "SET(CMAKE_SHARED_LIBRARY_LINK_CXX_FLAGS \"\")\n") # Only on Linux
+FILE(APPEND "${F}" "ENDIF()\n")
+
+UNSET(F)
+
+MACRO(Sharemind_hook_postLists)
+  FOREACH(p IN LISTS SHAREMIND_TARGETS)
+    Thing_getProperty("${p}" source_dir s)
+    ExternalProject_Add_Step("${p}" "CopyMyConf"
+      DEPENDEES update patch
+      DEPENDERS configure
+      COMMAND ${CMAKE_COMMAND} -E copy_if_different "${CMAKE_CURRENT_BINARY_DIR}/myconfig.cmake" config.local
+      WORKING_DIRECTORY "${s}/"
+      ALWAYS 1
+    )
+  ENDFOREACH()
+  UNSET(p)
+  UNSET(s)
+ENDMACRO()
+
+FUNCTION(Thing_OVERRIDE name)
+  Thing_removeArgs("${ARGN}" GIT_TAG args)
+  Thing_addFromOverride("${name}" ${args} GIT_TAG "2017.12")
+ENDFUNCTION()

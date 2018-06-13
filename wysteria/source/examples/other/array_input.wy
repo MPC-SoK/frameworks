@@ -1,0 +1,50 @@
+
+(* array input: alice, bob, charlie input arrays of size 
+ * outputs pairwise sum of their arrays
+ *)
+
+let parts = { !Alice, !Bob, !Charlie } in
+let size = 10 in
+let last_elt = size - 1 in 
+let answer @par ( parts ) =
+
+  (* input is a single list of wire bundles
+   * each element has an element from each participant
+   *)
+  let aw1 = wire { !Alice }: 1 in
+  let bw1 = wire { !Bob}: 1 in
+  let cw1 = wire { !Charlie }: 1 in
+  let three = (aw1 ++ bw1) ++ cw1 in 
+  let input = array [size] of three in
+
+  let output = array[size] of 0 in
+
+  let _ = 
+  for i = 0 to last_elt do
+    let w = select input[i] in
+    let sec_sum @sec( parts ) =
+      (* pull out three nats *)
+      let ai = w[!Alice] in
+      let bi = w[!Bob] in
+      let ci = w[!Charlie] in 
+      (ai + bi) + ci
+    in
+    (* let output = output + sec_sum in output *)
+    update output[i] <- sec_sum
+  done
+  in output
+
+(* outputting first element for clarity. 
+ * TODO: figure out how to print whole array (not just %1)
+ *)
+(* in wire parts:(select answer[0])*)
+in wire parts: answer
+
+
+(* QUESTIONS
+ * How does secure input actually work? 
+ * In this example, the inputs are hardcoded.
+ * Would they have to be read in from file to be secure?
+ * TO DO : implement dot product
+ * Recursive function inside secure block?
+ *)

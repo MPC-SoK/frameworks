@@ -1,0 +1,15 @@
+ROOT = /root/SCALE-MAMBA
+OSSL = /root/openssl-1.1.0h
+
+# Debug flags
+#   SH_DEBUG = Share debugging (for development only)
+#   DEBUG = Checks for reads before writes on register access
+#   DETERMINISTIC = Removes all randomness, gain for debugging
+
+MAX_MOD = 10
+
+#FLAGS = -DSH_DEBUG -DDEBUG -DMAX_MOD_SZ=$(MAX_MOD) -DDETERMINISTIC
+FLAGS = -DMAX_MOD_SZ=$(MAX_MOD) 
+
+OPT = -O3
+

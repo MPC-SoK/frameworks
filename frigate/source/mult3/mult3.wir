@@ -1,0 +1,19 @@
+#define wiresize 32
+#parties 3
+
+typedef int_t wiresize*3 int
+
+#input 1 int
+#output 1 int
+#input 2 int
+#output 2 int
+#input 3 int
+#output 3 int
+
+function void main()
+{
+    int q = input1 * input2 * input3;
+    output1 = q;
+    output2 = q;
+    output3 = q;
+}

@@ -1,0 +1,239 @@
+#include<limits.h>
+#include<stdbool.h>
+#include<stdio.h>
+#include<stdlib.h>
+
+#include<bcrandom.h>
+#include<obliv.oh>
+
+#include"../common/util.h"
+#include"crossTabs.h"
+
+// ------------------ Bitonic sorting -----------------------------------------
+
+void cmpswapPerson(size_t i, size_t j, void* arg)
+{
+  obliv int *idArr, *catArr, *dataArr;
+  obliv int **personArr = arg;
+  idArr = personArr[0];
+  catArr = personArr[1];
+  dataArr = personArr[2];
+  obliv if(idArr[i] > idArr[j]){
+    obliv int tmp;
+    tmp = idArr[j];
+    idArr[j] = idArr[i];
+    idArr[i] = tmp;
+    tmp = catArr[j];
+    catArr[j] = catArr[i];
+    catArr[i] = tmp;
+    tmp = dataArr[j];
+    dataArr[j] = dataArr[i];
+    dataArr[i] = tmp;
+  }   
+}
+
+void bitonicSort(void* arr, size_t offset, size_t n){
+  if(n==1)
+    return;
+  for(size_t i = offset; i<offset+(n/2); i++){
+    cmpswapPerson(i, i+ (n/2), arr);
+  }
+  bitonicSort(arr, offset, n/2);
+  bitonicSort(arr, offset + (n/2), n/2);
+  
+  // A slightly slow way to deal with n not being a power of 2.
+  // Insert last item to relevant place in array.
+  // Slowdown by a factor of 3, but same big-O notation.
+  if(n%2==1){
+    for(size_t i = offset; i<offset+n-1; i++){
+      cmpswapPerson(i, offset + n-1, arr);
+    }
+  }
+  
+  return;
+}
+
+// Find the sum of the two input arrays
+void sum(void *args){
+  sorterIO *io = args;
+  size_t a,b;
+  a = ocBroadcastInt(io->iN, 1);
+  b = ocBroadcastInt(io->iN, 2);
+  *(io->oN) = a + b;
+}
+
+// Assumes input >= 1.
+unsigned int nBitsBinary(int x){
+  if(x == 1)
+    return 1;
+  else
+    return 1 + nBitsBinary(x/2);
+}
+
+int roundUpToPowerOf2(int x){
+  if(x <=1){
+    return 1;
+  }
+  unsigned int p = nBitsBinary(x-1);
+  return 2^p;
+}
+
+obliv int** fillWithInput(person* input, size_t a, size_t b){
+  obliv int *idArr = calloc(a+b, sizeof(obliv int));
+  obliv int *catArr = calloc(a+b, sizeof(obliv int));
+  obliv int *dataArr = calloc(a+b, sizeof(obliv int));
+  for(size_t i=0; i<a; i++){
+     idArr[i] = feedOblivInt(input[i].id,1);
+     catArr[i] = feedOblivInt(input[i].category, 1);
+     dataArr[i] = feedOblivInt(input[i].data, 1);
+  }
+  // Party 2's items are reversed so array is bitonic
+  for(size_t i=0; i<b; i++){
+     idArr[a+b-1-i] = feedOblivInt(input[i].id,2);
+     catArr[a+b-1-i] = feedOblivInt(input[i].category, 2);
+     dataArr[a+b-1-i] = feedOblivInt(input[i].data, 2);
+  }
+
+  obliv int** args = calloc(3, sizeof(int*));
+  args[0]=idArr;
+  args[1]=catArr;
+  args[2]=dataArr;
+
+  return args;
+}
+
+void testPersonSorter(void *args){
+  sorterIO *io = args;
+  person* output = io->output;
+  person* input = io->input;
+  size_t iN = io->iN;
+
+  size_t a,b;
+  a = ocBroadcastLong(iN,1);
+  b = ocBroadcastLong(iN,2);
+
+  obliv int **args = fillWithInput(input, a, b);
+
+  bitonicSort(args, 0, a+b);
+
+  for(size_t i=0; i<a+b; i++){
+    person p;
+    revealOblivInt(&(p.id), args[0][i], 0);
+    revealOblivInt(&(p.category), args[1][i], 0);
+    revealOblivInt(&(p.data), args[2][i], 0);
+    output[i] = p;
+  }
+
+}
+
+
+void dupSelect3(obliv int** sorted, obliv int** combined, size_t i){
+  obliv int *idArr = sorted[0];
+  obliv int *catArr = sorted[1];
+  obliv int *dataArr = sorted[2];
+  obliv int *idCombined = combined[0];
+  obliv int *catCombined = combined[1];
+  obliv int *dataCombined = combined[2];
+  idCombined[i/2] = 0;
+  catCombined[i/2] = 0;
+  dataCombined[i/2] = 0;
+  obliv if(idArr[i-1] == idArr[i]){
+    idCombined[i/2] = idArr[i];
+    catCombined[i/2] = catArr[i-1] + catArr[i];
+    dataCombined[i/2] = dataArr[i-1] + dataArr[i];
+  }
+  obliv if(idArr[i] == idArr[i+1]){
+    idCombined[i/2] = idArr[i];
+    catCombined[i/2] = catArr[i] + catArr[i+1];
+    dataCombined[i/2] = dataArr[i] + dataArr[i+1];
+  }
+}
+
+void dupSelect2(obliv int** sorted, obliv int** combined, size_t i){
+  obliv int *idArr = sorted[0];
+  obliv int *catArr = sorted[1];
+  obliv int *dataArr = sorted[2];
+  obliv int *idCombined = combined[0];
+  obliv int *catCombined = combined[1];
+  obliv int *dataCombined = combined[2];
+  idCombined[i/2] = 0;
+  catCombined[i/2] = 0;
+  dataCombined[i/2] = 0;
+  obliv if(idArr[i-1] == idArr[i]){
+    idCombined[i/2] = idArr[i];
+    catCombined[i/2] = catArr[i-1] + catArr[i];
+    dataCombined[i/2] = dataArr[i-1] + dataArr[i];
+  }
+
+}
+
+obliv int** combineDups(obliv int** sorted, obliv int** combined, size_t n){
+  
+  obliv int *idCombined = calloc(n/2, sizeof(obliv int));
+  obliv int *catCombined = calloc(n/2, sizeof(obliv int));
+  obliv int *dataCombined = calloc(n/2, sizeof(obliv int));
+  obliv int** combined = calloc(3, sizeof(int*));
+  combined[0] = idCombined;
+  combined[1] = catCombined;
+  combined[2] = dataCombined;
+  
+  size_t i;
+  for(i = 1; i<n-1; i+=2){
+    dupSelect3(sorted, combined, i);
+  }
+  if(i<n){
+    dupSelect2(sorted, combined, i);
+  }
+
+  return combined;
+}
+
+obliv int** addCrossTabs(obliv int** deduped, size_t nDeduped, size_t nCat){
+  obliv int* categories = calloc(nCat, sizeof(obliv int));
+  obliv int* dataSums = calloc(nCat, sizeof(obliv int));
+  obliv int* counts = calloc(nCat, sizeof(obliv int));
+
+  for(size_t i = 0; i<nCat; i++){
+    categories[i] = i+1; // Assume categories are numbered 1, 2, ... , nCat
+    dataSums[i] = 0;
+    counts[i] = 0;
+    for(size_t j=0; j<nDeduped; j++){
+      obliv if(categories[i] == deduped[1][j]){
+        dataSums[i] += deduped[2][j];
+        counts[i] = counts[i] + 1;
+      }
+    }
+  }
+
+  obliv int** results = calloc(3, sizeof(int*));
+  results[0] = categories;
+  results[1] = dataSums;
+  results[2] = counts;
+  return results;
+}
+
+void crossTabs(void *args){
+  protocolIO *io = args;
+
+  size_t a,b;
+  a = ocBroadcastLong(io->iN,1);
+  b = ocBroadcastLong(io->iN,2);
+
+  obliv int **args = fillWithInput(io->input, a, b);
+
+  bitonicSort(args, 0, a+b);
+  
+  obliv int** combined = combineDups(args, combined, a+b);
+  
+  obliv int** results = addCrossTabs(combined, (a+b)/2, io->nCategories);    
+  result* cleanResults = calloc(io->nCategories, sizeof(result));
+  for(size_t i=0; i<io->nCategories; i++){
+    result r;
+    revealOblivInt(&(r.category), results[0][i], 0);
+    revealOblivInt(&(r.dataSum), results[1][i], 0);
+    revealOblivInt(&(r.count), results[2][i], 0);
+    cleanResults[i] = r;
+  }  
+
+  io->results = cleanResults;
+}

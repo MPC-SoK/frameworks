@@ -1,0 +1,14 @@
+sum = sint(0)
+aaaas = sint.Array(10)
+bbbbs = sint.Array(10)
+
+for i in range(10):
+  aaaas[i] = sint(i) # sint.get_private_input_from(0)
+  bbbbs[i] = sint(i*2) # sint.get_private_input_from(1)
+  
+
+for i in range(10):
+  sum = sum + (aaaas[i] * bbbbs[i])
+
+print_ln("InnerProd: %s", sum.reveal())
+

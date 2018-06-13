@@ -1,0 +1,25 @@
+diff -ru picco/compiler/src/seed/SecretShare.cpp picco-fixed/compiler/src/seed/SecretShare.cpp
+--- picco/compiler/src/seed/SecretShare.cpp	2018-04-25 15:18:40.410000000 +0000
++++ picco-fixed/compiler/src/seed/SecretShare.cpp	2018-04-24 19:50:45.320000000 +0000
+@@ -24,6 +24,7 @@
+ #include <iostream>
+ #include <cstdlib>
+ #include <gmp.h>
++#include <assert.h>
+ 
+ SecretShare::SecretShare(int p, int t, mpz_t mod){
+ 	peers = p;
+@@ -356,6 +357,7 @@
+ 	for(int i = 0; i < peers; i++)
+ 		for(int j = 0; j < peers; j++)
+ 			mpz_init(sharingMatrix[i][j]);
++    assert(2*threshold+1 <= peers);
+ 	for(int i = 0; i < peers; i++){
+ 		for(int j = 0; j < 2*threshold+1; j++){
+ 			mpz_set_ui(t1,i+1);
+diff -ru picco/compute/objects.mk picco-fixed/compute/objects.mk
+--- picco/compute/objects.mk	2018-04-25 15:18:40.420000000 +0000
++++ picco-fixed/compute/objects.mk	2018-04-24 20:00:06.940000000 +0000
+@@ -1 +1 @@
+-LIBS := -lboost_system -lgmp -lpthread -lcrypto -lssl -ldl
++LIBS := -lgmp -lpthread -lcrypto -lssl -ldl

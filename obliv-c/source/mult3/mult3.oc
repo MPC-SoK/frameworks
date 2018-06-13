@@ -1,0 +1,21 @@
+#include <obliv.oh>
+#include "mult3.h"
+
+
+void mult3(void* args){
+  protocolIO *io = args;
+  obliv int a1 = feedOblivInt(io->aShare, 1);
+  obliv int a2 = feedOblivInt(io->aShare, 2);
+  obliv int b1 = feedOblivInt(io->bShare, 1);
+  obliv int b2 = feedOblivInt(io->bShare, 2);
+  obliv int c1 = feedOblivInt(io->cShare, 1);
+  obliv int c2 = feedOblivInt(io->cShare, 2);
+
+  obliv int a = a1 + a2;
+  obliv int b = b1 + b2;
+  obliv int c = c1 + c2;
+
+  obliv int prod = a * b * c;
+  revealOblivInt(&(io->prod), prod, 0);
+
+}

@@ -1,0 +1,42 @@
+
+
+Expected directory structure:
+
+```
+ABY
++--- abycore
++--- bin
++--- eq_conversion
+|    \--- common
+|    |    \--- eqtest.cpp
+|    |    \--- eqtest.h
+|    \--- eqtest_test.cpp 
+|    \--- Makefile
+|    \--- README
+```
+
+
+Requires a Linux distro and all the required packages for ABY. Once you have [ABY
+running](https://github.com/encryptogroup/ABY), run
+
+```
+$ make
+```
+
+in the `eq_conversion` directory. Then, in two separate terminals, run
+
+```
+$ ./bin/eq_conversion.exe -r 0
+```
+
+```
+$ ./bin/eq_conversion.exe -r 1
+```
+
+
+There are two circuits implemented here, 0/1 Test and Commutative Square Test.
+You can only run one at a time. Uncomment lines 53-57 in `eqtest.cpp` to see
+Commutative Square.
+
+
+
