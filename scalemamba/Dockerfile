@@ -1,19 +1,16 @@
-FROM centos:7 
+FROM ubuntu:16.04
 WORKDIR /root
-RUN yum update 
-# for yasm:
-RUN yum --enablerepo=extras install -y epel-release 
-RUN yum install -y \
+RUN apt-get update && apt-get install -y \
   bzip2 \
   doxygen \
-  gcc-c++ \
+  g++ \
+  gcc \
   git \
   libgmp3-dev \
   m4 \
   make \
   patch \
   python \
-  texlive-full \ 
   vim \
   wget \
   yasm

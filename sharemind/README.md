@@ -13,9 +13,9 @@ $ docker run -it --rm sharemind
 ```
 
 ## Architecture
-This container demonstrates the open-source emulator for the Sharemind platform. It runs SecreC code, which is Sharemind's language for defining secure computations, but _does not perform a secure computation_. 
+This container demonstrates the open-source emulator for the Sharemind MPC platform. It runs SecreC code, which is Sharemind's language for defining secure computations, but _does not perform a secure computation_. 
 
-In the repository, we include supporting client code for running a secure computation with the full Sharemind platform, which we had access to via an academic license. This code will not be used in the following instructions, it's here for illustrative purposes and so that those who license the platform can test these examples. 
+In the repository, we include supporting client code for running a secure computation with the full Sharemind MPC platform, which we had access to via an academic license. This code will not be used in the following instructions, it's here for illustrative purposes and so that those who license the platform can test these examples. Note that this code is compatible with the 2018.03 release and may be incompatible with later versions.
 
 On the full platform, the code is compiled in two parts: the SecreC function definition is compiled and copied to each computation server, and the supporting code, which we wrote in C, is compiled into an executable. A single "input" party runs the executable, which sends input to three computation servers. The servers execute the computation and return the result to the original party. It is possible to write computations with multiple input parties using a database structure on the servers, but we didn't implement this.
 

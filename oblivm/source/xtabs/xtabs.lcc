@@ -1,4 +1,4 @@
-package com.github.mpcsok.oblivm_benchmarker.xtabs;
+package com.github.danxinnoble.oblivm_benchmarker.xtabs;
 
 int main@n@m(int@n x, int@m y){
 

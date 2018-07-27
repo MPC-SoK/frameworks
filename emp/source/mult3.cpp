@@ -2,44 +2,45 @@
 using namespace emp;
 using namespace std;
 
-void test_mult3(int bitsize, int party, string inputs_a[], string inputs_b[]) {
-  int result_bits = 3*bitsize;
-  Integer product(result_bits, 1);
-
-  int validate = 1;
+void test_mult3(int bitsize, string inputs_a[], string inputs_b[]) {
+  Integer product(bitsize, 1);
 
   for (int i=0; i<3; i++) {
-    Integer a(result_bits, inputs_a[i], ALICE);
-    Integer b(result_bits, inputs_b[i], BOB);
+    Integer a(bitsize, inputs_a[i], ALICE);
+    Integer b(bitsize, inputs_b[i], BOB);
 
+    // reconstruct "secret shared" inputs
     a = a + b;
-
+    // multiply value into product
     product = product * a;
-
-    // calculate correct answer IN THE CLEAR
-    // fails if input files aren't in the same place
-    if (result_bits < 33) {
-      validate *= stoi(inputs_a[i]) + stoi(inputs_b[i]);
-    }
-  }
-
-  if (result_bits < 33) {
-    cout << "Expected: " << validate << endl;
   }
 
   cout << "Product (binary notation): ";
-  for(int i=result_bits-1; i>=0; i--) {
+  for(int i=bitsize-1; i>=0; i--) {
       cout << product[i].reveal();
   }
   cout << endl;
 }
 
 int main(int argc, char** argv) {
-	int port, party;
-	parse_party_and_port(argv, &party, &port);
-	NetIO * io = new NetIO(party==ALICE ? nullptr : "127.0.0.1", port);
+    int bitsize;
 
-	setup_semi_honest(io, party);
+    // generate circuit for use in malicious library
+    if (argc == 2 && strcmp(argv[1], "-m") == 0 ) {
+        setup_plain_prot(true, "mult3.circuit.txt");
+        bitsize = 16;
+        string inputs[3] = {"0","0","0"};
+        test_mult3(bitsize, inputs, inputs);
+        finalize_plain_prot();
+	return 0;
+    }
+    
+    // run computation with semi-honest model
+    int port, party;
+    parse_party_and_port(argv, &party, &port);
+    NetIO * io = new NetIO(party==ALICE ? nullptr : "127.0.0.1", port);
+
+    setup_semi_honest(io, party);
 
     if (argc != 4) {
       cout << "Usage: ./mult3 <party> <port> <bitsize>" << endl
@@ -49,7 +50,7 @@ int main(int argc, char** argv) {
       return 0;
     }
 
-    int bitsize = atoi(argv[3]);
+    bitsize = atoi(argv[3]);
     char fname_a[40];
     char fname_b[40];
 
@@ -71,8 +72,7 @@ int main(int argc, char** argv) {
         infile_b.close();
     }
 
-
-    test_mult3(bitsize, party, inputs_a, inputs_b);
-	delete io;
+    test_mult3(bitsize, inputs_a, inputs_b);
+    delete io;
 }
 

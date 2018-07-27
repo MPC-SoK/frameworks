@@ -17,17 +17,14 @@ cd openssl-1.1.0h
 ./config
 make
 make install
-cp libssl.so.1.1 /usr/lib64
-cp libcrypto.so.1.1 /usr/lib64
+ldconfig 
 
 # download SCALE-MAMBA
 cd 
 git clone https://github.com/KULeuven-COSIC/SCALE-MAMBA.git
 cd SCALE-MAMBA
 mv /root/source/CONFIG.mine .
-# fix a known stack overflow bug
-patch -i ~/source/mamba.patch src/Offline/FHE_Factory.cpp
-make 
+make progs
 
 # set up certificate authority
 SUBJ="/CN=www.example.com"

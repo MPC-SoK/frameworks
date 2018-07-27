@@ -1,6 +1,6 @@
 /**
  \file 		innerproduct.cpp
- \author 	sreeram.sadasivam@cased.de
+ \author 	sreeram.sadasivam@cased.de, heavily modified by marcella
  \copyright	ABY - A Framework for Efficient Mixed-protocol Secure Two-party Computation
  Copyright (C) 2015 Engineering Cryptographic Protocols Group, TU Darmstadt
  This program is free software: you can redistribute it and/or modify

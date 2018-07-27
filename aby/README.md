@@ -1,4 +1,4 @@
-ABY was developed by Daniel Demmler, Thomas Schneider and Michael Zohner in the [ENCRYPTO group](https://www.informatik.tu-darmstadt.de/encrypto/home_page/index.en.jsp) at TU Darmstadt.
+ABY was developed by Daniel Demmler, Thomas Schneider and Michael Zohner in the [ENCRYPTO group](https://www.encrypto.informatik.tu-darmstadt.de/encrypto/) at TU Darmstadt.
 
 ## Docker setup
 
@@ -40,7 +40,7 @@ Note: The `innerproduct` example was a sample program included with the ABY dist
 ## Modifying examples
 Create a directory in `ABY/src/examples` for your example. Copy the `Example_Makefile` or create a symlink to it.
 
-To make, simplyl re-run `make` in the `ABY` directory (there is likely a way to
+To make, simply re-run `make` in the `ABY` directory (there is likely a way to
 compile a single program but we have yet to find it).
 
 For more details on the ABY libraries, we recommend the helpful, though

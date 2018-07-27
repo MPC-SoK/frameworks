@@ -66,6 +66,6 @@ $ make
 $ make run_sim
 ```
 
-Some language limitations are discussed in the wiki.
+Some language limitations are discussed [in the wiki](https://github.com/bhemen/MPC_compilers/wiki/CBMC-GC-v2).
 
 

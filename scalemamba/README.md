@@ -24,7 +24,7 @@ First step is to set up parameters for the computation, including network
 participants and secret-sharing setup. The framework provides a setup script to
 interactively produce the appropriate config files.
 
-We've set up the necessary certicicate infrastructure in `SCALE-MAMBA/Cert-Store`. We ran our examples using localhost (127.0.0.1) for the IP address and `Player<i>.crt`, where `<i>` is a number 0-3. 
+We've set up the necessary certificate infrastructure in `SCALE-MAMBA/Cert-Store`. We ran our examples using localhost (127.0.0.1) for the IP address and `Player<i>.crt`, where `<i>` is a number 0-3. 
 
 For secret sharing setup, we used Full Threshold sharing (option 1), with
 varying length modulus. Try 32 for initial testing purposes.

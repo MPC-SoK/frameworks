@@ -1,6 +1,6 @@
 /*
  * Sharemind MPC example programs
- * Copyright (C) 2018 MPC SoK
+ * Copyright (C) 2018 Marcella Hastings
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

@@ -3,18 +3,19 @@
 using namespace emp;
 using namespace std;
 
-int LEN = 5;
+int LEN = 10;
 
-void test_innerprod(int party, int bitsize, string inputs_a[], string inputs_b[], int len) {
+void test_innerprod(int bitsize, string inputs_a[], string inputs_b[], int len) {
 
-    bitsize = bitsize * bitsize * len;
     Integer sum(bitsize, 0, PUBLIC);
+    Integer prod(bitsize, 0, PUBLIC);
 
     for( int i=0; i<len; i++) {
         Integer a(bitsize, inputs_a[i], ALICE);
         Integer b(bitsize, inputs_b[i], BOB);
 
-        sum = sum + (a * b);
+        prod = a * b;
+        sum = sum + prod;
     }
 
     cout << "SUM: " << sum.reveal<int>() << endl;
@@ -22,6 +23,19 @@ void test_innerprod(int party, int bitsize, string inputs_a[], string inputs_b[]
 
 
 int main(int argc, char** argv) {
+    int bitsize;
+
+    // generate circuit for use in malicious library
+    if (argc == 2 && strcmp(argv[1], "-m") == 0 ) {
+        setup_plain_prot(true, "innerprod.circuit.txt");
+        bitsize = 16;
+        string inputs[LEN] = {"0","0","0","0","0","0","0","0","0","0"};
+        test_innerprod(bitsize, inputs, inputs, LEN);
+        finalize_plain_prot();
+	return 0;
+    }
+
+    // run computation with semi-honest model
     int port, party;
     parse_party_and_port(argv, &party, &port);
     NetIO * io = new NetIO(party==ALICE ? nullptr : "127.0.0.1", port);
@@ -35,10 +49,9 @@ int main(int argc, char** argv) {
       return 0;
     }
 
-
     cout << "Calculating inner product of two inputs of length " << LEN << endl;
 
-    int bitsize = atoi(argv[3]);
+    bitsize = atoi(argv[3]);
 
     char fname_a[40];
     char fname_b[40];
@@ -61,7 +74,7 @@ int main(int argc, char** argv) {
         infile_b.close();
     }
 
-    test_innerprod(party, bitsize, inputs_a, inputs_b, LEN);
+    test_innerprod(bitsize, inputs_a, inputs_b, LEN);
     delete io;
 }
 

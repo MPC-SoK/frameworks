@@ -43,6 +43,15 @@ $ ./bin/xtabs 1 12345 32 & ./bin/xtabs 2 12345 32
 
 This container also includes the `emp-sh2pc` examples produced by the author of the repository. These take different arguments than ours; please see the source code for details. 
 
+Our examples include an option to generate a circuit for use in the malicious
+protocol (`emp-ag2pc`). 
+```
+$ cd ~/emp-sh2pc/build
+$ ./bin/<ex> -m
+$ ls
+... <ex>.circuit.txt ...
+```
+
 ## Modifying examples
 
 Source code for these examples is in `emp-sh2pc/test/`. If you'd like to experiment with the code yourself, you can build it as follows. We'll assume you've written code in a file called `my_code.cpp` and placed it in the `test` directory.

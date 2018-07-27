@@ -1,4 +1,4 @@
-package com.github.mpcsok.oblivm_benchmarker.mult3;
+package com.github.danxinnoble.oblivm_benchmarker.mult3;
 
 int main@n@m(int@n x, int@m y){
   secure int32 a1 = x$0~32$;
