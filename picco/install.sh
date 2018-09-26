@@ -1,7 +1,8 @@
 # download + update with our minor fixes
 git clone https://github.com/PICCO-Team/picco.git
-cp source/picco.patch picco/
 cd picco
+git checkout ee85c91 
+cp ../source/picco.patch picco/
 patch -p1 -i picco.patch
 
 # install 

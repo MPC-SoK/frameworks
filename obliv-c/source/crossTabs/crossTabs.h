@@ -2,8 +2,6 @@
 
 #include<obliv.h>
 
-void testPersonSorter(void* args);
-
 void sum(void* args);
 
 void crossTabs(void* args);
@@ -27,11 +25,4 @@ typedef struct protocolIO{
   size_t *oN;
   size_t nCategories;
 } protocolIO;
-
-typedef struct sorterIO{
-  person *input;
-  person *output;
-  size_t *oN;
-  size_t iN;
-} sorterIO;
 

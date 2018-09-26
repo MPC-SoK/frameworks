@@ -44,7 +44,8 @@ $ ./a.out <port> <IP> <input file>
 We ran local tests as follows:
 
 ```
-$ ./a.out 1234 -- <inputFile1> & ./a.out 1234 localhost <inputFile2>
+$ ./a.out 1234 -- <inputFile1> & 
+$ ./a.out 1234 localhost <inputFile2>
 ```
 
 Obliv-C also includes automated testing functions. 

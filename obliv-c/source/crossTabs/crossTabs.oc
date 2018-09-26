@@ -53,15 +53,6 @@ void bitonicSort(void* arr, size_t offset, size_t n){
   return;
 }
 
-// Find the sum of the two input arrays
-void sum(void *args){
-  sorterIO *io = args;
-  size_t a,b;
-  a = ocBroadcastInt(io->iN, 1);
-  b = ocBroadcastInt(io->iN, 2);
-  *(io->oN) = a + b;
-}
-
 // Assumes input >= 1.
 unsigned int nBitsBinary(int x){
   if(x == 1)
@@ -101,31 +92,6 @@ obliv int** fillWithInput(person* input, size_t a, size_t b){
 
   return args;
 }
-
-void testPersonSorter(void *args){
-  sorterIO *io = args;
-  person* output = io->output;
-  person* input = io->input;
-  size_t iN = io->iN;
-
-  size_t a,b;
-  a = ocBroadcastLong(iN,1);
-  b = ocBroadcastLong(iN,2);
-
-  obliv int **args = fillWithInput(input, a, b);
-
-  bitonicSort(args, 0, a+b);
-
-  for(size_t i=0; i<a+b; i++){
-    person p;
-    revealOblivInt(&(p.id), args[0][i], 0);
-    revealOblivInt(&(p.category), args[1][i], 0);
-    revealOblivInt(&(p.data), args[2][i], 0);
-    output[i] = p;
-  }
-
-}
-
 
 void dupSelect3(obliv int** sorted, obliv int** combined, size_t i){
   obliv int *idArr = sorted[0];

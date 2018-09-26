@@ -22,8 +22,7 @@ appropriate directory.
 ```
 $ cd /root/tests/<ex>
 $ ls
-input    mult3.cpp      secure_servers  smc_config
-makefile mult3.insec.c  smc-compute     util_config 
+makefile    mult3.c mult3.gen.cpp   secure_servers  smc-compute smc_config  util_config 
 $ ls secure_servers
 keys  mult3  run_config  share1  share2  share3
 ```
@@ -34,7 +33,9 @@ We have done the following steps (see `install.sh` for details)
 3. Generated key pairs for three servers (`secure_servers/keys/`)
 
 First, you must generate input and shares for the correct number of servers
-(we use 3, this parameter is set in the `smc_config` file). 
+(we use 3 computation servers, 1-2 input parties, and 1 output party in our
+examples. These parameters are set in the `smc_config` file). 
+The PICCO team describes the correct input file format in their [manual](https://github.com/PICCO-Team/picco/blob/master/picco-manual.pdf).
 ```
 $ picco-utility -I <input ID> <input file> util_config secure_servers/share
 ```
@@ -62,4 +63,4 @@ The result of the computation is in the file `result`.
 
 
 ## Modifying examples
-We've hardcoded a configuration for our sample programs, but PICCO is configurable. They include extensive documentation on configuring, compiling, and running examples in their [manual](https://github.com/PICCO-Team/picco/blob/master/picco-manual.) 
+We've hardcoded a configuration for our sample programs, but PICCO is configurable. They include extensive documentation on configuring, compiling, and running examples in their [manual](https://github.com/PICCO-Team/picco/blob/master/picco-manual.pdf) 
