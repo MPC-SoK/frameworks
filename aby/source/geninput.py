@@ -1,9 +1,10 @@
 # this file should live in the examples directory
 
 import random, argparse, os, math
+HOME='/root/ABY/src/examples/'
 
 def create_dirs(program):
-    dirname = program + "/data"
+    dirname = HOME + program + "/data"
     if not os.path.exists(dirname):
         try:
             os.makedirs(dirname)
@@ -13,8 +14,8 @@ def create_dirs(program):
 def gen_mult3_input():
     # 5 bit inputs for a max of 16 bit result
     BITS = 5;
-    f0 = open("mult3/data/mult3.0.dat",'w')
-    f1 = open("mult3/data/mult3.1.dat",'w')
+    f0 = open(HOME+"mult3/data/mult3.0.dat",'w+')
+    f1 = open(HOME+"mult3/data/mult3.1.dat",'w+')
 
     product = 1
     for _ in range(3):
@@ -39,7 +40,7 @@ def gen_innerprod_input(l):
     result = sum([x*y for x,y in zip(xs,ys)])
 
     for i,arr in zip([0,1], [xs,ys]):
-        with open("innerprod/data/innerprod.%d.dat"%i,'w') as f:
+        with open(HOME+"innerprod/data/innerprod.%d.dat"%i,'w+') as f:
             for a in arr:
                 f.write("%d\n"%a)
 

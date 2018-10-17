@@ -7,7 +7,8 @@ RUN apt-get update && apt-get install -y \
   libgmp-dev \
   libglib2.0-dev \
   libssl-dev \
-  vim
+  vim \
+  wget
 ADD source/ /root/source
 ADD README.md .
 ADD install.sh .

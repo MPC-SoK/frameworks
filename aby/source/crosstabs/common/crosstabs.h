@@ -19,10 +19,11 @@
 #ifndef __CROSSTAB_H_
 #define __CROSSTAB_H_
 
-#include "../../abycore/circuit/booleancircuits.h"
-#include "../../abycore/circuit/arithmeticcircuits.h"
-#include "../../abycore/circuit/circuit.h"
-#include "../../abycore/aby/abyparty.h"
+#include "../../../abycore/circuit/booleancircuits.h"
+#include "../../../abycore/circuit/arithmeticcircuits.h"
+#include "../../../abycore/circuit/circuit.h"
+#include "../../../abycore/aby/abyparty.h"
+#include "../../../abycore/sharing/sharing.h"
 #include <math.h>
 #include <cassert>
 
@@ -45,6 +46,7 @@ void destroy_pairs(struct ct_pair *p);
  \param 	num			the number of elements in the crosstabs arrays
  \brief		This function is used for running a testing environment for solving Crosstabs 
  */
+const int32_t BINS = 5;
 int32_t test_crosstabs_circuit(e_role role, char* address, uint16_t port, seclvl seclvl,
 		uint32_t nvals, uint32_t bitlen, uint32_t nthreads, e_mt_gen_alg mt_alg,
 		e_sharing sharing, uint32_t num);
@@ -60,22 +62,13 @@ It computes the crosstabs product by
  	 	 	multiplying each value in x and y, and adding those multiplied results to evaluate the inner
  	 	 	product. The addition is performed in a tree, thus with logarithmic depth.
  */
-//share* BuildCrosstabsCircuit(share *s_x, share *s_y, uint32_t num, ArithmeticCircuit *ac);
-share* BuildCrosstabsCircuit(share *s_xkeys, share *s_xvals, 
-                             share *s_ykeys, share *s_yvals, 
-                             uint32_t num, ArithmeticCircuit *ac,
-                             BooleanCircuit *yc,
-                             BooleanCircuit *bc);
 
-
-
-share *BuildSimpleCrosstabsCircuit(share *s_xkeys, share *s_ykeys,
-     ArithmeticCircuit *ac, BooleanCircuit *yc, BooleanCircuit *bc);
-
-share *BuildVectorCrosstabsCircuit(vector<share*> xids, 
+vector<share *>BuildVectorCrosstabsCircuit(vector<share*> xids, 
                                    vector<share*> xvals, 
                                    vector<share*> yids, 
                                    vector<share*> yvals,
+                                   vector<share*> numbers,
+                                   vector<share*> results,
         ArithmeticCircuit *circ, BooleanCircuit *yao_circ, BooleanCircuit *bool_circ);
 
 #endif

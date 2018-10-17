@@ -65,7 +65,7 @@ If your Mac or Windows version is particularly old, you can try [Docker Toolbox]
 On some Ubuntu and other \*nix OSes, you may need to run the `docker build` and `docker run` commands with `sudo`.
 
 ## Questions
-This software is offered as-is. It represents these frameworks at a single point in time (early- to mid-2018), and may not be up-to-date with the latest versions. We welcome pull requests for compatibility with new versions of the software and corrections to sample programs we did not successfully implement.
+This software is offered as-is. It represents these frameworks at a single point in time (early- to mid-2018), and may not be up-to-date with the latest versions. We welcome pull requests for compatibility with new software versions, corrections to sample programs, and directories for new frameworks.
 
 Questions and commentary should be raised publicly in the [Issue Tracker](https://github.com/MPC-SoK/frameworks/issues). 
 

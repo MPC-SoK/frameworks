@@ -23,6 +23,7 @@
 #include "../../../abycore/circuit/arithmeticcircuits.h"
 #include "../../../abycore/circuit/circuit.h"
 #include "../../../abycore/aby/abyparty.h"
+#include "../../../abycore/sharing/sharing.h"
 #include <math.h>
 #include <cassert>
 

@@ -17,10 +17,10 @@
  */
 
 //Utility libs
-#include "../abycore/ENCRYPTO_utils/crypto/crypto.h"
-#include "../abycore/ENCRYPTO_utils/parse_options.h"
+#include <ENCRYPTO_utils/crypto/crypto.h>
+#include <ENCRYPTO_utils/parse_options.h>
 //ABY Party class
-#include "../abycore/aby/abyparty.h"
+#include "../../abycore/aby/abyparty.h"
 
 #include "common/crosstabs.h"
 
@@ -61,18 +61,19 @@ int32_t read_test_options(int32_t* argcp, char*** argvp, e_role* role,
 int main(int argc, char** argv) {
 
 	e_role role;
-	uint32_t bitlen = 32, nvals = 3, secparam = 128, nthreads = 1;
+	uint32_t bitlen = 32, nvals = 1, secparam = 128, nthreads = 1;
 	uint16_t port = 7766;
 	string address = "127.0.0.1";
 	int32_t test_op = -1;
 	e_mt_gen_alg mt_alg = MT_OT;
+	uint32_t array_len = 5;
 
 	read_test_options(&argc, &argv, &role, &bitlen, &nvals, &secparam, &address, &port, &test_op);
 
 	seclvl seclvl = get_sec_lvl(secparam);
 
 	// call crosstabs routine. set size with cmd-parameter -n <size>
-	test_crosstabs_circuit(role, (char*) address.c_str(), port, seclvl, 1, 16, nthreads, mt_alg, S_ARITH, nvals);
+	test_crosstabs_circuit(role, (char*) address.c_str(), port, seclvl, nvals, bitlen, nthreads, mt_alg, S_ARITH, array_len);
 
 	return 0;
 }

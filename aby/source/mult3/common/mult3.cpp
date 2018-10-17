@@ -1,5 +1,8 @@
 
 #include "mult3.h"
+#include <string>
+#include <iostream>
+using namespace std;
 
 int32_t test_mult3_circuit(e_role role, char* address, uint16_t port, seclvl seclvl,
 		uint32_t nvals, uint32_t bitlen, uint32_t nthreads, e_mt_gen_alg mt_alg,
@@ -39,10 +42,10 @@ int32_t test_mult3_circuit(e_role role, char* address, uint16_t port, seclvl sec
 	 */
 
     std::ifstream infile;
-    char *fname = (char *) malloc(100);
+    char *fname = (char *) malloc(150);
 
     // open the data file corresponding to the correct party
-    sprintf(fname, "src/examples/mult3/data/mult3.%d.dat", role);
+    sprintf(fname, "/root/ABY/src/examples/mult3/data/mult3.%d.dat", role);
 
     // read data from file
     infile.open(fname);
@@ -84,9 +87,8 @@ int32_t test_mult3_circuit(e_role role, char* address, uint16_t port, seclvl sec
 // constructs a mult3 circuit
 share * BuildSharedMult3Circuit(share *s_0, share *s_1, share *s_2,
                                 ArithmeticCircuit *ac) {
-
     share *out = ac->PutMULGate(s_0, s_1);
     out = ac->PutMULGate(out, s_2);
     out = ac->PutOUTGate(out, ALL);
-
+    return out;
 }

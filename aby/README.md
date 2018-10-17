@@ -26,23 +26,38 @@ The circuit itself is defined at a relatively low level: `share` objects are
 manipulated by `gate` operations in a `Circuit`. 
 
 ## Running examples
-Example executables are in the `ABY/bin/` directory. Two parties must run each
-example. You can do it in one line as here, or in two separate terminals.
+To run our examples, you'll need to generate input. We've written input
+generation scripts for `mult3`. It will tell you what the expected result is.
+Data is stored in the `ABY/src/examples/<ex>/data` directory.
 ```
-$ cd ABY
+$ python ~/ABY/src/examples/geninput.py -e <ex>
+Expected result: 621
+```
+
+Executables are in the `ABY/build/bin/` directory. 
+Two parties must run each example. 
+You can do it in one line as here, or in two separate terminals.
+```
+$ cd ~/ABY/build
 $ ./bin/<ex>.exe -r 0 & ./bin/<ex>.exe -r 1
+...
+Result: 621
 ```
 
-Inputs are randomly generated in the code.
+Notes: The `innerproduct` example was a sample program included with the ABY distribution and was not written by us. 
+We modified it slightly to read input from a file. Our version is called
+`innerprod`.
 
-Note: The `innerproduct` example was a sample program included with the ABY distribution and was not written by us. We don't have a working crosstabs example at this time. 
+We now have a crosstabs example, but it is a little buggy (fails when the
+number of bins is larger than the number of elements).
 
 ## Modifying examples
-Create a directory in `ABY/src/examples` for your example. Copy the `Example_Makefile` or create a symlink to it.
+Create a directory in `ABY/src/examples` for your example. Copy the
+`CMakeLists.txt` from another example directory and change the names appropriately. 
 
-To make, simply re-run `make` in the `ABY` directory (there is likely a way to
-compile a single program but we have yet to find it).
+To build your example, add it to `ABY/src/examples/CMakeLists.txt` and re-run `make` in the `ABY/build` directory.
 
-For more details on the ABY libraries, we recommend the helpful, though
-incomplete, [Developer
-Guide](https://www.informatik.tu-darmstadt.de/media/encrypto/encrypto_code/abydevguide.pdf)
+For more details on the ABY libraries, we recommend the helpful 
+[Developer Guide](https://www.informatik.tu-darmstadt.de/media/encrypto/encrypto_code/abydevguide.pdf). 
+While this document is minorly out-of-date, it contains much useful information
+about the architecture and capabilities of the framework.

@@ -20,7 +20,7 @@
 
 int32_t test_crosstabs_circuit(e_role role, char* address, uint16_t port, seclvl seclvl,
 		uint32_t nvals, uint32_t bitlen, uint32_t nthreads, e_mt_gen_alg mt_alg,
-		e_sharing sharing, uint32_t num) {
+		e_sharing sharing, uint32_t array_len) {
 
 	/**
 	 Step 1: Create the ABYParty object which defines the basis of all the
@@ -49,30 +49,21 @@ int32_t test_crosstabs_circuit(e_role role, char* address, uint16_t port, seclvl
           sharings[S_BOOL]->GetCircuitBuildRoutine();
 
 	/**
-	 Step 4: Creating the share objects - s_x_vec, s_y_vec which
-	 are used as inputs to the computation. Also, s_out which stores the output.
+	 Step 5: Allocate the xvals and ybins that will hold the plaintext values.
 	 */
+	uint32_t x, y;
 
-	//share *s_x_keys, *s_x_values, *s_y_keys, *s_y_values, *s_out;
-    share *s_out;
+	uint32_t output;
 
-	/**
-	 Step 5: Allocate the xvals and yvals that will hold the plaintext values.
-	 */
-	uint16_t x, y;
+        vector<share *> xvals(array_len, NULL);
+        vector<share *> ybins(array_len, NULL);
+        vector<share *> xids(array_len, NULL);
+        vector<share *> yids(array_len, NULL);
 
-	uint16_t output, v_sum = 0;
-
-    vector<share *> xvals(num, NULL);
-    vector<share *> yvals(num, NULL);
-    vector<share *> xids(num, NULL);
-    vector<share *> yids(num, NULL);
-
-	uint32_t i;
 	srand(time(NULL));
 
 	/**
-	 Step 6: Fill the arrays xvals and yvals with the generated random values.
+	 Step 6: Fill the arrays xvals and ybins with the generated random values.
 	 Both parties use the same seed, to be able to verify the
 	 result. In a real example each party would only supply
 	 one input value. Copy the randomly generated vector values into the respective
@@ -81,18 +72,31 @@ int32_t test_crosstabs_circuit(e_role role, char* address, uint16_t port, seclvl
 	 The values for the party different from role is ignored,
 	 but PutINGate() must always be called for both roles.
 	 */
-	for (i = 0; i < num; i++) {
-		x = rand();
-		y = rand();
+	vector<uint32_t> expected_results(BINS,0);
+        uint32_t i;
+	for (i = 0; i < array_len; i++) {
+	    x = rand();
+	    y = rand() % BINS;
+   	    expected_results[y] += x;
 
-		v_sum += x;
+            xvals[i] = circ->PutINGate(x, bitlen, SERVER);
+            ybins[i] = bool_circ->PutINGate(y, bitlen, CLIENT);
 
-        xvals[i] = circ->PutINGate(x, bitlen, SERVER);
-        yvals[i] = circ->PutINGate(y, bitlen, CLIENT);
-
-        xids[i]  = bool_circ->PutINGate(i, bitlen, SERVER);
-        yids[i]  = bool_circ->PutINGate(i, bitlen, CLIENT);
+            xids[i]  = bool_circ->PutINGate(i, bitlen, SERVER);
+            yids[i]  = bool_circ->PutINGate(i, bitlen, CLIENT);
 	}
+
+	cout << "Filled in values..." << endl;
+        uint8_t zero = 0;
+
+        // initialize result bins to 0 and constant bin numbers
+        // (constant input gates don't seem to be implemented)
+        vector<share *> results(BINS, NULL);
+        vector<share *> numbers(BINS,NULL);
+        for (uint32_t i=0; i<BINS; i++) {
+            numbers[i] = bool_circ->PutINGate(i,32,SERVER);
+            results[i] = circ->PutINGate(zero,32,SERVER);
+        }
 
 
 	/**
@@ -101,107 +105,63 @@ int32_t test_crosstabs_circuit(e_role role, char* address, uint16_t port, seclvl
 	 Don't forget to type cast the circuit object to type of share
 	 */
 
-    s_out = BuildVectorCrosstabsCircuit(xids, xvals, yids, yvals, 
-            circ, yao_circ, bool_circ);
-    cout << "finished building circuit" << endl;
+        vector<share *>s_out = BuildVectorCrosstabsCircuit(xids, xvals, yids, ybins, 
+            numbers, results, circ, yao_circ, bool_circ);
+ 	cout << "Built circuit... " << endl;
 
 	/**
 	 Step 8: Output the value of s_out (the computation result) to both parties
-	 */
-    s_out = circ->PutOUTGate(s_out, ALL);
-    cout << "placed out gate" << endl;
+	 **/
+        for(int i=0; i<BINS; i++) {
+            s_out[i] = circ->PutOUTGate(s_out[i], ALL);
+        }
+        cout << "placed out gates" << endl;
+        party->ExecCircuit();
+        cout << "Executed circuit" << endl;
 
-	/**
-	 Step 9: Executing the circuit using the ABYParty object evaluate the
-	 problem.
-	 */
-	party->ExecCircuit();
+        for(int i=0; i<BINS; i++) {
+            output = s_out[i]->get_clear_value<uint32_t>();
+            cout << "Bin " << i << ":\t" << output << endl;
+            cout << "Expect:\t" << expected_results[i] << endl;
+        }
 
-	/**
-	 Step 10: Type caste the plaintext output to 16 bit unsigned integer.
-	 */
-	output = s_out->get_clear_value<uint32_t>();
-
-	cout << "\nCircuit Result: " << output;
-	cout << "\nVerification Result: " << v_sum << endl;
-
-	delete party;
-
-	return 0;
-}
-
-share *BuildSimpleCrosstabsCircuit(share *s_xkeys, share *s_ykeys,
-                                   ArithmeticCircuit *ac,
-                                   BooleanCircuit *yc,
-                                   BooleanCircuit *bc){
-    s_xkeys = yc->PutADDGate(s_xkeys, s_ykeys);
-    s_xkeys = bc->PutY2AGate(s_xkeys,bc);
-    return s_xkeys;
+        delete party;
+    
+        return 0;
 }
 
 
-share *BuildVectorCrosstabsCircuit(vector<share*> xids, 
+vector<share *>BuildVectorCrosstabsCircuit(vector<share*> xids, 
                                    vector<share*> xvals, 
                                    vector<share*> yids, 
-                                   vector<share*> yvals,
+                                   vector<share*> ybins,
+	vector<share*> numbers, vector<share*>results,
         ArithmeticCircuit *circ, BooleanCircuit *yao_circ, BooleanCircuit *bool_circ) {
 
-    vector<share *> eqs(xids.size() * yids.size(), NULL);
+    share *idmatch, *binmatch; 
+    circ->PutPrintValueGate(results[0], "initial result");
+    
     for(int i=0; i<xids.size(); i++) {
+ 	bool_circ->PutPrintValueGate(xids[i], "xid: ");
         for(int j=0; j<yids.size(); j++) {
-            int idx = i*xids.size() + j;
+ 	    //bool_circ->PutPrintValueGate(yids[j], "yid: ");
             // check if ids match
-            eqs[idx] = bool_circ->PutEQGate(xids[i], yids[j]);
-            
-            // TODO bins go here
-            // if so, count xval
-            eqs[idx] = bool_circ->PutMULGate(eqs[idx], xvals[i]);
-            circ->PutPrintValueGate(eqs[idx], "idxth added value");
-            // store the total sum in index 0
-            eqs[0] = bool_circ->PutADDGate(eqs[0], eqs[idx]);
+            idmatch = bool_circ->PutEQGate(xids[i], yids[j]);
+	    //bool_circ->PutPrintValueGate(idmatch, "idmatch "+to_string(i)+","+to_string(j));
+	    for(int k=0; k<BINS; k++) {
+                // check if bin matches
+                binmatch = bool_circ->PutEQGate(numbers[k],ybins[j]);
+                // if both id and bin match...
+	        share *keep= bool_circ->PutANDGate(binmatch, idmatch); 
+		keep = circ->PutB2AGate(keep);
+		// add value to bin result
+                keep = circ->PutMULGate(keep, xvals[i]);
+                results[k] = circ->PutADDGate(results[k], keep);
+	    	circ->PutPrintValueGate(results[k], to_string(k)+"th result in round "+to_string(i));
+            }
         }
+        bool_circ->PutPrintValueGate(xids[i], "done with round");
     }
-    eqs[0] = circ->PutB2AGate(eqs[0]);
-    return eqs[0];
+    return results;
 }
 
-/*
- Constructs the crosstabs product circuit. num multiplications and num additions.
- */
-share* BuildCrosstabsCircuit(share *s_xkeys, share *s_xvals, 
-                             share *s_ykeys, share *s_yvals, 
-                             uint32_t num, ArithmeticCircuit *ac,
-                             BooleanCircuit *yc,
-                             BooleanCircuit *bc) {
-	uint32_t i,j,k;
-    uint32_t bins = 3; // this should come from somewhere
-
-    share *s_sum;
-
-    s_xkeys = ac->PutSplitterGate(s_xkeys);
-    s_xvals = ac->PutSplitterGate(s_xvals);
-    s_ykeys = ac->PutSplitterGate(s_ykeys);
-    s_yvals = ac->PutSplitterGate(s_yvals);
-
-    s_xkeys = yc->PutA2YGate(s_xkeys);
-    s_ykeys = yc->PutA2YGate(s_ykeys);
-    share *s_idmatch = yc->PutEQGate(s_xkeys, s_ykeys);
-
-    yc->PutPrintValueGate(s_idmatch, "everything matches?");
-
-
-    for (i = 0; i < num; i++) {
-      for (j = 0; j < num; j++) {
-        /* broken
-        uint32_t ti = ac->PutEQGate(s_xkeys->get_wire_id(i), s_ykeys->get_wire_id(j));
-        ti = ac->PutMULGate(ti, s_xvals->get_wire_id(i));
-        s_sum->set_wire_id(0, ac->PutADDGate(s_sum, ti)); 
-        */
-          
-        // TODO bins
-      }
-    }
-
-    return s_sum;
-
-}
