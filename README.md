@@ -1,7 +1,8 @@
-This repository contains a collection of sample programs for a variety of multi-party computation (MPC) frameworks. For ease of examination, we have set up each framework in a Docker container. This minimizes the effort required to test framework functionality.
+This repository contains a collection of sample programs for a variety of multi-party computation (MPC) frameworks. For ease of examination, we have set up each framework in a Docker container. This minimizes the effort required to test framework functionality. 
 
-This repository accompanies the paper _SoK: General-Purpose Compilers for Secure Multi-party Computation_.  It includes three sample programs for each of 12 frameworks. We include additional documentation on each framework in the [wiki](https://github.com/mpc-sok/frameworks/wiki).
+This repository accompanies the paper _SoK: General-Purpose Compilers for Secure Multi-party Computation_, (link coming 1 Nov 2018), which includes a thorough evaluation of each framework across usability and architectural criteria. For a gentler introduction to MPC and this project, please read our [Layperson's Guide](https://github.com/MPC-SoK/frameworks/wiki/A-Layperson%27s-Guide).
 
+We include a complete build environment and three sample programs for each of 12 frameworks (additional documentation of each framework can be found in the [wiki](https://github.com/mpc-sok/frameworks/wiki) pages). 
 Each framework directory includes a `Dockerfile` and `install.sh` script, described below. There is a `README` that describes some relevant architecture along with instructions to compile, run, and modify examples. The `source` directory holds the sample programs and any additional code (including patches, vim syntax highlighting, and input generation scripts).
 
 ## About Sample Programs
@@ -68,4 +69,14 @@ On some Ubuntu and other \*nix OSes, you may need to run the `docker build` and 
 This software is offered as-is. It represents these frameworks at a single point in time (early- to mid-2018), and may not be up-to-date with the latest versions. We welcome pull requests for compatibility with new software versions, corrections to sample programs, and directories for new frameworks.
 
 Questions and commentary should be raised publicly in the [Issue Tracker](https://github.com/MPC-SoK/frameworks/issues). 
+
+If you use this work for an academic project, please cite:
+```latex
+    @inproceedings{mpc-sok,
+       author = {Marcella Hastings and Brett Hemenway and Daniel Noble and Steve Zdancewic},
+       title = {{SoK:} General-Purpose Compilers for Secure Multi-Party Computation},
+       booktitle = {2019 IEEE Symposium on Security and Privacy (SP)},
+       year = {2019},
+    }
+```
 
