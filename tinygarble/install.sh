@@ -3,6 +3,7 @@
 git clone https://github.com/esonghori/TinyGarble.git
 
 cd TinyGarble
+git reset --hard 3a2a610
 ./configure
 cd bin
 make

@@ -4,11 +4,11 @@
 Create a Docker image. This will take a few minutes. You only have to do this
 once.
 ```
-$ docker build -t mamba .
+$ docker build -t scalemamba .
 ```
 Spin up a Docker container from the image. 
 ```
-$ docker run -it --rm mamba 
+$ docker run -it --rm scalemamba 
 ```
 Please note that any changes you make in the container are not persistent.
 
@@ -24,15 +24,25 @@ First step is to set up parameters for the computation, including network
 participants and secret-sharing setup. The framework provides a setup script to
 interactively produce the appropriate config files.
 
-We've set up the necessary certificate infrastructure in `SCALE-MAMBA/Cert-Store`. We ran our examples using localhost (127.0.0.1) for the IP address and `Player<i>.crt`, where `<i>` is a number 0-3. 
-
-For secret sharing setup, we used Full Threshold sharing (option 1), with
-varying length modulus. Try 32 for initial testing purposes.
+Run the following commands. You will need to create BOTH config files (Secret
+Sharing and Cert). 
 ```
 $ cd ~/SCALE-MAMBA
 $ ./Setup.x
+What do you want to set up?
+    1) Certs
+    2) Secret Sharing
+    3) Both
+Enter a number (1-3)..
 ```
-The setup script produces two configuration files: `Data/NetworkingData.txt` and
+Enter `3`.
+
+We've placed all necessary certificate infrastructure in `SCALE-MAMBA/Cert-Store`. The root certificate is called `RootCA` and the individual player certificate names are `Player<i>.crt`. We ran examples using localhost (127.0.0.1) for the IP address. You can test with real or fake offline and sacrifice phases.
+
+For secret sharing setup, we used Full Threshold sharing (option 1), with
+varying length modulus. Try 32 for initial testing purposes.
+
+This setup script produces two configuration files: `Data/NetworkingData.txt` and
 `Data/SharingData.txt`.
 
 Then, compile the directory containing the program you wish to run. We
@@ -57,4 +67,4 @@ a directory for them. Note that if you change the networking or sharing setup
 (ie by adding another player or changing the modulus size), you'll need to
 recompile the program.
 
-
+Our examples are compatible with the repository as of July 2018, but we note that the project is under active development.

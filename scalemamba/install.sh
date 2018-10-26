@@ -23,7 +23,8 @@ ldconfig
 cd 
 git clone https://github.com/KULeuven-COSIC/SCALE-MAMBA.git
 cd SCALE-MAMBA
-mv /root/source/CONFIG.mine .
+git reset --hard e05c19e
+cp /root/source/CONFIG.mine .
 make progs
 
 # set up certificate authority
