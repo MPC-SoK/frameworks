@@ -1,0 +1,12 @@
+sum = sint(0)
+
+for _ in range(3):
+  x1 = sint.get_raw_input_from(0)
+  print_ln("x1: %s", x1.reveal())
+  x2 = sint.get_raw_input_from(1)
+  print_ln("x2: %s", x2.reveal())
+  prod = x1 * x2
+  print_ln("prod: %s", prod.reveal())
+  sum = sum + prod
+
+print_ln("InnerProd: %s", sum.reveal())
