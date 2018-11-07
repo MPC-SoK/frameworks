@@ -39,7 +39,7 @@ Two parties must run each example.
 You can do it in one line as here, or in two separate terminals.
 ```
 $ cd ~/ABY/build
-$ ./bin/<ex>.exe -r 0 & ./bin/<ex>.exe -r 1
+$ ./bin/<ex>_test -r 0 & ./bin/<ex>_test -r 1
 ...
 Result: 621
 ```
@@ -53,7 +53,7 @@ number of bins is larger than the number of elements).
 
 ## Modifying examples
 Create a directory in `ABY/src/examples` for your example. Copy the
-`CMakeLists.txt` from another example directory and change the names appropriately. 
+`CMakeLists.txt` from another example directory and change the executable and file names appropriately. 
 
 To build your example, add it to `ABY/src/examples/CMakeLists.txt` and re-run `make` in the `ABY/build` directory.
 

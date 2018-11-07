@@ -23,9 +23,11 @@
 #include "../../../abycore/circuit/arithmeticcircuits.h"
 #include "../../../abycore/circuit/circuit.h"
 #include "../../../abycore/aby/abyparty.h"
+#include "../../../abycore/sharing/sharing.h"
 #include <math.h>
 #include <cassert>
 
+using namespace std;
 
 /**
  \param		role 		role played by the program which can be server or client part.

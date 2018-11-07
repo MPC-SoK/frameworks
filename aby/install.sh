@@ -10,10 +10,10 @@ rm -r cmake*
 # get ABY
 git clone --recursive https://github.com/encryptogroup/ABY.git
 cd ABY
-#git reset --hard abd5b3ffe0681aa9df69969c4adc3e51804b542b
+git checkout -b MPCSOK b77d4c527ce10e585fd1f46a949f27f4ae84dae7
 
 # copy our working examples 
-for EX in mult3 crosstabs # innerprod
+for EX in mult3 crosstabs innerprod
 do
   cp -r ~/source/$EX src/examples/
   echo 'add_subdirectory('$EX')' >> src/examples/CMakeLists.txt
