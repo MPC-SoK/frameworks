@@ -5,8 +5,10 @@ RUN apt-get update && apt-get install -y \
   gcc \
   g++ \
   git \
+  libboost-dev \
   libboost-thread-dev \
   libgmp3-dev \
+  libssl-dev \
   m4 \
   make \
   man \

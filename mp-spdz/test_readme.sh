@@ -13,6 +13,10 @@ echo 12 > Player-Data/Input-P1-0
 ./yao-player.x -p 0 mult3 &
 ./yao-player.x -p 1 mult3 | grep 1344 || exit 1
 
+./replicated-bin-party.x -p 1 mult3 &
+./replicated-bin-party.x -p 2 mult3 &
+./replicated-bin-party.x -p 0 mult3 | grep 1344 || exit 1
+
 for i in 0 1; do
     cp Programs/Source/xtabs.Input-P$i-0 Player-Data/Input-P$i-0
 done
@@ -22,6 +26,14 @@ done
 
 ./yao-player.x -p 0 xtabs &
 ./yao-player.x -p 1 xtabs | grep 'expected 6, got 6' || exit 1
+
+./replicated-bin-party.x -p 0 innerprod &
+./replicated-bin-party.x -p 1 innerprod &
+./replicated-bin-party.x -p 2 innerprod
+
+./replicated-bin-party.x -p 1 xtabs &
+./replicated-bin-party.x -p 2 xtabs &
+./replicated-bin-party.x -p 0 xtabs | grep 'expected 6, got 6' || exit 1
 
 for i in mult3 innerprod xtabs; do
     ./compile.py -p 128 $i || exit 1
@@ -50,8 +62,8 @@ for i in 0 1; do
 done
 
 ./Server.x 3 5000 &
-./Player-Online.x 0 innerprod || exit 1
-./Player-Online.x 1 inneprod & ./Player-Online.x 2 innerprod
+./Player-Online.x 0 innerprod || exit 1 &
+./Player-Online.x 1 innerprod & ./Player-Online.x 2 innerprod
 
 ./Server.x 3 5000 &
 ./Player-Online.x 0 xtabs | grep 'expected 6, got 6' || exit 1 &

@@ -37,7 +37,7 @@ ldconfig
 # Compile SPDZ with secure pre-processing
 git clone https://github.com/n1analytics/MP-SPDZ
 cd MP-SPDZ
-git checkout 7c910f75c5b5caf126a7cc62e9266343eb471c6c
+git checkout f0e02f2
 echo USE_NTL = 1 >> CONFIG.mine
 echo USE_GF2N_LONG = 0 >> CONFIG.mine
 echo MOD = -DMAX_MOD_SZ=6 >> CONFIG.mine
@@ -45,3 +45,4 @@ echo ARCH = -march=native >> CONFIG.mine
 
 make
 mkdir Player-Data
+Scripts/setup-ssl.sh

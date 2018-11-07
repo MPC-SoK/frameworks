@@ -17,9 +17,9 @@ $ docker run -it --rm mp-spdz
 
 ## Architecture
 
-While MP-SPDZ allows benchmarking for a number of schemes, only two implementations provide a security guarantee throughout: semi-honest two-party Yao's garbled circuits and covertly secure full-threshold SPDZ-2.
+While MP-SPDZ allows benchmarking for a number of schemes, only two implementations provide a security guarantee throughout: semi-honest two-party Yao's garbled circuits, semi-honest three-party replicated sharing with binary circuits, and covertly secure full-threshold SPDZ-2.
 
-## Yao's garbled circuits
+## Binary circuits
 
 First, compile the example source. We provide three examples (mult3, innerprod,
 xtabs). The `-B` argument determines the bit length of integers.
@@ -39,6 +39,8 @@ $ echo 14 8 > Player-Data/Input-P0-0
 $ echo 12 > Player-Data/Input-P1-0
 ```
 
+### Yao's garbled circuits
+
 Execute the two parties. The output transcript will include the
 computed solution.
 ``` 
@@ -48,6 +50,19 @@ $ ./yao-player.x -p 0 <ex> & ./yao-player.x -p 1 <ex>
 For example, the output from the following will include `Mult3 prod = 1344`. 
 ```
 $ ./yao-player.x -p 0 mult3 & ./yao-player.x -p 1 mult3
+```
+
+### Three-party replicated secret sharing
+
+Execute the three parties. The output transcript will include the
+computed solution.
+``` 
+$ ./replicated-bin-party.x -p 0 <ex> & ./replicated-bin-party.x -p 1 <ex> & ./replicated-bin-party.x -p 2 <ex>
+```
+
+For example, the output from the following will include `Mult3 prod = 1344`. 
+```
+$ ./replicated-bin-party.x -p 0 mult3 & ./replicated-bin-party.x -p 1 mult3 & ./replicated-bin-party.x -p 2 mult3
 ```
 
 ## SPDZ-2
