@@ -113,7 +113,7 @@ For example, to run mult3 with inputs 14, 12, and 8, we'd do the following:
 ```
 $ cd MP-SPDZ
 $ mkdir Programs/InputData
-$ printf "1\n14\n8\n" > Programs/InputData/mult3.P0 
+$ printf "2\n14\n8\n" > Programs/InputData/mult3.P0 
 $ printf "1\n12\n" > Programs/InputData/mult3.P1 
 $ printf "0\n" > Programs/InputData/mult3.P2 
 $ ./gen_input_fp.x -N 3 -i ./Programs/InputData/mult3.P0 -o ./Player-Data/Private-Input-0
