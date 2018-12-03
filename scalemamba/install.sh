@@ -23,7 +23,7 @@ ldconfig
 cd 
 git clone https://github.com/KULeuven-COSIC/SCALE-MAMBA.git
 cd SCALE-MAMBA
-git reset --hard e05c19e
+git checkout -b MPCSOK e05c19e
 cp /root/source/CONFIG.mine .
 make progs
 

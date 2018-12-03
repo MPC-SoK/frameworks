@@ -40,7 +40,9 @@ Enter `3`.
 We've placed all necessary certificate infrastructure in `SCALE-MAMBA/Cert-Store`. The root certificate is called `RootCA` and the individual player certificate names are `Player<i>.crt`. We ran examples using localhost (127.0.0.1) for the IP address. You can test with real or fake offline and sacrifice phases.
 
 For secret sharing setup, we used Full Threshold sharing (option 1), with
-varying length modulus. Try 32 for initial testing purposes.
+varying length modulus. Try 32 for initial testing purposes. _IMPORTANT_: Full
+threshold sharing insecurely generates keys! For secure key generation, use a
+different sharing scheme.
 
 This setup script produces two configuration files: `Data/NetworkingData.txt` and
 `Data/SharingData.txt`.
