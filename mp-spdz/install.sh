@@ -20,16 +20,6 @@ make
 make install
 cd ..
 
-# Install NTL (needed by SPDZ-2)
-wget http://www.shoup.net/ntl/ntl-10.5.0.tar.gz
-tar -xf ntl-10.5.0.tar.gz
-rm ntl-10.5.0.tar.gz
-cd ntl-10.5.0/src/
-./configure
-make
-make install
-cd ../..
-
 # Linking
 LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/local/lib
 ldconfig
