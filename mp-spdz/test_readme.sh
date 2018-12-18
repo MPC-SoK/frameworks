@@ -44,21 +44,15 @@ for i in 0 1; do
 done
 ./spdz2-offline.x -p 2 -N 3 -m || exit 1
 
-mkdir Programs/InputData
-printf "2\n14\n8\n" > Programs/InputData/mult3.P0 
-printf "1\n12\n" > Programs/InputData/mult3.P1 
-printf "0\n" > Programs/InputData/mult3.P2
-
-for i in 0 1 2; do
-    ./gen_input_fp.x -N 3 -i ./Programs/InputData/mult3.P$i -o ./Player-Data/Private-Input-$i
-done
+echo 14 8 > Player-Data/Input-P0-0
+echo 12 > Player-Data/Input-P1-0
 
 ./Server.x 3 5000 &
 ./Player-Online.x 1 mult3 & ./Player-Online.x 2 mult3 &
 ./Player-Online.x 0 mult3 | grep 1344 || exit 1
 
 for i in 0 1; do
-    ./gen_input_fp.x -N 3 -i ./Programs/Source/xtabs.P$i -o ./Player-Data/Private-Input-$i
+    cp Programs/Source/xtabs.Input-P$i-0 Player-Data/Input-P$i-0
 done
 
 ./Server.x 3 5000 &

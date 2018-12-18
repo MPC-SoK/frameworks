@@ -99,26 +99,15 @@ $ cd MP-SPDZ
 $ ./compile.py -p 128 <ex>
 ```
 
-Generate input for each party and transform it into the SPDZ binary format.
-You'll need to fill in `<ex>.P<x>` with correctly-formatted data for each party
+Generate input for each party (as above).
+You'll need to fill in `Player-Data/Input-P<x>-0` with ASCII data for each party
 `<x>`.
-```
-$ cd MP-SPDZ
-$ mkdir Programs/InputData
-$ touch Programs/InputData/<ex>.P<x> 
-$ ./gen_input_fp.x -N 3 -i ./Programs/InputData/<ex>.P<x> -o ./Player-Data/Private-Input-<x>
-```
-
 For example, to run mult3 with inputs 14, 12, and 8, we'd do the following:
 ```
 $ cd MP-SPDZ
-$ mkdir Programs/InputData
-$ printf "2\n14\n8\n" > Programs/InputData/mult3.P0 
-$ printf "1\n12\n" > Programs/InputData/mult3.P1 
-$ printf "0\n" > Programs/InputData/mult3.P2 
-$ ./gen_input_fp.x -N 3 -i ./Programs/InputData/mult3.P0 -o ./Player-Data/Private-Input-0
-$ ./gen_input_fp.x -N 3 -i ./Programs/InputData/mult3.P1 -o ./Player-Data/Private-Input-1
-$ ./gen_input_fp.x -N 3 -i ./Programs/InputData/mult3.P2 -o ./Player-Data/Private-Input-2
+$ mkdir Player-Data
+$ echo 14 8 > Player-Data/Input-P0-0
+$ echo 12 > Player-Data/Input-P1-0
 ```
 
 Execute the server and each player. The output transcript will include the
