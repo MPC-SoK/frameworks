@@ -10,16 +10,6 @@ make
 make install
 cd ..
 
-# Install libsodium
-wget https://github.com/jedisct1/libsodium/releases/download/1.0.16/libsodium-1.0.16.tar.gz
-tar -xf libsodium-1.0.16.tar.gz
-rm libsodium-1.0.16.tar.gz 
-cd libsodium-1.0.16/  
-./configure
-make
-make install
-cd ..
-
 # Linking
 LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/local/lib
 ldconfig

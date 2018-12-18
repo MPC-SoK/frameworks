@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y \
   libboost-thread-dev \
   libgmp3-dev \
   libntl-dev \
+  libsodium-dev \
   libssl-dev \
   m4 \
   make \
