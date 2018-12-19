@@ -17,7 +17,7 @@ ldconfig
 # Compile SPDZ with secure pre-processing
 git clone https://github.com/n1analytics/MP-SPDZ
 cd MP-SPDZ
-git checkout f0e02f2
+git checkout -b MPCSOK 4092d61
 echo USE_NTL = 1 >> CONFIG.mine
 echo USE_GF2N_LONG = 0 >> CONFIG.mine
 echo MOD = -DMAX_MOD_SZ=6 >> CONFIG.mine
