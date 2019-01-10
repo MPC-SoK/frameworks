@@ -57,6 +57,9 @@ The result of the program is returned as a byte array. To see the value in plain
 
 
 ## Modifying Examples
-[Extensive documentation for the SecreC language](https://sharemind-sdk.github.io/stdlib/reference/index.html) is available online. 
+Sharemind produced [documentation for the 2018 Q1
+release](https://docs.sharemind.cyber.ee/) which includes high-level
+architectural descriptions and other useful diagrams.
+Extensive low-level [documentation for the SecreC language](https://sharemind-sdk.github.io/stdlib/reference/index.html) is available online. 
 
 
