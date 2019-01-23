@@ -13,11 +13,11 @@ catMin = 1;
 catMax = 3;
 
 # Assume each party's IDs are distinct 
-idA = [sint.get_raw_input_from(0) for _ in range(nRowsA)]
-idB = [sint.get_raw_input_from(1) for _ in range(nRowsB)]
+idA = [sint.get_input_from(0) for _ in range(nRowsA)]
+idB = [sint.get_input_from(1) for _ in range(nRowsB)]
 
-catA = [sint.get_raw_input_from(0) for _ in range(nRowsA)]
-valB = [sint.get_raw_input_from(1) for _ in range(nRowsB)]
+catA = [sint.get_input_from(0) for _ in range(nRowsA)]
+valB = [sint.get_input_from(1) for _ in range(nRowsB)]
 
 nCat = catMax - catMin + 1
 catCount = Array(nCat, sint)
