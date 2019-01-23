@@ -90,7 +90,7 @@ $ echo 12 > Player-Data/Input-P1-0
 Execute the three parties. The output transcript will include the
 computed solution.
 ```
-$ ./malicious-rep-field-party.x -p 0 <ex> & ./malicious-rep-field-party.x -p 1 <ex> & ./malicious-rep-field-party.x -p 2 <ex>
+$ ./malicious-rep-field-party.x 0 <ex> & ./malicious-rep-field-party.x 1 <ex> & ./malicious-rep-field-party.x 2 <ex>
 ```
 
 For example, the output from the following will include `Mult3 prod = 1344`.
