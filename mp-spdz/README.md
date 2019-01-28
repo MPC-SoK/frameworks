@@ -95,7 +95,7 @@ $ ./malicious-rep-field-party.x 0 <ex> & ./malicious-rep-field-party.x 1 <ex> & 
 
 For example, the output from the following will include `Mult3 prod = 1344`.
 ```
-$ ./malicious-rep-field-party.x -p 0 mult3 & ./malicious-rep-field-party.x -p 1 mult3 & ./malicious-rep-field-party.x -p 2 mult3
+$ ./malicious-rep-field-party.x 0 mult3 & ./malicious-rep-field-party.x 1 mult3 & ./malicious-rep-field-party.x 2 mult3
 ```
 
 ### SPDZ-2
