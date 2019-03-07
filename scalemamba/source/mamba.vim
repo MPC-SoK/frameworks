@@ -4,5 +4,13 @@ endif
 
 set syntax=python
 
-let b:current_syntax = "frigate"
+syntax match mambaType "sint"
+syntax match mambaType "cint" 
+syntax match mambaType "sfloat" 
+syntax match mambaType "cfloat"
+syntax match mambaType "sfix" 
+syntax match mambaType "cfix"
+highlight link mambaType Type
+
+let b:current_syntax = "mamba"
 

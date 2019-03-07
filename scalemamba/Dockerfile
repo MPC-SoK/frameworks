@@ -6,6 +6,7 @@ RUN apt-get update && apt-get install -y \
   g++ \
   gcc \
   git \
+  libcrypto++-dev \
   libgmp3-dev \
   m4 \
   make \
@@ -13,7 +14,8 @@ RUN apt-get update && apt-get install -y \
   python \
   vim \
   wget \
-  yasm
+  yasm \
+  zip
 
 ADD source/ /root/source
 ADD install.sh .

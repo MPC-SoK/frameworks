@@ -1,10 +1,10 @@
-#frigate install supporting mpir library
+# install supporting mpir library
 wget http://mpir.org/mpir-3.0.0.tar.bz2
 tar -xvf mpir-3.0.0.tar.bz2
 rm mpir-3.0.0.tar.bz2
 cd mpir-3.0.0
 ./configure --enable-cxx
-make install
+make && make check && make install
 cp .libs/* /usr/lib64/
 
 # install openssl from source because apparently apt's version is not good
@@ -15,15 +15,14 @@ tar -xvf openssl-1.1.0h.tar.gz
 rm openssl-1.1.0h.tar.gz
 cd openssl-1.1.0h
 ./config
-make
-make install
+make && make install
 ldconfig 
 
 # download SCALE-MAMBA
 cd 
 git clone https://github.com/KULeuven-COSIC/SCALE-MAMBA.git
 cd SCALE-MAMBA
-git checkout -b MPCSOK e05c19e
+git checkout -b MPCSOK 862ecf5 
 cp /root/source/CONFIG.mine .
 make progs
 
@@ -60,5 +59,4 @@ cd
 mkdir -p .vim/syntax
 mv source/mamba.vim .vim/syntax
 mkdir .vim/ftdetect
-cd .vim/ftdetect
-echo "au BufNewFile,BufRead *.wir set filetype=mamba" > mamba.vim
+echo "au BufNewFile,BufRead *.mpc set filetype=mamba" > .vim/ftdetect/mamba.vim
