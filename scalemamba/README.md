@@ -69,4 +69,4 @@ a directory for them. Note that if you change the networking or sharing setup
 (ie by adding another player or changing the modulus size), you'll need to
 recompile the program.
 
-Our examples are compatible with the repository as of July 2018, but we note that the project is under active development.
+Our examples are compatible with the repository as of March 2019, but we note that the project is under active development.
