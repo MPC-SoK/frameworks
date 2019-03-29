@@ -1,26 +1,9 @@
 FROM ubuntu:16.04
 WORKDIR /root
 RUN apt-get update && apt-get install -y \
-  autoconf \
-  gcc \
-  g++ \
-  git \
-  libboost-dev \
-  libboost-thread-dev \
-  libgmp3-dev \
-  libntl-dev \
-  libsodium-dev \
-  libssl-dev \
-  libtool \
-  m4 \
-  make \
-  man \
+  curl \
   python \
-  sudo \
-  texinfo \
-  valgrind \
-  vim \
-  yasm
+  openssl
 
 ADD install.sh .
 RUN ["bash", "install.sh"]
