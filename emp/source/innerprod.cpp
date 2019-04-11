@@ -9,12 +9,16 @@ void test_innerprod(int bitsize, string inputs_a[], string inputs_b[], int len) 
 
     Integer sum(bitsize, 0, PUBLIC);
     Integer prod(bitsize, 0, PUBLIC);
+	Integer a[len];
+	Integer b[len];
 
     for( int i=0; i<len; i++) {
-        Integer a(bitsize, inputs_a[i], ALICE);
-        Integer b(bitsize, inputs_b[i], BOB);
+        a[i] = Integer(bitsize, inputs_a[i], ALICE);
+        b[i] = Integer(bitsize, inputs_b[i], BOB);
+    }
 
-        prod = a * b;
+    for( int i=0; i<len; i++) {
+        prod = a[i] * b[i];
         sum = sum + prod;
     }
 

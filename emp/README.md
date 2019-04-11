@@ -47,8 +47,6 @@ This container also includes the `emp-sh2pc` examples produced by the author of 
 EMP-toolkit only supports end-to-end execution for the `sh2pc` implementation. However,
 you can also use the semi-honest repository to generate circuits compatible with the other
 protocol implementations included in the library.
-While we have not had complete success running these examples, we include the
-build steps for interested parties.
 
 For the `mult3` and `innerprod` examples, we inclde a runtime option (`-m`) that 
 uses the `sh2pc` library to generate a circuit rather than execute a computation. 
@@ -65,13 +63,18 @@ We used EMP-toolkit scripts as a model for our protocol execution script for
 `mult3`. We hardcoded input and execute the protocol in the file
 `~/emp-ag2pc/test/mult3.ag2pc.cpp`. We haven't created a parallel for the other examples.
 We compiled this file; run the executable for each party execute the two-party computation. 
-This is where we ran into unexpected behavior.
+
 ```
+$ cd ~/emp-ag2pc/build
+$ cp ~/emp-sh2pc/build/mult3.circuit.txt .
 $ ./bin/mult3.ag2pc 1 12345 & ./bin/mult3.ag2pc 2 12345
+connected
+connected
+48 48 16 527
 [...]
-no match GT!
-result: <something unexpected>
 ```
+
+[In the wiki](https://github.com/MPC-SoK/frameworks/wiki/EMP-toolkit), we explain the ag2pc circuit file format, some restrictions on programs, and modifications required for 3 or more party executions.
 
 ## Modifying examples
 

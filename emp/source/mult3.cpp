@@ -5,14 +5,20 @@ using namespace std;
 void test_mult3(int bitsize, string inputs_a[], string inputs_b[]) {
   Integer product(bitsize, 1);
 
+
+	Integer a[3];
+	Integer b[3];
   for (int i=0; i<3; i++) {
-    Integer a(bitsize, inputs_a[i], ALICE);
-    Integer b(bitsize, inputs_b[i], BOB);
+    a[i] = Integer(bitsize, inputs_a[i], ALICE);
+    b[i] = Integer(bitsize, inputs_b[i], BOB);
+	}
+
+	for( int i=0; i < 3; i++ ) {
 
     // reconstruct "secret shared" inputs
-    a = a + b;
+    a[i] = a[i] + b[i];
     // multiply value into product
-    product = product * a;
+    product = product * a[i];
   }
 
   cout << "Product (binary notation): ";
