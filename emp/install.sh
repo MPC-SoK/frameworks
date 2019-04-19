@@ -7,6 +7,8 @@ git clone https://github.com/emp-toolkit/emp-readme.git
 bash ./emp-readme/scripts/install_packages.sh
 apt-get install -y libboost-{chrono,log,program-options,date-time,thread,system,filesystem,regex,test}1.58-dev
 
+# roll back to older version of relic
+sed -i '/cd relic/a git checkout 3cbf4ae' ~/emp-readme/scripts/install_relic.sh
 bash ./emp-readme/scripts/install_relic.sh
 #EC STRING SIZE
 sed -i "s/FB_POLYN:STRING=283/FB_POLYN:STRING=251/" ~/relic/CMakeCache.txt
@@ -40,9 +42,6 @@ mv mult3.circuit.txt /usr/local/include/emp-tool/circuits/files/
 cd
 git clone https://github.com/emp-toolkit/emp-ag2pc.git
 
-#Fix issue with segfaults
-sed -i '/using std::endl;/a using std::max;' ~/emp-ag2pc/emp-ag2pc/2pc.h
-sed -i 's/labels = new block\[cf->num_wire\];/labels = new block\[max(total_pre,cf->num_wire)\];/' ~/emp-ag2pc/emp-ag2pc/2pc.h 
 #Fix space in error message
 sed -i 's/{cout <<ands <<"no match GT!"<<endl<<flush;/{cout <<ands <<" no match GT!"<<endl<<flush;/' ~/emp-ag2pc/emp-ag2pc/2pc.h
 
