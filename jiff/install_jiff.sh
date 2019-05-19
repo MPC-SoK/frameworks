@@ -1,0 +1,3 @@
+
+cd jiff
+npm install
