@@ -1,0 +1,32 @@
+<!-- Basic UI for running the demo in the browser -->
+
+<html>
+  <head>
+    <title>Multiply integers under MPC</title>
+    <style>
+      .error {
+        color: #FF0000;
+      }
+    </style>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/lib/sodium.js"></script>
+    <script src="/lib/jiff-client.js"></script>
+
+    <!-- Contains UI Handlers and Input Checks -->
+    <script type="text/javascript" src="./client.js"></script>
+
+    <!-- Contains the MPC implementation -->
+    <script type="text/javascript" src="./mpc.js"></script>
+  </head>
+  <body>
+    <h1>Connect JIFF</h1>
+    <label for="computation_id">Computation ID</label><input id="computation_id" value="test"></input><br/><br/>
+    <label for="count">Party Count<label> <input id="count" pattern="[0-9]*" value="3"> &nbsp; <button id="connectButton" onclick="connect();">Connect</button>
+    <br/><br/>
+    <hr/>
+    <h1>Multiply Numbers under MPC</h1>
+    <label for="number">Input Number (between 0 and 100)</label> <input id="number" pattern="[0-9]+"> &nbsp; <button onclick="submit();" disabled="disabled" id="button">Multiply</button><br/>
+    <div id="output"></div>
+  </body>
+</html>
