@@ -8,8 +8,8 @@ RUN apt-get update && apt-get install -y \
 
 RUN ["wget", "https://nodejs.org/dist/v10.15.3/node-v10.15.3-linux-x64.tar.xz"]
 ADD *.sh ./
-RUN ["bash", "install.sh"]
+ADD source/ /root/source
 RUN ["git", "clone", "https://github.com/multiparty/jiff"]
-RUN ["bash", "install_jiff.sh"]
+RUN ["bash", "install.sh"]
 
 RUN ["bash", "vim.sh"]

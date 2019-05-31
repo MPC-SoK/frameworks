@@ -5,4 +5,9 @@ for DIR in bin include lib share; do
   cp -r ./$DIR/* /usr/$DIR/
 done
 
+cd ~/jiff
+npm install
+
+cp -r ~/source/* demos/
+
 
