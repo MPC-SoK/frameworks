@@ -1,0 +1,57 @@
+<!-- Basic UI for running the demo in the browser -->
+
+<html>
+  <head>
+    <title>Binary Search Tree</title>
+    <style>
+      .error {
+        color: #FF0000;
+      }
+    </style>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/lib/sodium.js"></script>
+    <script src="/lib/jiff-client.js"></script>
+
+    <!-- Contains UI Handlers and Input Checks -->
+    <script type="text/javascript" src="./client.js"></script>
+
+    <!-- Contains the MPC implementation -->
+    <script type="text/javascript" src="./mpc.js"></script>
+  </head>
+  <body>
+    <h1>Connect JIFF</h1>
+    <label for="computation_id">Computation ID</label><input id="computation_id" value="test"></input><br/><br/>
+    <label for="role">Choose Role</label>
+    <select id="role">
+      <option value="1">Provide Values</option>
+      <option value="2">Provide Types (categories)</option>
+    </select>
+    <button id="connectButton" onclick="connect();">Connect</button>
+    <br/><br/>
+    <hr/>
+    <div class="container" id="input1", style="display: none">
+      <div class="row">
+        <h1>Input Array</h1>
+      </div>
+      <div id="party_ids">
+        <p>Enter an array of positive integers, which correspond to IDs.</p>
+        <textarea rows="4" cols="50" id="idArray">[1, 2, 3, 4, 5, 6]</textarea>
+        </div>
+      <div id="party_values", style="display: none">
+        <p>Enter an array of positive integers, which correspond to values.</p>
+        <textarea rows="4" cols="50" id="valueArray">[1, 2, 7, 10, 11, 12]</textarea>
+      </div>
+      <div id="party_types" style="display: none">
+        <p>Enter an array of positive integers [0,3], which correspond to types.</p>
+        <textarea rows="4" cols="50" id="typeArray">[0, 2, 3, 1, 1, 2]</textarea>
+      </div>
+      <br/><br/>
+      <div class="row">
+        <button class="btn btn-secondary" id="submit1" onclick="submitArray();">Submit</button>
+      </div>
+    </div>
+
+    <div id="output"></div>
+  </body>
+</html>
