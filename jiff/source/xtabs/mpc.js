@@ -29,26 +29,50 @@
 
     var deferred = $.Deferred();
     var promise = deferred.promise();
+    var allPromisedResults = [];
 
-    // var value_array_shares = jiff_instance.share_array(value_array, 2, [1, 2], [ 2 ]);
+    // pass inputs
+    var id_promise = jiff_instance.share_array(ids, ids.length);
+    var data_promise = jiff_instance.share_array(data, data.length);
 
-    // TODO: update this to take one array of pairs (2-el arrays)
-    // e.g. [[id,val], ... , [id,val]]
-    //  and [[id,cat], ... , [id,cat]]
-    id_promise = jiff_instance.share_array(ids, ids.length);
+    Promise.all([id_promise, data_promise]).then(function (shares) {
+      // pass ids and data to xtabs
+      var result = xtabs(shares[0], shares[1], jiff_instance);
 
-    jiff_instance.share_array(data, data.length).then(function (shares) {
-      console.log("shares: ", shares)
-      var result = xtabs(shares[1], shares[2]);
-      result.open().then(function (result) {
-        deferred.resolve(result);
+      // this processes the debug output for now
+      for(var i = 0; i<result.length; i++){
+        allPromisedResults.push(jiff_instance.open(result[i]));
+      }
+
+      Promise.all(allPromisedResults).then(function (results) {
+          deferred.resolve(results);
       });
     });
 
     return promise;
   };
 
-  function xtabs(value_array_shares, type_array_shares) {
+  // input is two independent lists of ids
+  // player 1's data shares are values
+  // player 2's data shares are categories
+  function xtabs(id_shares, data_shares, jiff_instance) {
+    var values = data_shares[1];
+    var types = data_shares[2];
+
+    // number of categories is fixed at 4 for now.
+    //var results = new Array(4);
+
+    // debugging: returns booleans indicating whether ids match
+    var debug_results = [];
+
+    for (var i = 0; i < id_shares[1].length; i++) {
+      for(var j = 0; j < id_shares[2].length; j++) {
+        debug_results.push( id_shares[1][i].eq( id_shares[2][j] ));
+      }
+    }
+
+    //return results;
+    return debug_results;
 
 
     /*

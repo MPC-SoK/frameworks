@@ -62,7 +62,12 @@ function submitArray() {
   var promise = mpc.compute(ids,data);
 
   promise.then(function (result) {
-    var msg = result === 1 ? 'Element Found' : 'Element Does Not Exist';
+    var msg = "[ ";
+    for(var i=0; i<result.length; i++) {
+      msg = msg + ", " + result[i]; //(result === 1 ? 'EQ, ' : 'NOT EQ, ');
+    }
+    msg = msg + " ]";
+    //var msg = result === 1 ? 'Element Found' : 'Element Does Not Exist';
     $('#output').append('<p>' + msg + '</p>');
   });
 }
