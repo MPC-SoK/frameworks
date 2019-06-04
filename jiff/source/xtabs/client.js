@@ -8,7 +8,7 @@ function connect() {
   var computation_id = $('#computation_id').val();
   var party_id = parseInt($('#role').val());
 
-  var options = { party_id: party_id, party_count: 2, Zp: 13 };
+  var options = { party_id: party_id, party_count: 2};
   options.onError = function (error) {
     $('#output').append('<p class="error">'+error+'</p>');
     $('#connectButton').prop('disabled', false);
@@ -46,7 +46,6 @@ function submitArray() {
   var party_id = parseInt($('#role').val());
   var ids = JSON.parse($('#idArray').val());
   var data = JSON.parse($('#valueArray').val());
-  console.log("data array: ", data)
 
   if (party_id === 2) {
     data = JSON.parse($('#typeArray').val());
@@ -57,38 +56,31 @@ function submitArray() {
       }
     }
   }
+  console.log("data array: ", data)
+
+  if (ids.length !== data.length) {
+    alert("Input arrays must be the same length!");
+    return;
+  }
+
 
   // eslint-disable-next-line no-undef
   var promise = mpc.compute(ids,data);
 
   promise.then(function (result) {
-    var msg = "[ ";
-    for(var i=0; i<result.length; i++) {
-      msg = msg + ", " + result[i]; //(result === 1 ? 'EQ, ' : 'NOT EQ, ');
+    var msg;
+    // return a string if there's an error
+    if (! (result instanceof Array)) {
+      console.log("result is not an array???")
+      msg = result;
+    } else {
+      msg = "[ ";
+      for(var i=0; i<result.length; i++) {
+        msg = msg + ", " + result[i]; 
+      }
+      msg = msg + " ]";
     }
-    msg = msg + " ]";
-    //var msg = result === 1 ? 'Element Found' : 'Element Does Not Exist';
     $('#output').append('<p>' + msg + '</p>');
   });
 }
 
-// eslint-disable-next-line no-unused-vars
-function submitElement() {
-  var element = $('#inputElement').val();
-  element = parseInt(element);
-  if (element == null || isNaN(element)) {
-    alert('Element must be a whole number');
-    return;
-  } if (element < 0 || element >= 13) {
-    alert('Element must be between 0 and 13 exclusive');
-    return;
-  }
-
-  // eslint-disable-next-line no-undef
-  var promise = mpc.compute(element);
-
-  promise.then(function (result) {
-    var msg = result === 1 ? 'Element Found' : 'Element Does Not Exist';
-    $('#output').append('<p>' + msg + '</p>');
-  });
-}

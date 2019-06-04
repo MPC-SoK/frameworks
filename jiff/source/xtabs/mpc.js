@@ -35,11 +35,17 @@
     var id_promise = jiff_instance.share_array(ids, ids.length);
     var data_promise = jiff_instance.share_array(data, data.length);
 
+    // execute xtabs once all data is shared
     Promise.all([id_promise, data_promise]).then(function (shares) {
-      // pass ids and data to xtabs
+      if (shares[1][1].length !== shares[1][2].length) {
+        // not sure if this works
+        deferred.resolve("ERROR: inputs have different lengths");
+        return promise;
+      }
+
       var result = xtabs(shares[0], shares[1], jiff_instance);
 
-      // this processes the debug output for now
+      // process array of outputs
       for(var i = 0; i<result.length; i++){
         allPromisedResults.push(jiff_instance.open(result[i]));
       }
@@ -60,45 +66,31 @@
     var types = data_shares[2];
 
     // number of categories is fixed at 4 for now.
-    //var results = new Array(4);
+    var NUM_TYPES = 4;
+    var results = new Array(NUM_TYPES).fill(null);
 
-    // debugging: returns booleans indicating whether ids match
-    var debug_results = [];
+    var eqid;
+    var eqcat;
+    var amt_added;
 
+    // if ids match and categories match, add value
+    // eg results[cat] += eqid * eqcat * value
     for (var i = 0; i < id_shares[1].length; i++) {
       for(var j = 0; j < id_shares[2].length; j++) {
-        debug_results.push( id_shares[1][i].eq( id_shares[2][j] ));
+        eqid = id_shares[1][i].eq( id_shares[2][j] );
+        for (var cat=0; cat < NUM_TYPES; cat++) {
+          eqcat = types[j].eq(cat);
+          amt_added = values[i].smult(eqid.smult(eqcat));
+          if (results[cat]) {
+            results[cat] = results[cat].sadd(amt_added);
+          } else {
+            results[cat] = amt_added;
+          }
+        }
       }
     }
 
-    //return results;
-    return debug_results;
-
-
-    /*
-    if (array.length === 1) {
-      return array[0].seq(element);
-    }
-
-    // comparison
-    var mid = Math.floor(array.length/2);
-    var cmp = element.slt(array[mid]);
-
-    // Slice array in half, choose slice depending on cmp
-    var nArray = [];
-    for (var i = 0; i < mid; i++) {
-      var c1 = array[i];
-      var c2 = array[mid+i];
-      nArray[i] = cmp.if_else(c1, c2);
-    }
-
-    // watch out for off by 1 errors if length is odd.
-    if (2*mid < array.length) {
-      nArray[mid] = array[2*mid];
-    }
-
-    return binary_search(nArray, element);
-    */
+    return results;
   }
 
 }((typeof exports === 'undefined' ? this.mpc = {} : exports), typeof exports !== 'undefined'));
