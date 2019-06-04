@@ -17,19 +17,19 @@ $ docker run -it --rm jiff
 Please note that any changes you make in the container are not persistent.
 
 ## Architecture
-There is a jiff engine that must execute MPC.
+There are two types of parties, a single central server that serves a client interface and routes messages, and individual clients that provide data and execute the computation. The server can be untrusted as long as clients are part of a public-key infrastructure.
+This architecture allows clients to disconnect temporarily during a computation without shutting everything down.
 
-The server executes `server.js`, which hosts the client website.
-The clients can visit the webpage and execute the `client.js` script, which defines the interactions the user has with the webpage.
-When a client submits data, they execute functions defined in `mpc.js`: `connect` finds an existing jiff instance; `compute` shares the input among other parties, receives input from the rest, and computes the function.
-
-It's not clear to me yet where the sharing and distributed communications are implemented. There is a library `jiff-client.js`. 
-
-The multiply function uses beaver triplets that seem to come from the jiff instance. Are they using the trusted third party model for generating offline data? How do the clients communicate? 
-
-Based on errors I'm seeing, it looks like clients maintain some kind of open connection as long as the webpage is open, even if the server stops and restarts.
-
-Why must array length be a power of 2?
+Individual examples are mostly divided into the following files:
+```
++ demos/example
+  - client.html : client front-end webpage
+  - client.js : implements client-side connections and input-passing
+  - mpc.js : defines MPC computation
+  - party.js : parses command line inputs and initializes MPC 
+  - server.js : implements server-side communications and hosting
+  - test.js : implements tests
+```
 
 ## Running examples
 
@@ -57,7 +57,9 @@ Then you can connect to the client interface in the browser to the IP address yo
 
 `172.17.0.1:8080/demos/<ex>/client.html`
 
-Connect as many clients as necessary.
+Connect as many clients as necessary. The client interface lets you connect to the server and enter data.
 
 ## Modifying examples
+
+To create an example, just add a new folder in the `jiff/demos` directory. The main files to be modified are `client.html`, `client.js`, `mpc.js`, and `test.js`. In most cases, `server.js` and `party.js` can be left as-is. Some debug info is in the javascript console. 
 

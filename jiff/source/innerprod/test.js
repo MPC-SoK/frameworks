@@ -3,16 +3,16 @@ var assert = require('chai').assert;
 var mpc = require('./mpc.js');
 
 // Generic Testing Parameters
-var party_count = 4;
+var party_count = 2;
 var parallelismDegree = 3; // Max number of test cases running in parallel
 var n = 8;
 
 // Parameters specific to this demo
-var maxElement = 13;
-var maxLength = 16;
+var maxElement = 31;
+var maxLength = 10;
 
 var showProgress = true;
-var Zp = maxElement;
+var Zp = 10007;
 
 /**
  * CHANGE THIS: Generate inputs for your tests
@@ -22,21 +22,16 @@ var Zp = maxElement;
  * }
  */
 function generateInputs(party_count) {
-  // merge sort works only for arrays with length that is a power of 2
-  var lg = Math.log(maxLength)/Math.log(2) + 1;
-
   var inputs = {};
   for (var i = 1; i <= party_count; i++) {
     inputs[i] = [];
   }
 
   for (var t = 0; t < n; t++) {
-    var pow = Math.floor(Math.random() * (lg-1) + 1);
-    var length = Math.pow(2, pow);
     for (var p = 1; p <= party_count; p++) {
       var arr = [];
-      while (arr.length < length) {
-        arr.push(Math.floor(Math.random() * maxElement / party_count));
+      while (arr.length < maxLength) {
+        arr.push(Math.floor(Math.random() * maxElement));
       }
 
       inputs[p][t] = arr;

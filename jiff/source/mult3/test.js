@@ -6,39 +6,41 @@ var mpc = require('./mpc.js');
 // Generic Testing Parameters
 var showProgress = false;
 var party_count = 3;
-var parallelismDegree = 100; // Max number of test cases running in parallel
-var n = 1000;
+var parallelismDegree = 10; // Max number of test cases running in parallel
+var n = 100;
 var Zp = null;
 
 // Parameters specific to this demo
-var maxValue = 1000;
+var maxValue = 100;
 
 
 /**
- * CHANGE THIS: Generate inputs for your tests
+ * Generates inputs for mult3 tests
  * Should return an object with this format:
  * {
  *   'party_id': [ 'test1_input', 'test2_input', ...]
  * }
+ *
+ * In this setting, each input is a single integer.
  */
 function generateInputs(party_count) {
   var inputs = {};
   var i;
 
-  for (i = 0; i < party_count; i++) {
-    inputs[i+1] = [];
+  for (i = 1; i <= party_count; i++) {
+    inputs[i] = [];
   }
 
-  for (i = 0; i < party_count; i++) {
-    for (var j = 0; j < n; j++) {
-      inputs[i+1].push(Math.floor((Math.random() * maxValue)));
+  for (t = 0; t < n; t++) {
+    for (i = 1; i <= party_count; i++) {
+      inputs[i].push(Math.floor((Math.random() * maxValue)));
     }
   }
   return inputs;
 }
 
 /**
- * CHANGE THIS: Compute the expected results not in MPC
+ * Computes the expected results in the clear
  * @param {object} inputs - same format as generateInputs output.
  * Should return a single array with the expected result for every test in order
  *   [ 'test1_output', 'test2_output', ... ]
@@ -47,7 +49,7 @@ function computeResults(inputs) {
   var results = [];
 
   for (var j = 0; j < n; j++) {
-    var prod = 0;
+    var prod = 1;
     for (var i = 1; i <= party_count; i++) {
       prod = prod * inputs[i][j];
     }
