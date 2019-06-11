@@ -6,15 +6,17 @@ var mpc = require('./mpc.js');
 
 // Generic Testing Parameters
 var party_count = 2;
-var parallelismDegree = 3; // Max number of test cases running in parallel
-var n = 30;
+var parallelismDegree = 1; // Max number of test cases running in parallel
+var n = 1;
 
 // Parameters specific to this demo
-var maxElement = 13;
-var maxLength = 32;
+var maxID = 20;
+var maxValue = 30;
+var maxCat = 4;
+var maxLength = 10; // don't do more tests or everything will bork.
 
 var showProgress = true;
-var Zp = 13;
+var Zp = 101; 
 
 /**
  * CHANGE THIS: Generate inputs for your tests
@@ -32,28 +34,20 @@ function generateInputs(party_count) {
   for (var t = 0; t < n; t++) {
     var length = Math.floor(Math.random() * maxLength) + 1;
 
-    var arr = [];
-    while (arr.length < length) {
-      arr.push(Math.floor(Math.random() * maxElement));
+    var id1 = [];
+    var id2 = [];
+    var cat = [];
+    var val = [];
+    while (id1.length < length) {
+      id1.push(Math.floor(Math.random() * maxID));
+      id2.push(Math.floor(Math.random() * maxID));
+      cat.push(Math.floor(Math.random() * maxCat));
+      val.push(Math.floor(Math.random() * maxValue));
     }
 
-    arr.sort(function (a, b) {
-      return a - b;
-    });
+    inputs[1][t] = { ids:id1, dat:val };
+    inputs[2][t] = { ids:id2, dat:cat };
 
-    inputs[1][t] = arr;
-
-    if (Math.random() < 0.5) {
-      inputs[2][t] = arr[Math.floor(Math.random() * arr.length)];
-    } else {
-      for (var e = 0; e < maxElement; e++) {
-        if (arr.indexOf(e) === -1) {
-          break;
-        }
-      }
-
-      inputs[2][t] = e % maxElement;
-    }
   }
 
   return inputs;
@@ -69,10 +63,16 @@ function computeResults(inputs) {
   var results = [];
 
   for (var t = 0; t < n; t++) {
-    var array = inputs[1][t]; // Shallow copy, so that when modifying things are not changed!
-    var element = inputs[2][t];
-    var result = array.indexOf(element) > -1 ? 1 : 0;
-    results.push(result);
+    var len = inputs[1][t].ids.length
+    var rescat = Array(maxCat).fill(0);
+    for (var i1=0; i1<len; i1++) {
+      for (var i2=0; i2<len; i2++) {
+        if (inputs[1][t].ids[i1] === inputs[2][t].ids[i2]) {
+          rescat[inputs[2][t].dat[i2]] += inputs[1][t].dat[i1];
+        }
+      }
+    }
+    results.push(rescat);
   }
 
   return results;
@@ -91,6 +91,8 @@ describe('Test', function () {
 
     var inputs = generateInputs(party_count);
     var realResults = computeResults(inputs);
+    console.log("inputs",inputs);
+    console.log("realResults",realResults);
 
     var onConnect = function (jiff_instance) {
       var partyInputs = inputs[jiff_instance.id];
@@ -104,7 +106,7 @@ describe('Test', function () {
         if (j < partyInputs.length) {
           var promises = [];
           for (var t = 0; t < parallelismDegree && (j + t) < partyInputs.length; t++) {
-            promises.push(mpc.compute(partyInputs[j + t], jiff_instance));
+            promises.push(mpc.compute(partyInputs[j+t].ids, partyInputs[j+t].dat, jiff_instance));
           }
 
           Promise.all(promises).then(function (parallelResults) {
