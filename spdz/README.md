@@ -1,8 +1,10 @@
 ## SPDZ
 
-As of May 2018, SPDZ is superseded by the SCALE-MAMBA system. We leave this here
-for posterity.
-SPDZ source-code is available at https://github.com/bristolcrypto/SPDZ-2.
+**Deprecation Notice** As of May 2018, SPDZ is superseded by the [SCALE-MAMBA](https://github.com/mpc-sok/frameworks/tree/master/scalemamba) system and [MP-SPDZ](https://github.com/mpc-sok/frameworks/tree/master/mp-spdz). We do not recommend using SPDZ for applications.
+
+SPDZ implements a the SPDZ, MASCOT, and Overdrive secure multi-party computation protocols. These components are all implemented separately and the user must compose them together.
+
+SPDZ source code is available [on Github](https://github.com/bristolcrypto/SPDZ-2).
 
 ## Docker setup
 
