@@ -1,5 +1,12 @@
+# Wysteria
+
+Wysteria implements a novel high-level functional programming language. It is guaranteed to meet the ideal MPC definition: that the distributed secure computation produces the same output as a single trusted party would. Wysteria uses a Boolean-circuit based GMW protocol implementation and supports an arbitary number of computation parties; the software contribution includes a front-end language specification, a type checker, and a run-time interpreter.
+
 Wysteria was developed by Aseem Rastogi, Matthew Hammer, and Michael Hicks at       
 the University of Maryland.
+
+Our recommendation: Wysteria's limited support for complex data types, current lack of development, and outdated back-end circuit prser means that we do not recommend it for developing complex or efficient protocols. On the other hand, Wysteria is the only complier we examined that verifies the equivalence between the underlying MPC and the monolithic program, and the only compiler that uses a functional-style programming language. 
+We recommend Wysteria's type-based correctness and security guarantees as a model for future framework developers.
 
 ## Docker setup
 
