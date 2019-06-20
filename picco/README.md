@@ -1,5 +1,14 @@
-PICCO was developed by Yihua Zhang, Aaron Steele, and Marina Blanton at the
-University of Notre Dame.
+# PICCO
+
+PICCO is a general-purpose compiler that implements a hybrid secret-sharing protocol. It extends C with public and private keywords. The main software contribution are a source-to-source compiler from their extension of C to a native C implementation of MPC and an IO utility that produces and reconstructs secret shared data.
+
+The MPC protocol uses an information-theoretic primitive for multiplication and custom primitives (using cryptographic assumptions) for other operations. It supports an arbitrary number of parties and requires an honest majority.
+
+PICCO supports pointers to private data and dynamic memory allocation using C-like syntax. We were unable to implement programs using several of their secure types, including booleans or 1-bit integers and fixed-point numbers.
+
+PICCO was developed by Yihua Zhang, Aaron Steele, and Marina Blanton at the University of Notre Dame.
+
+Our recommendation: PICCO is appropriate for developers and academics who requrie a true multi-party implementation. In particular, it provides a flexible computation configuration.
 
 ## Docker setup
 Create a Docker image. This will take a moment. You only have to do this once.

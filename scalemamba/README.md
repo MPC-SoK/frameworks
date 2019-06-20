@@ -1,4 +1,10 @@
-## SCALE-MAMBA
+# SCALE-MAMBA
+
+SCALE-MAMBA includes a custom compiler and MPC execution engine that implements a maliciously secure hybrid protocol. It supersedes the SPDZ framework. MAMBA is a Python-like language that compiles to a documented bytecode representation. SCALE implements a two-phase protocol, first offloading public-key operatiosn to a offline, function-independent pre-processing stage, then executing an optiized hybrid protocol.
+
+SCALE-MAMBA is developed by a team at [KU Leuven](https://homes.esat.kuleuven.be/~nsmart/SCALE/).
+
+Our recommendation: SCALE-MAMBA is an actively maintained, highly flexible, extensively documented framework. It supports an arbitrary number of parties and has strong security guarantees and we recommend it for most use cases. Our only caveat is that it may consume significant computing resources.
 
 ## Docker Setup
 Create a Docker image. This will take a few minutes. You only have to do this
@@ -13,8 +19,8 @@ $ docker run -it --rm scalemamba
 Please note that any changes you make in the container are not persistent.
 
 ## Architecture
-SCALE-MAMBA executes a two-phase GMW-based protocol. 
-The phases run back-to-back with a single executable.
+SCALE-MAMBA executes a two-phase hybrid protocol. 
+The preprocessing and execution phases run back-to-back with a single executable.
 Users need to configure the parameters for the computation, compile the program
 with those parameters, and then run each computation party.
 
