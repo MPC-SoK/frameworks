@@ -12,7 +12,7 @@ Our recommendation: CBMC-GC uses powerful tools to produce optimized circuits, b
 
 ## Docker setup
 
-Create a Docker image. This will take a few minutes. You only have to do this once.
+Create a Docker image. This will take 8-10 minutes. You only have to do this once.
 ```
 $ docker build -t cbmcgc .
 ```
@@ -23,7 +23,7 @@ $ docker run -it --rm cbmcgc
 
 ## Architecture
 
-Compiling the `CBMC-GC` source code produces a set of executables which are kept in `cbmc-gc/bin/` (we also copied these to `/usr/bin` for ease of use). This includes:
+Compiling the `CBMC-GC` source code produces a set of executables which are kept in `CBMC-GC-2/bin/` (we also copied these to `/usr/bin` for ease of use). This includes:
 - `cbmc-gc`: the circuit compiler
 - `cmbc`: a compiled executable for the underlying software tool
 - `circuit-sim`: an insecure circuit simulator for testing purposes
@@ -31,11 +31,11 @@ Compiling the `CBMC-GC` source code produces a set of executables which are kept
 
 
 ## Running Examples
-Each example has a folder in `cbmc-gc/examples/`. To compile a circuit,
+Each example has a folder in `CBMC-GC-2/examples/`. To compile a circuit,
 `cd` into the appropriate directory and run `make`. 
 
 ```
-$ cd ~/cbmc-gc/examples/<program>
+$ cd ~/CBMC-GC-2/examples/<program>
 $ make
 ```
 
@@ -76,6 +76,6 @@ $ make
 $ make run_sim
 ```
 
-Some language limitations are discussed [in the wiki](https://github.com/bhemen/MPC_compilers/wiki/CBMC-GC-v2).
+Some language limitations are discussed [in the wiki](https://github.com/mpc-sok/frameworks/wiki/CBMC-GC-v2).
 
 

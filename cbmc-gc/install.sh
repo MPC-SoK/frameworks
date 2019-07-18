@@ -1,11 +1,10 @@
 
 # download source
-wget https://www.seceng.informatik.tu-darmstadt.de/assets/software/cbmc-gc-v2.0alpha.tgz
-tar zxvf cbmc-gc-v2.0alpha.tgz 
-rm cbmc-gc-v2.0alpha.tgz
+git clone https://gitlab.com/securityengineering/CBMC-GC-2.git
+cd CBMC-GC-2
+git checkout -b MPCSOK e57333b19484
 
 # make and install cmbc-gc executables
-cd cbmc-gc
 make minisat2-download
 make
 
