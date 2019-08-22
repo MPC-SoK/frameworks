@@ -5,7 +5,7 @@ ABY switches between three protocols: a GMW-based __A__rithmetic protocol that u
 
 ABY was developed by Daniel Demmler, Thomas Schneider and Michael Zohner in the [ENCRYPTO group](https://www.encrypto.informatik.tu-darmstadt.de/encrypto/) at TU Darmstadt.
 
-Our recommendation: ABY provides a powerful low-level crytographic interface that gives the developer significant control over performance. We recommend ABY for users who are familiara with MPC protocols, their relative tradeoffs, and the circuit model of computation.
+Our recommendation: ABY provides a powerful low-level crytographic interface that gives the developer significant control over performance. We recommend ABY for users who are familiar with MPC protocols, their relative tradeoffs, and the circuit model of computation.
 
 ## Docker setup
 
