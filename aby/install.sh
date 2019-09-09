@@ -2,7 +2,7 @@
 # get ABY
 git clone --recursive https://github.com/encryptogroup/ABY.git
 cd ABY
-git checkout -b MPCSOK f52fef85cb8d301440605fb101e1a9e4f7302b04
+git checkout -b MPCSOK 5535bf80541c09682d776fcebe7000213ecad25f
 
 # copy our working examples 
 for EX in mult3 crosstabs innerprod
