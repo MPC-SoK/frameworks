@@ -22,7 +22,7 @@ This architecture allows clients to disconnect temporarily during a computation 
 
 Individual examples are mostly divided into the following files:
 ```
-+ demos/example
++ demos/<example>
   - client.html : client front-end webpage
   - client.js : implements client-side connections and input-passing
   - mpc.js : defines MPC computation
@@ -31,13 +31,22 @@ Individual examples are mostly divided into the following files:
   - test.js : implements tests
 ```
 
+See [extended documentation](https://multiparty.org/jiff/docs/jsdoc/) by the JIFF developers.
+
 ## Running examples
 
-Run your Docker container. So far we haven't implemented any exampes, but you can try the included ones.
+Run the Docker container. We implemented three examples, `mult3`, `innerprod`, and `xtabs`. You can either run them in the browser or via automated tests.
 
-Start the server node
+To run tests, execute
 ```
-$ cd jiff
+$ cd ~/jiff
+$ npm run-script test-demo -- demos/<ex>
+```
+Note that the `xtabs` test is relatively slow to execute.
+
+To run interactively in the browser, first run the server node
+```
+$ cd ~/jiff
 $ node demos/<ex>/server.js
 ```
 
@@ -53,11 +62,12 @@ $ docker inspect <container name> | grep IP
 ...
 ```
 
-Then you can connect to the client interface in the browser to the IP address you found. The server should tell you the correct URL, too.
+Then you can connect to the client interface in your web browser to the IP address you found. The server should tell you the correct URL, too.
 
 `172.17.0.1:8080/demos/<ex>/client.html`
 
-Connect as many clients as necessary. The client interface lets you connect to the server and enter data.
+Open the appropriate number of client tabs in the browser (3 for `mult3`, 2 for the other examples).
+First, connect all clients by clicking the `Connect` button. Then enter data and click the `Submit` button.
 
 ## Modifying examples
 

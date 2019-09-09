@@ -91,8 +91,6 @@ describe('Test', function () {
 
     var inputs = generateInputs(party_count);
     var realResults = computeResults(inputs);
-    console.log("inputs",inputs);
-    console.log("realResults",realResults);
 
     var onConnect = function (jiff_instance) {
       var partyInputs = inputs[jiff_instance.id];
