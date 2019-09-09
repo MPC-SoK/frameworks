@@ -17,6 +17,9 @@ RUN apt-get update && apt-get install -y \
   yasm \
   zip
 
+ADD install_dependencies.sh .
+RUN ["bash", "install_dependencies.sh"]
+
 ADD source/ /root/source
 ADD install.sh .
 RUN ["bash", "install.sh"]

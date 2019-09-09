@@ -1,5 +1,8 @@
+# Sharemind
 
-Sharemind was developed by Cybernetica AS.
+Sharemind is a secure data processing platform and a trademark of Cybernetica AS, a research-and-development technology company based in Estonia. We used the Sharemind MPC platform, which implements a compiler for the custom SecreC langauge and executes a three-party hybrid protocol based on an additive secret sharing scheme.
+
+Our recommendation: The Sharemind MPC platform is a powerful, well-supported framework and is suitable for a wide variety of settings. We recommend it to anyone looking to use MPC for a specific project, particularly large, complex, or security-crucial funtionalities.
 
 ## Docker Setup
 

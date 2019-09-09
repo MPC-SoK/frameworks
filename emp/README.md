@@ -1,6 +1,9 @@
 # EMP-toolkit
 
+EMP-toolkit is an extensive set of MPC frameworks based on garbled circuits. The core toolkit includes an oblivious transfer library, a secure types library, and several custom protocol implementations. We have tested the semi-honest implementation of Yao (`sh2pc`), a maliciously secure protocol with authenticated garbling (`ag2pc`), and a maliciously secure, multi-party protocol with authentiated garbling (`agmpc`).
 EMP-toolkit source is available [on github](https://github.com/emp-toolkit).
+
+Our recommendation: We recommend the semi-honest library (`sh2pc`) for general use. The entire platform is well suited to cryptographic experts looking to implement a novel circuit-based protocol, because it has an effective circuit generation tool and supporting libraries (OT). However, for protocols other than `sh2pc`, we note that the end-to-end flow is not seamless and has limited flexibility and IO support.
 
 
 ## Docker setup
@@ -18,7 +21,7 @@ Please note that any changes you make in the container are not persistent.
 
 ## Architecture
 
-EMP-toolkit is built like a library: there are secure Integer, Bit and Float classes. The runtime is flexible but by default, the entire circuit is not generated at once (for sh2pc). However, if necessary, you can generate the entire circuit for any backend. Programs written using EMP-toolkit are compiled in one step, using a CMake/Makefile system, which produces an executable.
+EMP-toolkit is implemented as a C library: there are secure Integer, Bit and Float classes. The default `sh2pc` behavior is a continuous execution model (a single execution stage that does not generate the circuit by default). However, if necessary, you can generate the entire circuit for any backend. Programs written using EMP-toolkit are compiled in one step, using a CMake/Makefile system, which produces an executable.
 
 ## Running examples
 

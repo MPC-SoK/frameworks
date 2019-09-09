@@ -1,8 +1,18 @@
+# CBMC-GC
+
+CBMC-GC is a circuit compiler that produces Boolean circuits from a subset of ANSI-C. It is based on CBMC, a bounded model checker that translates a C program into a boolean constraint; CBMC-GC adapts the output of this tool to produce an optimized circuit. 
+Optimization can be for minimal size or minimal depth circuts (depending on your use case). It supports an arbitrary number of parties.
+
+CBMC-GC includes a tool for running circuits with [ABY](https://github.com/MPC-SoK/frameworks/tree/master/aby), but we weren't able to use it; the CMBC-GC adapter seems to reference a deprecated ABY API. 
+CBMC-GC also includes a tool to output circuits in other formats, but we weren't able to successfully execute any of these (not clear whose fault that is).
+
 CBMC-GC is a circuit compiler produced by Niklas Büscher and others in the security engineering group at TU Darmstadt. This work examines v2.
+
+Our recommendation: CBMC-GC uses powerful tools to produce optimized circuits, but we were unable to successfully execute any of the circuits it produced.
 
 ## Docker setup
 
-Create a Docker image. This will take a few minutes. You only have to do this once.
+Create a Docker image. This will take 8-10 minutes. You only have to do this once.
 ```
 $ docker build -t cbmcgc .
 ```
@@ -13,7 +23,7 @@ $ docker run -it --rm cbmcgc
 
 ## Architecture
 
-Compiling the `CBMC-GC` source code produces a set of executables which are kept in `cbmc-gc/bin/` (we also copied these to `/usr/bin` for ease of use). This includes:
+Compiling the `CBMC-GC` source code produces a set of executables which are kept in `CBMC-GC-2/bin/` (we also copied these to `/usr/bin` for ease of use). This includes:
 - `cbmc-gc`: the circuit compiler
 - `cmbc`: a compiled executable for the underlying software tool
 - `circuit-sim`: an insecure circuit simulator for testing purposes
@@ -21,11 +31,11 @@ Compiling the `CBMC-GC` source code produces a set of executables which are kept
 
 
 ## Running Examples
-Each example has a folder in `cbmc-gc/examples/`. To compile a circuit,
+Each example has a folder in `CBMC-GC-2/examples/`. To compile a circuit,
 `cd` into the appropriate directory and run `make`. 
 
 ```
-$ cd ~/cbmc-gc/examples/<program>
+$ cd ~/CBMC-GC-2/examples/<program>
 $ make
 ```
 
@@ -66,6 +76,6 @@ $ make
 $ make run_sim
 ```
 
-Some language limitations are discussed [in the wiki](https://github.com/bhemen/MPC_compilers/wiki/CBMC-GC-v2).
+Some language limitations are discussed [in the wiki](https://github.com/mpc-sok/frameworks/wiki/CBMC-GC-v2).
 
 

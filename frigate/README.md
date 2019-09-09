@@ -1,4 +1,12 @@
+# Frigate 
+
+Frigate is a circuit compiler that consumes a novel C-like language and produces a custom Boolean circuit representation for any number of inputs. The fraework emphasizes its use of good software engineering techniques, including a test suite and a focus on modularity and extensibility. The circuit format minimizes file size and the framewor includes an interpreter to efficiently interface between garbled circuits and other applications.
+
+Frigate's type system is simple, with three native types: signed and unsigned integers of arbitrary size and structs. Frigate supports arrays within structs only.aThe compiler provides useful errors and there is documentation of interpreter options and a language desription.
+
 Frigate was developed by Benjamin Mood, Debayan Gupta, Henry Carter, Kevin R. B. Butler, and Patrick Traynor. 
+
+Our recommendation: Frigate provides an expressive C-like language for fast circuit generation and is a good way to estimate circuit size for a given computaion. However, we note that linking Frigate to an implementaiton wil require additional work by the user.
 
 ## Docker setup
 Create a Docker image. This will take a moment. You only have to do this once.
@@ -19,7 +27,7 @@ is also an option to produce output in other formats (e.g. gate by gate).
 Since Frigate does not have a way to evaluate these circuits we have also
 included in the docker the BMR implementation developed by Bar-Ilan Cryptography
 Research Group which can be used to securely evaluate circuits.
-The implementation is available at https://github.com/cryptobiu/Semi-Honest-BMR.
+The implementation is available [on Github](https://github.com/cryptobiu/Semi-Honest-BMR).
 It is based on the paper "Optimizing Semi-Homest Secure Multiparty Computation 
 for the Internet" by Aner Ben-Afraim, Yehuda Lindell and Eran Omri. 
 
