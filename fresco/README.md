@@ -31,4 +31,3 @@ The text of this Dockerfile can be found [in their repository](https://github.co
 This sample code uses the SPDZ protocol, but FRESCO also has support for other protocols.
 
 ## Modifying examples
-
