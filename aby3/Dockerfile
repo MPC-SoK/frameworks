@@ -16,6 +16,6 @@ ADD install.sh .
 RUN ["bash", "install.sh"]
 # this breaks
 ADD breaks.sh .
-RUN ["bash", "breaks.sh"]
+#RUN ["bash", "breaks.sh"]
 CMD ["/bin/bash"]
 
