@@ -1,6 +1,6 @@
 ## MP-SPDZ
 
-MP-SPDZ source-code is available at https://github.com/n1analytics/MP-SPDZ.
+MP-SPDZ source-code is available at https://github.com/data61/MP-SPDZ.
 
 ## Docker setup
 
@@ -20,7 +20,7 @@ $ docker run -it --rm mp-spdz
 While MP-SPDZ implements a number of schemes, we focus on computation
 modulo a 128-bit prime here because MP-SPDZ the widest range of
 security models in this domain. See the the MP-SPDZ
-[readme](https://github.com/n1analytics/MP-SPDZ) for details on other
+[readme](https://github.com/data61/MP-SPDZ) for details on other
 domains such as computation modulo 2^k and binary circuits.
 
 ## Running examples
@@ -47,21 +47,21 @@ $ echo 8 > Player-Data/Input-P2-0
 Execute the three parties. The output transcript will include the
 computed solution.
 ```
-$ ./Player-Online.x -N 3 -p 0 <ex> & ./Player-Online.x -N 3 -p 1 <ex> & ./Player-Online.x -N 3 -p 2 <ex>
+$ ./mascot-party.x -N 3 -p 0 <ex> & ./mascot-party.x -N 3 -p 1 <ex> & ./mascot-party.x -N 3 -p 2 <ex>
 ```
 
 For example, the output from the following will include `Mult3 prod = 1344`.
 ```
-$ ./Player-Online.x -N 3 -p 0 mult3 & ./Player-Online.x -N 3 -p 1 mult3 & ./Player-Online.x -N 3 -p 2 mult3
+$ ./mascot-party.x -N 3 -p 0 mult3 & ./mascot-party.x -N 3 -p 1 mult3 & ./mascot-party.x -N 3 -p 2 mult3
 ```
 
-`./Player-Online.x` provides high security in that it tolerates two
+`./mascot-party.x` provides high security in that it tolerates two
 corrupted parties and it tolerates these two parties to deviate from
 the protocol, in which case the protocol aborts. Using Shamir's secret
 sharing, it is possible to create a faster protocol that tolerates
 only one corrupted party, either tolerating deviation as well or not
 even that for a faster execution. You can use
-`./malicious-shamir-party.x` instead of `./Player-Online.x` for the
+`./malicious-shamir-party.x` instead of `./mascot-party.x` for the
 more security variant and `./shamir-party.x` for the less secure but
 faster variant. Note that Shamir's secret sharing requires encrypted
 channels, so you will have to run the following script in order to

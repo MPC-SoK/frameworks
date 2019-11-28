@@ -1,7 +1,7 @@
 #!/bin/bash
 
-curl -L https://github.com/n1analytics/MP-SPDZ/releases/download/v0.0.8/mp-spdz-0.0.8.tar.gz | tar xzv
-mv mp-spdz-0.0.8 MP-SPDZ
+curl -L https://github.com/data61/MP-SPDZ/releases/download/v0.1.3/mp-spdz-0.1.3.tar.xz | tar xJv
+mv mp-spdz-0.1.3 MP-SPDZ
 
 cd MP-SPDZ
 Scripts/tldr.sh
