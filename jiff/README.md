@@ -1,7 +1,6 @@
 # JIFF
 
-JIFF source is available [on github](https://github.com/multiparty/jiff).
-
+[JIFF](https://github.com/multiparty/jiff) is a Javascript library. It implements a custom set of hybrid protocols and can be integrated easily with web apps in the browser or via Node.js.
 
 ## Docker setup
 

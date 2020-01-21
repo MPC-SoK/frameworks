@@ -1,6 +1,6 @@
 # TinyGarble
 
-TinyGarble is an implementation of Yao's garbled circuits, developed by
+[TinyGarble](https://github.com/esonghori/TinyGarble) is an implementation of Yao's garbled circuits, developed by
 researchers at Rice University and TU Darmstadt.
 
 TinyGarble extends Verilog, a hardware circuit description language, to generate

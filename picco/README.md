@@ -1,6 +1,6 @@
 # PICCO
 
-PICCO is a general-purpose compiler that implements a hybrid secret-sharing protocol. It extends C with public and private keywords. The main software contribution are a source-to-source compiler from their extension of C to a native C implementation of MPC and an IO utility that produces and reconstructs secret shared data.
+[PICCO](https://github.com/picco-team/picco) is a general-purpose compiler that implements a hybrid secret-sharing protocol. It extends C with public and private keywords. The main software contribution are a source-to-source compiler from their extension of C to a native C implementation of MPC and an IO utility that produces and reconstructs secret shared data.
 
 The MPC protocol uses an information-theoretic primitive for multiplication and custom primitives (using cryptographic assumptions) for other operations. It supports an arbitrary number of parties and requires an honest majority.
 

@@ -1,12 +1,12 @@
 # CBMC-GC
 
-CBMC-GC is a circuit compiler that produces Boolean circuits from a subset of ANSI-C. It is based on CBMC, a bounded model checker that translates a C program into a boolean constraint; CBMC-GC adapts the output of this tool to produce an optimized circuit. 
+[CBMC-GC](https://gitlab.com/securityengineering/CBMC-GC-2) is a circuit compiler that produces Boolean circuits from a subset of ANSI-C. It is based on CBMC, a bounded model checker that translates a C program into a boolean constraint; CBMC-GC adapts the output of this tool to produce an optimized circuit. 
 Optimization can be for minimal size or minimal depth circuts (depending on your use case). It supports an arbitrary number of parties.
 
 CBMC-GC includes a tool for running circuits with [ABY](https://github.com/MPC-SoK/frameworks/tree/master/aby), but we weren't able to use it; the CMBC-GC adapter seems to reference a deprecated ABY API. 
 CBMC-GC also includes a tool to output circuits in other formats, but we weren't able to successfully execute any of these (not clear whose fault that is).
 
-CBMC-GC is a circuit compiler produced by Niklas Büscher and others in the security engineering group at TU Darmstadt. This work examines v2.
+CBMC-GC is a circuit compiler produced by Niklas Büscher and others in the [security engineering group at TU Darmstadt](https://forsyte.at/software/cbmc-gc/). This work examines v2.
 
 Our recommendation: CBMC-GC uses powerful tools to produce optimized circuits, but we were unable to successfully execute any of the circuits it produced.
 
