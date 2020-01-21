@@ -1,6 +1,6 @@
 # ABY
 
-[ABY](https://github.com/encryptogroup/ABY) is a mixed-protocol two-party computation framework implemented as a C++ library. It aims to give developers fine-grained control over computation efficiency bby providing a mechanism for mixing protocols. 
+ABY is a mixed-protocol two-party computation framework implemented as a C++ library. It aims to give developers fine-grained control over computation efficiency bby providing a mechanism for mixing protocols. 
 ABY switches between three protocols: a GMW-based __A__rithmetic protocol that uses an additive sharing scheme with multiplicative triplets; a __B__oolean-circuit based implementation fo the original GMW protocol using an XOR-baseds ecret sharing scheme; and an optimized version of __Y__ao's garbled circuit protocol, also over a Boolean circuit.
 
 ABY was developed by Daniel Demmler, Thomas Schneider and Michael Zohner in the [ENCRYPTO group](https://www.encrypto.informatik.tu-darmstadt.de/encrypto/) at TU Darmstadt.

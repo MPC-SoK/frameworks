@@ -1,8 +1,8 @@
 # ObliVM
 
-[ObliVM](http://oblivm.com/) compiles a custom Java-like language, ObliVM-lang and executes a two-party garbled circuit protocol. It aims to provide a language intuitive to non-experts while implementing domain-specific programming abstractions for improved performance. 
+ObliVM compiles a custom Java-like language, ObliVM-lang and executes a two-party garbled circuit protocol. It aims to provide a language intuitive to non-experts while implementing domain-specific programming abstractions for improved performance. 
 
-ObliVM was developed by Chang Liu, Xiao Wang, Kartik Nayak, Yan Huang and Elaine Shi, at the University of Maryland and Indiana University. The source-code is available [on Github](https://github.com/oblivm/ObliVMLang).
+ObliVM was developed by Chang Liu, Xiao Wang, Kartik Nayak, Yan Huang and Elaine Shi, at the University of Maryland and Indiana University. The source-code is available at https://github.com/oblivm/ObliVMLang.
 
 Our recommendation: Although ObliVM implements advanced cryptographic constructs, its usability for practicial applications is significantly limited by minimal documentation and restricted IO functionality. We weren't able to implement our crosstabs example.
 

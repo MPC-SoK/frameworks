@@ -1,11 +1,11 @@
 # Obliv-C
 
-[Obliv-C](https://oblivc.org/) is an extension of C that executes a 2-party garbled circuit protocol. The main language addition is an _obliv_ qualifier, applied to C types and constructs. Typing rules enforce that `obliv` types remain secret unless explicitly revealed. 
-Code within oblivious functions and conditionals cannot modify public data, except within a qualified _~obliv_ block, which executes in the clear. These rules allow programmers to develop modular libraries and efficient functionalities.
+Obliv-C is an extension of C that executes a 2-party garbled circuit protocol. The main language addition is an _obliv_ qualifier, applied to C types and constructs. Typing rules enforce that `obliv` types remain secret unless explicitly revealed. 
+Code wtihin oblivious functions and conditionals cannot modifypublic data, except within a qualified _~obliv_ block, which executes in the clear. These rules allow programmers to develop modular libraries and efficient functionalities.
 
 Our recommendation: Obliv-C is a robust garbled circut framework. We recommend it for general use, particularly to experts who wish to implement and optimize complex libraries such as ORAM.
 We note that Obliv-C has been used for multiple practical applications.
-Source code is [on Github](https://github.com/samee/obliv-c).
+
 
 ## Docker setup
 

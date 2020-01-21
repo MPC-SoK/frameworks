@@ -1,6 +1,6 @@
-# MP-SPDZ
+## MP-SPDZ
 
-[MP-SPDZ](https://github.com/n1analytics/MP-SPDZ) features a python-based front end and implements a large set of schemes, including multip-party circuit based, hybrid, and garbled circuit protocols. The source-code is available [on Github](https://github.com/n1analytics/MP-SPDZ); [additional documentation is also online](https://mp-spdz.readthedocs.io/en/latest/).
+MP-SPDZ source-code is available at https://github.com/n1analytics/MP-SPDZ.
 
 ## Docker setup
 
