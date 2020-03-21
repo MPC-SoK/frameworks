@@ -3,7 +3,7 @@
 cd MP-SPDZ
 
 for i in mult3 innerprod xtabs; do
-    ./compile.py -p 128 $i || exit 1
+    ./compile.py -C -p 128 $i || exit 1
 done
 
 Scripts/setup-ssl.sh 3

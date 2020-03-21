@@ -28,8 +28,9 @@ First, compile the example source. We provide three examples (mult3, innerprod,
 xtabs).
 ```
 $ cd MP-SPDZ
-$ ./compile.py -p 128 <ex>
+$ ./compile.py -C -p 128 <ex>
 ```
+The `-C` argument is optional but it speeds up the compilation of xtabs.
 
 Generate input for each party (as above).
 You'll need to fill in `Player-Data/Input-P<x>-0` with ASCII data for each party
