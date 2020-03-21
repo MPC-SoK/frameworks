@@ -1,6 +1,6 @@
 # MP-SPDZ
 
-[MP-SPDZ](https://github.com/data61/MP-SPDZ) features a python-based front end and implements a large set of schemes, including multip-party circuit based, hybrid, and garbled circuit protocols. The source-code is available [on Github](https://github.com/data61/MP-SPDZ); [additional documentation is also online](https://mp-spdz.readthedocs.io/en/latest/).
+[MP-SPDZ](https://github.com/data61/MP-SPDZ) features a python-based front end and implements a large set of schemes, including multi-party circuit based, hybrid, and garbled circuit protocols. The source-code is available [on Github](https://github.com/data61/MP-SPDZ); [additional documentation is also online](https://mp-spdz.readthedocs.io/en/latest/).
 
 ## Docker setup
 
@@ -18,8 +18,7 @@ $ docker run -it --rm mp-spdz
 ## Architecture
 
 While MP-SPDZ implements a number of schemes, we focus on computation
-modulo a 128-bit prime here because MP-SPDZ the widest range of
-security models in this domain. See the the MP-SPDZ
+modulo a 128-bit prime here. See the the MP-SPDZ
 [readme](https://github.com/data61/MP-SPDZ) for details on other
 domains such as computation modulo 2^k and binary circuits.
 
@@ -57,7 +56,11 @@ $ ./mascot-party.x -N 3 -p 0 mult3 & ./mascot-party.x -N 3 -p 1 mult3 & ./mascot
 
 `./mascot-party.x` provides high security in that it tolerates two
 corrupted parties and it tolerates these two parties to deviate from
-the protocol, in which case the protocol aborts. Using Shamir's secret
+the protocol, in which case the protocol aborts. `./hemi-party.x`
+provides less security in that it doesn't tolerate deviation but it
+still tolerates any two parties colluding by sharing their information.
+
+Using Shamir's secret
 sharing, it is possible to create a faster protocol that tolerates
 only one corrupted party, either tolerating deviation as well or not
 even that for a faster execution. You can use
