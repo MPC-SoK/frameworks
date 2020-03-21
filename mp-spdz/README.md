@@ -1,6 +1,6 @@
-## MP-SPDZ
+# MP-SPDZ
 
-MP-SPDZ source-code is available at https://github.com/data61/MP-SPDZ.
+[MP-SPDZ](https://github.com/data61/MP-SPDZ) features a python-based front end and implements a large set of schemes, including multip-party circuit based, hybrid, and garbled circuit protocols. The source-code is available [on Github](https://github.com/data61/MP-SPDZ); [additional documentation is also online](https://mp-spdz.readthedocs.io/en/latest/).
 
 ## Docker setup
 

@@ -1,7 +1,6 @@
 # EMP-toolkit
 
-EMP-toolkit is an extensive set of MPC frameworks based on garbled circuits. The core toolkit includes an oblivious transfer library, a secure types library, and several custom protocol implementations. We have tested the semi-honest implementation of Yao (`sh2pc`), a maliciously secure protocol with authenticated garbling (`ag2pc`), and a maliciously secure, multi-party protocol with authentiated garbling (`agmpc`).
-EMP-toolkit source is available [on github](https://github.com/emp-toolkit).
+[EMP-toolkit](https://github.com/emp-toolkit) is an extensive set of MPC frameworks based on garbled circuits. The core toolkit includes an oblivious transfer library, a secure types library, and several custom protocol implementations. We have tested the [semi-honest implementation of Yao](https://github.com/emp-toolkit/emp-sh2pc) (`sh2pc`), a [maliciously secure protocol with authenticated garbling](https://github.com/emp-toolkit/emp-ag2pc) (`ag2pc`), and a [maliciously secure, multi-party protocol with authentiated garbling](https://github.com/emp-toolkit/emp-agmpc) (`agmpc`).
 
 Our recommendation: We recommend the semi-honest library (`sh2pc`) for general use. The entire platform is well suited to cryptographic experts looking to implement a novel circuit-based protocol, because it has an effective circuit generation tool and supporting libraries (OT). However, for protocols other than `sh2pc`, we note that the end-to-end flow is not seamless and has limited flexibility and IO support.
 
