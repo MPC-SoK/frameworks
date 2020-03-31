@@ -3,7 +3,7 @@
 cd MP-SPDZ
 
 for i in mult3 innerprod xtabs; do
-    ./compile.py -p 128 $i || exit 1
+    ./compile.py -C -p 128 $i || exit 1
 done
 
 Scripts/setup-ssl.sh 3
@@ -13,7 +13,7 @@ echo 14 > Player-Data/Input-P0-0
 echo 12 > Player-Data/Input-P1-0
 echo 8 > Player-Data/Input-P2-0
 
-progs="./Player-Online.x ./malicious-shamir-party.x ./shamir-party.x"
+progs="./mascot-party.x ./hemi-party.x ./malicious-shamir-party.x ./shamir-party.x"
 
 for prog in $progs; do
     for i in 0 1 2; do
