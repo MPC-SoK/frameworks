@@ -9,7 +9,6 @@ cd
 git clone --recursive https://github.com/osu-crypto/libOTe.git
 cd libOTe/cryptoTools/thirdparty/linux
 bash boost.get
-bash miracl.get
 cd ../../..
-cmake -DENABLE_CIRCUITS=ON -DENABLE_SIMPLESTOT=ON .
+cmake -DENABLE_CIRCUITS=ON .
 make -j
