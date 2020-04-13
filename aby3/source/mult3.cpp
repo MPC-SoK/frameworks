@@ -6,6 +6,7 @@
 #include "aby3/sh3/Sh3Evaluator.h"
 
 #include "mult3.h"
+#include "util.h"
 
 using namespace oc;
 using namespace aby3;
@@ -17,53 +18,6 @@ using namespace aby3;
  *
  */
 
-// This function sets up the basic classes that we will 
-// use to perform some computation. This mostly consists
-// of creating Channels (network sockets) to the other 
-// parties and then establishing some shared randomness.
-void setup(
-	u64 partyIdx,
-	IOService& ios,
-	Sh3Encryptor& enc,
-	Sh3Evaluator& eval,
-	Sh3Runtime& runtime)
-{
-	// A CommPkg is a pair of Channels (network sockets) to the other parties.
-	// See cryptoTools\frontend_cryptoTools\Tutorials\Network.cpp 
-	// for details.
-	// since we're running them all locally, they're sitting on 3 different ports.
-	CommPkg comm;
-	switch (partyIdx)
-	{
-	case 0:
-		comm.mNext = Session(ios, "127.0.0.1:1313", SessionMode::Server, "01").addChannel();
-		comm.mPrev = Session(ios, "127.0.0.1:1314", SessionMode::Server, "02").addChannel();
-		break;
-	case 1:
-		comm.mNext = Session(ios, "127.0.0.1:1315", SessionMode::Server, "12").addChannel();
-		comm.mPrev = Session(ios, "127.0.0.1:1313", SessionMode::Client, "01").addChannel();
-		break;
-	default:
-		comm.mNext = Session(ios, "127.0.0.1:1314", SessionMode::Client, "02").addChannel();
-		comm.mPrev = Session(ios, "127.0.0.1:1315", SessionMode::Client, "12").addChannel();
-		break;
-	}
-
-	// in a real work example, where parties 
-	// have different IPs, you have to give the 
-	// Clients the IP of the server and you give
-	// the servers their own IP (to listen to).
-
-
-	// Establishes some shared randomness needed for the later protocols
-	enc.init(partyIdx, comm, sysRandomSeed());
-
-	// Establishes some shared randomness needed for the later protocols
-	eval.init(partyIdx, comm, sysRandomSeed());
-
-	// Copies the Channels and will use them for later protcols.
-	runtime.init(partyIdx, comm);
-}
 void mult3_test(u64 partyIdx, int value){
 	if (partyIdx == 0) 
 		std::cout << "testing mult3..." << std::endl;
@@ -77,7 +31,7 @@ void mult3_test(u64 partyIdx, int value){
 	Sh3Evaluator eval;
 	// Sh3Runtime does networking and helps schedule operations in parallel 
 	Sh3Runtime runtime;
-	setup(partyIdx, ios, enc, eval, runtime);
+	setup_samples(partyIdx, ios, enc, eval, runtime);
 
 	std::vector<si64> sharedVec(3);
 
