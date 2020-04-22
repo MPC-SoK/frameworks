@@ -1,8 +1,8 @@
 # MPyC
 
-MPyC is a python package for MPC. It runs a semi-honest, mostly information-theoretically secure protocol.
+[MPyC](https://www.win.tue.nl/~berry/mpyc/) is a python package for MPC. It runs a semi-honest, mostly information-theoretically secure protocol. Source code is available [on Github](https://github.com/lschoe/mpyc).
 
-Our recommendation: We recommend MPyC for general use. It is extremely easy to install and use with minimal Python experience. The library is straightforward and effective.
+Our recommendation: We recommend MPyC for general use. It is extremely easy to install and use with minimal Python experience. The library is straightforward and effective. (Further notes [in the wiki](https://github.com/MPC-SoK/frameworks/wiki/MPyC).)
 
 
 ## Docker setup
@@ -33,9 +33,9 @@ To run an example with `N` parties, use:
 ```
 $ python <ex>.py -M N
 ```
-You can also skip the `-M` argument to run locally (?) .
+You can also skip the `-M` argument to run locally.
 
-For more code examples, run
+Many more code examples are available in the MPyC repository. Run:
 ```
 $ git clone https://github.com/lschoe/mpyc.git
 $ cd mpyc/demos
