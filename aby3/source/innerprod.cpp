@@ -5,7 +5,6 @@
 #include "aby3/sh3/Sh3Encryptor.h"
 #include "aby3/sh3/Sh3Evaluator.h"
 
-#include "util.h"
 #include "innerprod.h"
 
 using namespace oc;

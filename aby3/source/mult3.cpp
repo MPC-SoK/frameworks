@@ -6,7 +6,6 @@
 #include "aby3/sh3/Sh3Evaluator.h"
 
 #include "mult3.h"
-#include "util.h"
 
 using namespace oc;
 using namespace aby3;
