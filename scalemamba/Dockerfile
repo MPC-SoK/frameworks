@@ -1,5 +1,8 @@
-FROM ubuntu:16.04
+FROM ubuntu:18.04
+
 WORKDIR /root
+
+# Install required packages
 RUN apt-get update && apt-get install -y \
   bzip2 \
   doxygen \
@@ -8,6 +11,7 @@ RUN apt-get update && apt-get install -y \
   git \
   libcrypto++-dev \
   libgmp3-dev \
+  libssl-dev \
   m4 \
   make \
   patch \
@@ -25,5 +29,7 @@ ADD install.sh .
 RUN ["bash", "install.sh"]
 
 ADD README.md .
+
+ENV PATH ~/.cargo/bin/:${PATH}
 
 CMD ["/bin/bash"]
