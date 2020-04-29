@@ -54,10 +54,10 @@ Secret sharing config output is in `Data/SharingData.txt`.
 `Conversion circuit`: For our small prime examples, you don't need to do this manually. See their documentation for more details about this option.
 
 ### compilition and execution
-Compile the directory containing the program you wish to run. We
-implemented three examples: `mult3`, `innerprod` and `xtabs`. Data for our examples is hard-coded.
+Compile the directory containing the program you wish to run. This takes a long time and requires an internet connection the first time you run it. 
+We implemented three examples: `mult3`, `innerprod` and `xtabs`. Data for our examples is hard-coded.
 ```
-$ ./compile.py Programs/<ex>
+$ ./compile.sh Programs/<ex>
 ```
 
 Then, run each computation party. 
@@ -69,6 +69,21 @@ To run our examples, we ran all players together locally:
 ```
 $ ./Player.x 0 Programs/innerprod & ./Player.x 1 Programs.innerprod
 ```
+There's lots of runtime output, and sometimes the result of the program can be hard to find. Look for the following lines in our examples.
+```
+mult3: 
+> Output channel 0: 540
+innerprod: 
+> InnerProd: 570
+xtabs:
+> Output channel 15 : 0
+> Output channel 0 : 0
+> Output channel 15 : 0
+> Output channel 0 : 0
+> Output channel 15 : 3
+> Output channel 0 : 9
+```
+
 
 ## Modifying Examples
 Secure code is stored in `Programs/<ex>/<ex>.mpc`. Add new programs by creating

@@ -5,6 +5,7 @@ WORKDIR /root
 # Install required packages
 RUN apt-get update && apt-get install -y \
   bzip2 \
+  curl \
   doxygen \
   g++ \
   gcc \

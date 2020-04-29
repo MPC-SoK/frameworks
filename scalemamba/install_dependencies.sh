@@ -7,5 +7,7 @@ cd mpir-3.0.0
 make
 make check
 make install
+ldconfig
 
-curl -sSf sh.rustup.rs | sh -s -- -y
+cd
+curl https://sh.rustup.rs -sSf | sh -s -- -y

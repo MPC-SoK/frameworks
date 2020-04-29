@@ -8,6 +8,7 @@ cp /root/source/CONFIG.mine .
 make progs
 
 # set up certificate authority
+touch ~/.rnd # see: https://github.com/openssl/openssl/issues/7754
 SUBJ="/CN=www.example.com"
 cd Cert-Store
 

@@ -1,4 +1,4 @@
-
+# TODO: it would be cool to use the garbled circuit extension with this example!
 def mux(cond, trueVal, falseVal):
     return trueVal + (cond == 0) * (falseVal - trueVal)
 
