@@ -73,7 +73,7 @@ int main(int argc, char** argv) {
 	seclvl seclvl = get_sec_lvl(secparam);
 
 	// call inner product routine. set size with cmd-parameter -n <size>
-	test_inner_product_circuit(role, (char*) address.c_str(), port, seclvl, 1, 16, nthreads, mt_alg, S_ARITH, nvals);
+	test_inner_product_circuit(role, (char*) address.c_str(), port, seclvl, 1, bitlen, nthreads, mt_alg, S_ARITH, nvals);
 
 	return 0;
 }
