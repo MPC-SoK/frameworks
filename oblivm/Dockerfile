@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y \
 ADD README.md .
 
 ADD install.sh .
+ADD real.patch .
 RUN ["bash", "install.sh"]
 
 ADD source/mult3 /root/ObliVMLang/examples/mult3

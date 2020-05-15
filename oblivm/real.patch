@@ -1,0 +1,13 @@
+diff --git a/java/com/oblivm/compiler/backend/flexsc/FlexSCCodeGenerator.java b/java/com/oblivm/compiler/backend/flexsc/FlexSCCodeGenerator.java
+index 4c6b01f..ac207bf 100644
+--- a/java/com/oblivm/compiler/backend/flexsc/FlexSCCodeGenerator.java
++++ b/java/com/oblivm/compiler/backend/flexsc/FlexSCCodeGenerator.java
+@@ -138,7 +138,7 @@ public class FlexSCCodeGenerator implements ICodeGenerator {
+ 					if(count)
+ 						fout.write("Mode: COUNT\n");
+ 					else
+-						fout.write("Mode: VERIFY\n");
++						fout.write("Mode: REAL\n");
+ 					fout.close();
+ 				}
+ 			} 
