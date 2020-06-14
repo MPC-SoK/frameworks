@@ -35,8 +35,8 @@ for the Internet](https://eprint.iacr.org/2016/1066.pdf)" by Aner Ben-Afraim, Ye
 We've copied our examples to their `test` directory, but since we've installed
 the `frigate` binary in `/usr/bin/`, you can run an example from anywhere.
 
-We've implemented `mult3`, `innerprod`, and `xtabs`. Replace `<ex>` below with
-any of these examples, or with their provided tests. 
+We've implemented `mult3`, `innerprod`, and `crosstabs`. Replace `<ex>` below with
+any of these examples, or with the Frigate provided tests. Note that we've implemented a few different algorithms that all live within the `crosstabs` directory: `crosstabs_brute.wir`, `crosstabs_dp.wir`, and `crosstabs_hash.wir`.
 
 ```
 $ cd frigaterelease/src/tests/<ex>
