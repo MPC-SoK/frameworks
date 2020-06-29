@@ -50,7 +50,7 @@ EMP-toolkit only supports end-to-end execution for the `sh2pc` implementation. H
 you can also use the semi-honest repository to generate circuits compatible with the other
 protocol implementations included in the library.
 
-For the `mult3` and `innerprod` examples, we inclde a runtime option (`-m`) that 
+For the `mult3` and `innerprod` examples, we include a runtime option (`-m`) that 
 uses the `sh2pc` library to generate a circuit rather than execute a computation. 
 This circuit should be compatible with any of the protocol implementations and
 will be placed in the `emp-sh2pc/build/` directory.
