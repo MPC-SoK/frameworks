@@ -48,7 +48,7 @@ Enter `4`.
 The root certificate is called `RootCA` and the individual player certificate names are `Player<i>.crt`. We run examples using localhost (`127.0.0.1`) for the IP address. We recommend running the computation with real offline and sacrifice data (better tested).
 Certificate config output is in `Data/NetworkingData.txt`.
 
-`Secret Sharing`: There are several options for sharing schemes. We recommend Shamir sharing. For our examples, you can choose a modulus that's at least 31 bits (e.g 2147483999). The Full Threshold option generates keys insecurely. For full details about these options, see their documentation.
+`Secret Sharing`: There are several options for sharing schemes. We recommend Shamir sharing. For our examples, you can choose a modulus that's at least 31 bits (e.g 2147483999). The Full Threshold option allows 2-party computation but generates keys insecurely. For full details about these options, see the SCALE-MAMBA documentation.
 Secret sharing config output is in `Data/SharingData.txt`.
 
 `Conversion circuit`: For our small prime examples, you don't need to do this manually. See their documentation for more details about this option.
@@ -67,7 +67,7 @@ $ ./Player.x <id> Programs/<ex>
 
 To run our examples, we ran all players together locally:
 ```
-$ ./Player.x 0 Programs/innerprod & ./Player.x 1 Programs.innerprod
+$ ./Player.x 0 Programs/innerprod & ./Player.x 1 Programs/innerprod & ./Player.x 2 Programs/innerprod
 ```
 There's lots of runtime output, and sometimes the result of the program can be hard to find. Look for the following lines in our examples.
 ```
@@ -84,6 +84,16 @@ xtabs:
 > Output channel 0 : 9
 ```
 
+### Troubleshooting
+SCALE-MAMBA is a complex software system. Some common errors we've seen include:
+
+`terminate called recursively` or `terminate called after throwing an instance of receiving_error`: The most common cause of these vague errors is a container that has run out of memory. These programs can require 3GB or more memory _per player_. Try running a new container with more memory:
+```
+$ docker run -it -m 16g --rm scalemamba
+```
+If you use Docker Desktop for Mac On OSX, you may have increase the total resource cap through that application. 
+
+`mac_fail`: This error happens intermittently in Docker containers; I don't know why. Try re-compiling and re-running a few times, sometimes it goes away. If it doesn't stop, try to get access to an actual linux machine (via a cloud computing platform, for example) and install SCALE-MAMBA directly. You can use the install scripts provided in this repo (you might have to change the home directory from `/root` to something else).
 
 ## Modifying Examples
 Secure code is stored in `Programs/<ex>/<ex>.mpc`. Add new programs by creating
