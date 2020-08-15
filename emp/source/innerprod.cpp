@@ -7,22 +7,31 @@ int LEN = 10;
 
 void test_innerprod(int bitsize, string inputs_a[], string inputs_b[], int len) {
 
-    Integer sum(bitsize, 0, PUBLIC);
-    Integer prod(bitsize, 0, PUBLIC);
-	Integer a[len];
-	Integer b[len];
+	Integer sum(bitsize, 0, PUBLIC);
+	Integer prod(bitsize, 0, PUBLIC);
+	Integer *a = new Integer[len];
+	Integer *b = new Integer[len];
 
-    for( int i=0; i<len; i++) {
-        a[i] = Integer(bitsize, inputs_a[i], ALICE);
-        b[i] = Integer(bitsize, inputs_b[i], BOB);
-    }
+	Batcher batcher;
+	for( int i=0; i<len; i++) {
+		a[i] = Integer(bitsize, inputs_a[i], ALICE);
+		batcher.add<Integer>(bitsize, inputs_b[i]);
+	}
+	batcher.make_semi_honest(BOB);
+	for( int i=0; i<len; i++) {
+		b[i] = batcher.next<Integer>();
+	}
 
-    for( int i=0; i<len; i++) {
-        prod = a[i] * b[i];
-        sum = sum + prod;
-    }
 
-    cout << "SUM: " << sum.reveal<int>() << endl;
+	for( int i=0; i<len; i++) {
+		prod = a[i] * b[i];
+		sum = sum + prod;
+	}
+
+	cout << "SUM: " << sum.reveal<int>() << endl;
+	delete[] a;
+	delete[] b;
+
 }
 
 
