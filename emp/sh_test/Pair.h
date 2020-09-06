@@ -40,8 +40,8 @@ Pair::Pair(int p, int bl, int i, int v) {
 
 Pair::Pair(int p, int bl, string i, string v) {
     party = p;
-    id = new Integer(bl, i, party);
-    val = new Integer(bl, v, party);
+    id = new Integer(bl, stoi(i), party);
+    val = new Integer(bl, stoi(v), party);
 }
 
 Pair::~Pair() {
