@@ -6,8 +6,11 @@ RUN apt-get update && apt-get install -y \
   git \
   libssl-dev \
   sudo \
+  wget \
+  python \
   vim
-ADD source/ /root/source
+ADD sh_test/ /root/sh_test
+ADD ag_test/ /root/ag_test
 ADD README.md .
 ADD install.sh .
 RUN ["bash", "install.sh"]
