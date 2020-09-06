@@ -14,10 +14,11 @@ void test_xtabs(int party, int bitsize, string xids[], string bins[],
     Integer binsums[BINS];
 
     // convert to secure values
-    for( int i=0; i<LEN; i++ ) {
+    for( int i=0; i<LEN; i++ )
         xs[i] = Pair(ALICE, bitsize, xids[i], bins[i]); 
+    
+    for( int i=0; i<LEN; i++ )
         ys[i] = Pair(BOB, bitsize, yids[i], vals[i]);
-    }
 
     // initialize sums
     for( int i=0; i<BINS; i++) {
