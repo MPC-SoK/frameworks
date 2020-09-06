@@ -11,12 +11,11 @@ void test_innerprod(int bitsize, string inputs_a[], string inputs_b[], int len) 
 	Integer prod(bitsize, 0, PUBLIC);
 	Integer *a = new Integer[len];
 	Integer *b = new Integer[len];
+	for( int i=0; i<len; i++)
+		a[i] = Integer(bitsize, stoi(inputs_a[i]), ALICE);
 
 	for( int i=0; i<len; i++)
-		a[i] = Integer(bitsize, inputs_a[i], ALICE);
-
-	for( int i=0; i<len; i++)
-		b[i] = Integer(bitsize, inputs_b[i], BOB;);
+		b[i] = Integer(bitsize, stoi(inputs_b[i]), BOB);
 
 	for( int i=0; i<len; i++) {
 		prod = a[i] * b[i];
@@ -36,7 +35,7 @@ int main(int argc, char** argv) {
 	if (argc == 2 && strcmp(argv[1], "-m") == 0 ) {
 		setup_plain_prot(true, "innerprod.circuit.txt");
 		bitsize = 16;
-		string inputs[LEN] = {"0","0","0","0","0","0","0","0","0","0"};
+		string inputs[] = {"0","0","0","0","0","0","0","0","0","0"};
 		test_innerprod(bitsize, inputs, inputs, LEN);
 		finalize_plain_prot();
 		return 0;
@@ -63,8 +62,8 @@ int main(int argc, char** argv) {
 	char fname_a[40];
 	char fname_b[40];
 
-	sprintf(fname_a, "../data/innerprod/%d.1.dat", bitsize);
-	sprintf(fname_b, "../data/innerprod/%d.2.dat", bitsize);
+	sprintf(fname_a, "data/innerprod/%d.1.dat", bitsize);
+	sprintf(fname_b, "data/innerprod/%d.2.dat", bitsize);
 
 	ifstream infile_a(fname_a);
 	ifstream infile_b(fname_b);
@@ -84,5 +83,3 @@ int main(int argc, char** argv) {
 	test_innerprod(bitsize, inputs_a, inputs_b, LEN);
 	delete io;
 }
-
-
