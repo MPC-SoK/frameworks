@@ -8,10 +8,11 @@ void test_mult3(int bitsize, string inputs_a[], string inputs_b[]) {
 
 	Integer a[3];
 	Integer b[3];
-  for (int i=0; i<3; i++) {
+  for (int i=0; i<3; i++)
     a[i] = Integer(bitsize, inputs_a[i], ALICE);
+	
+  for (int i=0; i<3; i++)
     b[i] = Integer(bitsize, inputs_b[i], BOB);
-	}
 
 	for( int i=0; i < 3; i++ ) {
 
