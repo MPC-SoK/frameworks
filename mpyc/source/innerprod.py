@@ -1,34 +1,46 @@
-import numpy as np
+"""Demo dot product.
+
+This MPyC demo can be run with any number of parties m >= 1.
+
+Each party locally generates two lists of LOAD random integers, and
+uses these lists as *private* inputs for the multiparty computation.
+
+All the privately contributed entries are concatenated to form two
+secret-shared vectors x and y. The dot product x.y is then computed securely.
+"""
+
+from random import randint
 from mpyc.runtime import mpc
+
+LOAD = 100
+
+flatten = lambda x: [a for _ in x for a in _]
+
 
 async def main():
 
-    # initialize mpc, define secure int type
-    LEN = 10
+    # Use 32-bit (default) secure integers:
+    secint = mpc.SecInt()
+
+    # Each party locally generates LOAD random entries of type secint:
+    my_entries_for_vec_x = [secint(randint(-1000, 1000)) for _ in range(LOAD)]
+    my_entries_for_vec_y = [secint(randint(-1000, 1000)) for _ in range(LOAD)]
+
+    # Start MPyC runtime to let all parties connect:
     await mpc.start()
-    secint = mpc.SecInt(64) # work with 64-bit secure integers
 
-    # party 0 samples the inputs locally... 
-    if mpc.pid == 0:
-        vec1 = [np.random.randint(1,1000) for _ in range(LEN)]
-        vec2 = [np.random.randint(1,1000) for _ in range(LEN)]
+    # The entries for vectors x and y are secret-shared between all parties:
+    vec_x = flatten(mpc.input(my_entries_for_vec_x))
+    vec_y = flatten(mpc.input(my_entries_for_vec_y))
 
-    # ...and secret-shares them with the others
-    result_type = [secint()] * LEN
-    sec_vec1 = mpc.input([secint(v) for v in vec1] if mpc.pid == 0 else result_type, senders=0)
-    sec_vec2 = mpc.input([secint(v) for v in vec2] if mpc.pid == 0 else result_type, senders=0)
+    # Secure dot products are supported natively and *very* efficiently:
+    c = mpc.in_prod(vec_x, vec_y)
 
-    # compute inner product
-    ip = mpc.in_prod(sec_vec1, sec_vec2)
-   
-    # output result (to everybody)
-    result = await mpc.output(ip)
-    print("result:", result)
-    if mpc.pid == 0:
-        assert(result == np.dot(vec1, vec2))
+    # Open the secret-shared value c and let all parties print the result:
+    print('Dot product:', await mpc.output(c))
+
+    # Shutdown MPyC runtime to close all connections:
     await mpc.shutdown()
 
-
 if __name__ == '__main__':
-    
     mpc.run(main())
