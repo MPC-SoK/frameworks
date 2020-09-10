@@ -31,6 +31,7 @@ Our examples are all run the same way. `<ex>` can be one of `mult3`, `innerprod`
 Generate input. EMP-toolkit supports arbitrary size integers, replace the `-n` argument with your desired bitsize. Data will be output in the `data/<ex>` directory.
 
 ```
+$ cd sh_test
 $ python geninput.py -e <ex> -n 32
 ```
 
