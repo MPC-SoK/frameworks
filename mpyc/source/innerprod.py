@@ -6,7 +6,7 @@ async def main():
     # initialize mpc, define secure int type
     LEN = 10
     await mpc.start()
-    secint = mpc.SecInt(64) # work in a 64-bit prime field
+    secint = mpc.SecInt(64) # work with 64-bit secure integers
 
     # party 0 samples the inputs locally... 
     if mpc.pid == 0:
