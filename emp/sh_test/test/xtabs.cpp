@@ -7,17 +7,18 @@ using namespace std;
 int LEN = 10;
 int BINS = 5;
 
-void test_xtabs(int party, int bitsize, string xids[], string bins[], 
+void test_xtabs(int party, int bitsize, string xids[], string bins[],
                                         string yids[], string vals[]) {
     Pair xs[LEN];
     Pair ys[LEN];
     Integer binsums[BINS];
 
     // convert to secure values
-    for( int i=0; i<LEN; i++ ) {
-        xs[i] = Pair(ALICE, bitsize, xids[i], bins[i]); 
+    for( int i=0; i<LEN; i++ )
+        xs[i] = Pair(ALICE, bitsize, xids[i], bins[i]);
+
+    for( int i=0; i<LEN; i++ )
         ys[i] = Pair(BOB, bitsize, yids[i], vals[i]);
-    }
 
     // initialize sums
     for( int i=0; i<BINS; i++) {
@@ -66,7 +67,7 @@ int main(int argc, char** argv) {
     int bitsize = atoi(argv[3]);
 
     char fname[30];
-    sprintf(fname, "../data/xtabs/%d.bins.dat", bitsize);
+    sprintf(fname, "data/xtabs/%d.bins.dat", bitsize);
     ifstream infile(fname);
 
     string xids[LEN];
@@ -79,7 +80,7 @@ int main(int argc, char** argv) {
         infile.close();
     }
 
-    sprintf(fname, "../data/xtabs/%d.vals.dat", bitsize);
+    sprintf(fname, "data/xtabs/%d.vals.dat", bitsize);
     infile.open(fname);
 
     string yids[LEN];
@@ -91,13 +92,10 @@ int main(int argc, char** argv) {
         }
         infile.close();
     }
-    
+
     test_xtabs(party, bitsize, xids, bins, yids, vals);
 
     delete io;
     return 0;
 
 }
-
-
-

@@ -24,17 +24,18 @@ EMP-toolkit is implemented as a C library: there are secure Integer, Bit and Flo
 
 ## Running examples
 
-Run your Docker container. We have implemented examples in the `emp-sh2pc` directory, which runs a semi-honest 2-party computations. You should run all this code from the `emp-sh2pc` directory. 
+Run your Docker container. We have implemented examples in the `sh_test` directory, which uses `emp-sh2pc` as an external lib. You should run all this code from the `sh_test` directory. 
 
 Our examples are all run the same way. `<ex>` can be one of `mult3`, `innerprod`, or `xtabs`.
 
 Generate input. EMP-toolkit supports arbitrary size integers, replace the `-n` argument with your desired bitsize. Data will be output in the `data/<ex>` directory.
 
 ```
+$ cd sh_test
 $ python geninput.py -e <ex> -n 32
 ```
 
-Run the example. The executable takes three arguments and must be run from the `build` directory. 
+Run the example. The executable takes three arguments and must be run from the `sh_test` directory. 
 ```
 $ ./bin/<ex> <party> <port> <bitsize>
 ```
@@ -43,7 +44,6 @@ You can open two terminals and run each party separately, or run them in the sam
 $ ./bin/xtabs 1 12345 32 & ./bin/xtabs 2 12345 32
 ```
 
-This container also includes the `emp-sh2pc` examples produced by the author of the repository. These take different arguments than ours; please see the source code for details. 
 
 ### Generating circuits for other protocol implementations
 EMP-toolkit only supports end-to-end execution for the `sh2pc` implementation. However,
@@ -53,9 +53,9 @@ protocol implementations included in the library.
 For the `mult3` and `innerprod` examples, we include a runtime option (`-m`) that 
 uses the `sh2pc` library to generate a circuit rather than execute a computation. 
 This circuit should be compatible with any of the protocol implementations and
-will be placed in the `emp-sh2pc/build/` directory.
+will be placed in the `sh_test` directory.
 ```
-$ cd ~/emp-sh2pc/build
+$ cd ~/sh_test
 $ ./bin/<ex> -m
 $ ls 
 ... <ex>.circuit.txt ...
@@ -63,12 +63,12 @@ $ ls
 
 We used EMP-toolkit scripts as a model for our protocol execution script for
 `mult3`. We hardcoded input and execute the protocol in the file
-`~/emp-ag2pc/test/mult3.ag2pc.cpp`. We haven't created a parallel for the other examples.
+`~/ag_test/test/mult3.ag2pc.cpp`. We haven't created a parallel for the other examples.
 We compiled this file; run the executable for each party execute the two-party computation. 
 
 ```
-$ cd ~/emp-ag2pc/build
-$ cp ~/emp-sh2pc/build/mult3.circuit.txt .
+$ cd ~/ag_test
+$ cp ~/sh_test/mult3.circuit.txt .
 $ ./bin/mult3.ag2pc 1 12345 & ./bin/mult3.ag2pc 2 12345
 connected
 connected
@@ -80,13 +80,12 @@ connected
 
 ## Modifying examples
 
-Source code for these examples is in `emp-sh2pc/test/`. If you'd like to experiment with the code yourself, you can build it as follows. We'll assume you've written code in a file called `my_code.cpp` and placed it in the `test` directory.
+Source code for these examples is in `sh_test/test/`. If you'd like to experiment with the code yourself, you can build it as follows. We'll assume you've written code in a file called `my_code.cpp` and placed it in the `test` directory.
 
 Add your example to the `cmake` build system and rebuild the system. You only have to do this once.
 ```
 $ echo "add_test (my_code)" >> CMakeLists.txt
-$ cd build
-$ cmake ..
+$ cmake .
 ```
 Then, make your example using the generated `Makefile`. Do this every time you update your code.
 ```

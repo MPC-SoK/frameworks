@@ -8,10 +8,11 @@ void test_mult3(int bitsize, string inputs_a[], string inputs_b[]) {
 
 	Integer a[3];
 	Integer b[3];
-  for (int i=0; i<3; i++) {
-    a[i] = Integer(bitsize, inputs_a[i], ALICE);
-    b[i] = Integer(bitsize, inputs_b[i], BOB);
-	}
+  for (int i=0; i<3; i++)
+    a[i] = Integer(bitsize, stoi(inputs_a[i]), ALICE);
+
+  for (int i=0; i<3; i++)
+    b[i] = Integer(bitsize, stoi(inputs_b[i]), BOB);
 
 	for( int i=0; i < 3; i++ ) {
 
@@ -40,7 +41,7 @@ int main(int argc, char** argv) {
         finalize_plain_prot();
 	return 0;
     }
-    
+
     // run computation with semi-honest model
     int port, party;
     parse_party_and_port(argv, &party, &port);
@@ -60,8 +61,8 @@ int main(int argc, char** argv) {
     char fname_a[40];
     char fname_b[40];
 
-    sprintf(fname_a, "../data/mult3/%d.1.dat", bitsize);
-    sprintf(fname_b, "../data/mult3/%d.2.dat", bitsize);
+    sprintf(fname_a, "data/mult3/%d.1.dat", bitsize);
+    sprintf(fname_b, "data/mult3/%d.2.dat", bitsize);
 
     ifstream infile_a(fname_a);
     ifstream infile_b(fname_b);
@@ -81,4 +82,3 @@ int main(int argc, char** argv) {
     test_mult3(bitsize, inputs_a, inputs_b);
     delete io;
 }
-

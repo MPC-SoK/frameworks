@@ -1,18 +1,19 @@
 #include <emp-tool/emp-tool.h>
 #include "emp-ag2pc/emp-ag2pc.h"
+#include "test/single_execution.h"
 using namespace std;
 using namespace emp;
 
 //const string circuit_file_location = macro_xstr(EMP_CIRCUIT_PATH);
 void test(int party, NetIO* io, string name, string check_output = "") {
     // read in the circuit from the location where it was generated
-	string file = "/root/emp-sh2pc/build/" + name;
+	string file = "./" + name;
         cout << file << endl;
 	CircuitFile cf(file.c_str());
     //
     // initialize some timing stuff?
 	auto t1 = clock_start();
-	C2PC twopc(io, party, &cf);
+	C2PC<NetIO> twopc(io, party, &cf);
 	io->flush();
 	cout << "one time:\t"<<party<<"\t" <<time_from(t1)<<endl;
 

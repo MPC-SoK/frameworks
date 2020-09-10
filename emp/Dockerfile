@@ -4,12 +4,13 @@ RUN apt-get update && apt-get install -y \
   build-essential \
   cmake \
   git \
-  libgmp-dev \
   libssl-dev \
   sudo \
-  software-properties-common \
+  wget \
+  python \
   vim
-ADD source/ /root/source
+ADD sh_test/ /root/sh_test
+ADD ag_test/ /root/ag_test
 ADD README.md .
 ADD install.sh .
 RUN ["bash", "install.sh"]
