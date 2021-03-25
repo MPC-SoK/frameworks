@@ -9,7 +9,7 @@ void test(int party, NetIO* io, string name, string check_output = "") {
     // read in the circuit from the location where it was generated
 	string file = "./" + name;
         cout << file << endl;
-	CircuitFile cf(file.c_str());
+	BristolFormat cf(file.c_str());
     //
     // initialize some timing stuff?
 	auto t1 = clock_start();
@@ -17,13 +17,13 @@ void test(int party, NetIO* io, string name, string check_output = "") {
 	io->flush();
 	cout << "one time:\t"<<party<<"\t" <<time_from(t1)<<endl;
 
-    // preprocessing?
+    // preprocessing (make AND triples)
 	t1 = clock_start();
 	twopc.function_independent();
 	io->flush();
 	cout << "inde:\t"<<party<<"\t"<<time_from(t1)<<endl;
 
-    // more preprocessing?
+    // garbling (takes two parties)
 	t1 = clock_start();
 	twopc.function_dependent();
 	io->flush();
@@ -31,7 +31,8 @@ void test(int party, NetIO* io, string name, string check_output = "") {
 
     // create and fill in input vectors (to all zeros with memset)
 	bool *in = new bool[max(cf.n1, cf.n2)];
-	cout << "input size: max " << cf.n1 << "\t" << cf.n2;
+	cout << "input size: max " << cf.n1 << "\t" << cf.n2 << endl;
+    cout << "input for " << party << ": 0" << endl;
 	bool * out = new bool[cf.n3];
 	if (party == ALICE) {
 	    memset(in, false, max(cf.n1, cf.n2));
@@ -40,7 +41,7 @@ void test(int party, NetIO* io, string name, string check_output = "") {
 	}
 	memset(out, false, cf.n3);
 
-    // online protocol execution
+    // evaluate: online protocol execution
 	t1 = clock_start();
 	twopc.online(in, out);
 	cout << "online:\t"<<party<<"\t"<<time_from(t1)<<endl;
@@ -51,6 +52,7 @@ void test(int party, NetIO* io, string name, string check_output = "") {
 		for(int i = 0; i < cf.n3; ++i)
 			res += (out[i]?"1":"0");
 		cout << "result: " << res << endl;
+        cout << "expected result (this is hardcoded): " << hex_to_binary(check_output) << endl;
 		cout << (res == hex_to_binary(check_output)? "GOOD!":"BAD!")<<endl;
 	}
 	delete[] in;
@@ -63,7 +65,7 @@ int main(int argc, char** argv) {
 	parse_party_and_port(argv, &party, &port);
 	NetIO* io = new NetIO(party==ALICE ? nullptr:IP, port);
 	io->set_nodelay();
-	test(party, io, "mult3.circuit.txt", string("c000"));
+	test(party, io, "mult3.circuit.txt", string("0000"));
 	delete io;
 	return 0;
 }

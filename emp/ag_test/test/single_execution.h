@@ -38,7 +38,7 @@ const string circuit_file_location = macro_xstr(EMP_CIRCUIT_PATH);
 template<typename T>
 void test(int party, T* io, string name, string check_output = "") {
 	string file = name;//circuit_file_location + name;
-	CircuitFile cf(file.c_str());
+	BristolFormat cf(file.c_str());
 	auto t1 = clock_start();
 	C2PC<T> twopc(io, party, &cf);
 	io->flush();
