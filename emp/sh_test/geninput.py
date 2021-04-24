@@ -24,13 +24,13 @@ def gen_mult3_input(n) :
  	fy.write("%d\n"%ys[i])
     fx.close()
     fy.close()
-    result = reduce(mul, [x+y for x,y in zip(xs,ys)], 1))
+    result = reduce(mul, [x+y for x,y in zip(xs,ys)], 1)
     print("expected value: %d"%result)
     print("      l binary: {0:b}".format(result))
 
 
 def gen_input(program, n, l):
-    if (n > 32)
+    if (n > 32):
         print ("invalid bit length---this test can only handle up to 32 bits")
         print ("because we read in input using `stoi`")
         return
