@@ -1,4 +1,4 @@
-import argparse, random, os, math
+import argparse, random, os, math, functools
 from operator import mul
 
 def create_dirs(program):
@@ -14,17 +14,17 @@ def get_rand_list(bits, l):
 
 def gen_mult3_input(n) :
     product = 1
-    bits = n/3
+    bits = int(n/3)
     xs = get_rand_list(bits,3)
     ys = get_rand_list(bits,3)
     fx = open("data/mult3/%d.1.dat"%n, 'w')
     fy = open("data/mult3/%d.2.dat"%n, 'w')
     for i in range(3):
-  	fx.write("%d\n"%xs[i])
- 	fy.write("%d\n"%ys[i])
+        fx.write("%d\n"%xs[i])
+        fy.write("%d\n"%ys[i])
     fx.close()
     fy.close()
-    result = reduce(mul, [x+y for x,y in zip(xs,ys)], 1)
+    result = functools.reduce(mul, [x+y for x,y in zip(xs,ys)], 1)
     print("expected value: %d"%result)
     print("      l binary: {0:b}".format(result))
 
@@ -35,7 +35,7 @@ def gen_input(program, n, l):
         print ("because we read in input using `stoi`")
         return
 
-    bits = (n - int(math.log(l, 2))) / 2
+    bits = int((n - int(math.log(l, 2))) / 2)
     # print bits
     lists = [(i,get_rand_list(bits,l)) for i in [1,2]]
     for party,data in lists:
@@ -57,7 +57,7 @@ def gen_xtabs_input(n, l):
 
     with open("data/xtabs/%d.vals.dat"%n,'w') as f:
         ys = [(random.randint(0,IDMAX), 
-               random.getrandbits(n/int(math.log(l,2)))) for _ in range(LEN)]
+               random.getrandbits(int(n/int(math.log(l,2))))) for _ in range(LEN)]
         for idy, val in ys:
             y = "%d %d\n"%(idy,val)
             f.write(y)
