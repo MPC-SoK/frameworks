@@ -45,14 +45,16 @@ cargo build --release --examples
 
 Resulting binaries would be located at `/usr/local/src/swanky/target/release/examples`.
 
-### Ocelot
+Im order to run example use patter
 
-`ocelot` library goes with 2 examples:
-    1. 
-    2.
+```shell
+cd /root/swanky 
+cargo run --example name_of_example
+```
+For instance if you want to build `popsicle/examples/psz.rs`, run
 
 
-## Performance measurement
+```shell
+cargo run --example psz
+```
 
-Consider using containers in order to measure overall resource consumption.
-https://www.datadoghq.com/blog/how-to-collect-docker-metrics/
