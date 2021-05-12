@@ -10,10 +10,5 @@ include(${CMAKE_FOLDER}/cmake/enable_float.cmake)
 find_package(emp-sh2pc REQUIRED)
 include_directories(${EMP-SH2PC_INCLUDE_DIRS})
 
-macro (add_test_l _name)	
-	add_test(${_name} ${EMP-TOOL_LIBRARIES})
-endmacro()
-
-add_test_l(mult3)
-add_test_l(innerprod)
-add_test_l(xtabs)
+ENABLE_TESTING()
+ADD_SUBDIRECTORY(test)
