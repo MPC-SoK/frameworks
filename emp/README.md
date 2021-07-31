@@ -53,10 +53,10 @@ protocol implementations included in the library.
 For the `mult3` and `innerprod` examples, we include a runtime option (`-m`) that 
 uses the `sh2pc` library to generate a circuit rather than execute a computation. 
 This circuit should be compatible with any of the protocol implementations and
-will be placed in the `sh_test` directory.
+will be generated in whichever directory you ran the command from.
 ```
-$ cd ~/sh_test
-$ ./bin/<ex> -m
+$ cd ~/ag_test
+$ ../sh_test/bin/<ex> -m
 $ ls 
 ... <ex>.circuit.txt ...
 ```
@@ -67,8 +67,6 @@ We used EMP-toolkit scripts as a model for our protocol execution script for
 We compiled this file; run the executable for each party execute the two-party computation. 
 
 ```
-$ cd ~/ag_test
-$ cp ~/sh_test/mult3.circuit.txt .
 $ ./bin/mult3.ag2pc 1 12345 & ./bin/mult3.ag2pc 2 12345
 connected
 connected
