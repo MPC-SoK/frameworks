@@ -6,14 +6,13 @@
    */
   exports.connect = function (hostname, computation_id, options) {
     var opt = Object.assign({}, options);
-
     if (node) {
       // eslint-disable-next-line no-undef
-      jiff = require('../../lib/jiff-client');
+      JiffClient = require('../../lib/jiff-client');
     }
 
     // eslint-disable-next-line no-undef
-    saved_instance = jiff.make_jiff(hostname, computation_id, opt);
+    saved_instance = new JiffClient(hostname, computation_id, opt);
     return saved_instance;
   };
 
@@ -36,3 +35,4 @@
     return jiff_instance.open(product);
   };
 }((typeof exports === 'undefined' ? this.mpc = {} : exports), typeof exports !== 'undefined'));
+

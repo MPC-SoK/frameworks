@@ -1,15 +1,18 @@
-FROM ubuntu:16.04
+FROM node:19.7.0-alpine3.16
 WORKDIR /root
-RUN apt-get update && apt-get install -y \
+RUN apk add  \
   git \
-  npm \
   vim \
-  wget
+  bash
 
-RUN ["wget", "https://nodejs.org/dist/v10.15.3/node-v10.15.3-linux-x64.tar.xz"]
+RUN git clone https://github.com/multiparty/jiff
+WORKDIR /root/jiff
+RUN git checkout 8ea565d
+RUN npm install
+
 ADD *.sh ./
 ADD source/ /root/source
-RUN ["git", "clone", "https://github.com/multiparty/jiff"]
-RUN ["bash", "install.sh"]
+#RUN bash vim.sh
 
-RUN ["bash", "vim.sh"]
+RUN cp -r ../source/* demos/
+ENTRYPOINT /bin/bash

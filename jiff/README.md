@@ -7,7 +7,7 @@
 Create a Docker image. This will take a few minutes. You only have to do this
 once.
 ```
-$ docker build -t jiff.
+$ docker build -t jiff .
 ```
 Spin up a Docker container from the image. 
 ```

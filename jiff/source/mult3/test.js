@@ -125,7 +125,7 @@ describe('Test', function () {
       })(0);
     };
 
-    var options = { party_count: party_count, onError: console.log, onConnect: onConnect, Zp: Zp };
+    var options = { party_count: party_count, onError: console.log, onConnect: onConnect, Zp: Zp, crypto_provider: true };
     for (var i = 0; i < party_count; i++) {
       mpc.connect('http://localhost:8080', 'mocha-test', options);
     }
