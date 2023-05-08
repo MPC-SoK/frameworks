@@ -35,31 +35,30 @@
       var final_promise = final_deferred.promise();
 
       // Share the arrays
-      jiff_instance.share_array(input, input.length).then(function (shares) {
-        try {
-          // multipy all shared input arrays element wise
-          var array = shares[1];
-          for (var p = 2; p <= jiff_instance.party_count; p++) {
-            for (var i = 0; i < array.length; i++) {
-              array[i] = array[i].smult(shares[p][i]);
-            }
+      var shares = jiff_instance.share_array(input, input.length);
+      try {
+        // multiply all shared input arrays element wise
+        var array = shares[1];
+        for (var p = 2; p <= jiff_instance.party_count; p++) {
+          for (var i = 0; i < array.length; i++) {
+            array[i] = array[i].smult(shares[p][i]);
           }
- 
-          // sum up elements
-          var sum = array[0];
-          for (var i = 1; i < array.length; i++) {
-            sum = sum.sadd(array[i]);
-          }
-
-          // Open the array
-          jiff_instance.open(sum).then(function (results) {
-            final_deferred.resolve(results);
-          });
-
-        } catch (err) {
-          console.log(err);
         }
-      });
+
+        // sum up elements
+        var sum = array[0];
+        for (var i = 1; i < array.length; i++) {
+          sum = sum.sadd(array[i]);
+        }
+
+        // Open the array
+        jiff_instance.open(sum).then(function (results) {
+          final_deferred.resolve(results);
+        });
+
+      } catch (err) {
+        console.log(err);
+      }
 
     } catch (err) {
       console.log(err);
