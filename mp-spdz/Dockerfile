@@ -1,13 +1,14 @@
-FROM ubuntu:16.04
+FROM python:3.9.16-bullseye
 WORKDIR /root
 RUN apt-get update && apt-get install -y \
   curl \
-  python3 \
   openssl \
   xz-utils
 
 ADD install.sh .
 RUN ["bash", "install.sh"]
 
-add README.md test_readme.sh ./
-add source/* ./MP-SPDZ/Programs/Source/
+ADD README.md test_readme.sh ./
+ADD source/* ./MP-SPDZ/Programs/Source/
+
+CMD ["/bin/bash"]
