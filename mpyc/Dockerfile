@@ -1,13 +1,12 @@
-FROM ubuntu:18.04
+FROM python:3.9.16-bullseye
 WORKDIR /root
 RUN apt-get update && apt-get install -y \
   libmpc-dev \
-  python3 \
-  python3-pip \
   vim 
 
+ADD requirements.txt .
+RUN ["pip", "install", "-r", "requirements.txt"]
+
 ADD source/ /root/source
-ADD install.sh .
-RUN ["bash", "install.sh"]
 
 CMD ["/bin/bash"]
