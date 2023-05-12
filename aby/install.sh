@@ -1,3 +1,4 @@
+#!/bin/sh
 
 # get ABY
 git clone --recursive https://github.com/encryptogroup/ABY.git

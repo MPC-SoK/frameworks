@@ -18,9 +18,6 @@ RUN apt-get update && apt-get install -y \
 ADD source/ /root/source
 ADD README.md .
 
-#ADD install_dependencies.sh .
-#RUN ["bash", "install_dependencies.sh"]
-
 ADD install.sh .
 RUN ["bash", "install.sh"]
 CMD ["/bin/bash"]
