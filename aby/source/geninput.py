@@ -33,7 +33,7 @@ def gen_mult3_input():
     print("Expected result: %d"%product)
 
 def gen_innerprod_input(l):
-    BITS = (16 - int(math.log(10,2))) / 2 
+    BITS = (16 - int(math.log(10,2))) // 2 
 
     xs = [random.getrandbits(BITS) for _ in range(l)]
     ys = [random.getrandbits(BITS) for _ in range(l)]
@@ -73,5 +73,5 @@ if __name__ == "__main__":
         gen_innerprod_input(args.l)
 
     elif args.e == "xtabs":
-        print "xtabs not yet implemented"
+        print("xtabs not yet implemented")
 

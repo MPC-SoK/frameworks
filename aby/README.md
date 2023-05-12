@@ -23,7 +23,7 @@ Please note that any changes you make in the container are not persistent.
 
 ABY is roughly architected as a C++ library. It defines several classes that
 implement the MPC protocol. It is written in an object-oriented style. 
-Secure data is limited to unsigned C integer types (no arbitrary-length integers or an explicit Boolen type, though it does support 1-bit integers). Support for floating (fixed?)-point operations are under active development. ABY can tore secure data in a C struct and supports both C++ arrays and SIMD constructiosn for efficient parallelization, though retrieving individual elements out of a SIMD share is not well-supported.
+Secure data is limited to unsigned C integer types (no arbitrary-length integers or an explicit Boolen type, though it does support 1-bit integers). Support for floating (fixed?)-point operations are under active development. ABY can store secure data in a C struct and supports both C++ arrays and SIMD constructions for efficient parallelization, though retrieving individual elements out of a SIMD share is not well-supported.
 
 Most examples have a similar format: 
 - `<ex>_test.cpp` file reads input and sets parameters
@@ -35,10 +35,10 @@ manipulated by `gate` operations in a `Circuit`.
 
 ## Running examples
 To run our examples, you'll need to generate input. We've written input
-generation scripts for `mult3`. It will tell you what the expected result is.
-Data is stored in the `ABY/src/examples/<ex>/data` directory.
+generation scripts for `mult3` and `innerprod`. It will tell you what the expected result is.
+Data are stored in the `ABY/src/examples/<ex>/data` directory.
 ```
-$ python ~/ABY/src/examples/geninput.py -e <ex>
+$ python3 ~/ABY/src/examples/geninput.py -e <ex>
 Expected result: 621
 ```
 
