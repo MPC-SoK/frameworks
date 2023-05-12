@@ -20,5 +20,8 @@ ADD README.md .
 
 ADD install.sh .
 RUN ["bash", "install.sh"]
+
+ADD test_readme.sh .
+
 CMD ["/bin/bash"]
 
