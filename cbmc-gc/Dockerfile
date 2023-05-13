@@ -1,4 +1,5 @@
 FROM ubuntu:16.04
+# Can't upgrade to ubuntu:22:04 since this causes bison 3.8.2 to be installed, which is incompatible
 WORKDIR /root
 RUN apt-get update && apt-get install -y \
   bison \
@@ -8,7 +9,7 @@ RUN apt-get update && apt-get install -y \
   libwww-perl \
   make \
   patch \
-  python \
+  python3 \
   wget \
   vim
 

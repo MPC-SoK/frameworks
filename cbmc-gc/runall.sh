@@ -8,7 +8,7 @@ trials=10
 cd examples
 
 for ex in $examples; do
-    python geninput.py -e "$ex" -t "$trials"
+    python3 geninput.py -e "$ex" -t "$trials"
     cd "$ex"
     make
     make run-sim | grep -q failed && exit 1

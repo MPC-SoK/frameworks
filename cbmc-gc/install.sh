@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -ex
+
 # download source
 git clone https://gitlab.com/securityengineering/CBMC-GC-2.git
 cd CBMC-GC-2
