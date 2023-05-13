@@ -73,7 +73,7 @@ your code:
 ```
 $ make
 ...
-$ make run_sim
+$ make run-sim
 ```
 
 Some language limitations are discussed [in the wiki](https://github.com/mpc-sok/frameworks/wiki/CBMC-GC-v2).
