@@ -1,3 +1,4 @@
+#!/bin/sh
 
 # download source
 git clone https://gitlab.com/securityengineering/CBMC-GC-2.git
@@ -11,5 +12,4 @@ make
 cp bin/cbmc* /usr/bin/
 cp bin/circuit* /usr/bin/
 
-# copy our source
-cp -r ~/source/* examples/
+

@@ -11,10 +11,18 @@ RUN apt-get update && apt-get install -y \
   python \
   wget \
   vim
-ADD source/ /root/source
-ADD README.md .
+
 ADD install.sh .
 RUN ["bash", "install.sh"]
+
+WORKDIR /root/CBMC-GC-2
+
+ADD source/ ./examples/
+
+ADD README.md .
+
+ADD runall.sh .
+
 CMD ["/bin/bash"]
 
 
