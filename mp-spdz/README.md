@@ -17,10 +17,10 @@ $ docker run -it --rm mp-spdz
 
 ## Architecture
 
-While MP-SPDZ implements a number of schemes, we focus on computation
-modulo a 128-bit prime here. See the the MP-SPDZ
-[readme](https://github.com/data61/MP-SPDZ) for details on other
-domains such as computation modulo 2^k and binary circuits.
+While MP-SPDZ implements a number of schemes.
+We focus on computation using an integer length of 64.
+Computations are performed modulo a large enough prime here, which is output by the compiler.
+See the the MP-SPDZ [readme](https://github.com/data61/MP-SPDZ) for details on other domains such as computation modulo 2^k and binary circuits.
 
 ## Running examples
 
@@ -28,7 +28,7 @@ First, compile the example source. We provide three examples (mult3, innerprod,
 xtabs).
 ```
 $ cd MP-SPDZ
-$ ./compile.py -C -p 128 <ex>
+$ ./compile.py -C -F 64 <ex>
 ```
 The `-C` argument is optional but it speeds up the compilation of xtabs.
 

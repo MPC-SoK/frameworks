@@ -1,7 +1,9 @@
 #!/bin/bash
 
-curl -L https://github.com/data61/MP-SPDZ/releases/download/v0.1.5/mp-spdz-0.1.5.tar.xz | tar xJv
-mv mp-spdz-0.1.5 MP-SPDZ
+MP_SPDZ_VERSION="0.3.6"
+
+curl -L https://github.com/data61/MP-SPDZ/releases/download/v$MP_SPDZ_VERSION/mp-spdz-$MP_SPDZ_VERSION.tar.xz | tar xJv
+mv mp-spdz-$MP_SPDZ_VERSION MP-SPDZ
 
 cd MP-SPDZ
 Scripts/tldr.sh
