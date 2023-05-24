@@ -1,0 +1,3 @@
+mpyc==0.9
+gmpy2
+numpy
