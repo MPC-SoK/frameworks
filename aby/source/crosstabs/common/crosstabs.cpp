@@ -121,8 +121,8 @@ int32_t test_crosstabs_circuit(e_role role, char* address, uint16_t port, seclvl
 
         for(int i=0; i<BINS; i++) {
             output = s_out[i]->get_clear_value<uint32_t>();
-            cout << "Bin " << i << ":\t" << output << endl;
-            cout << "Expect:\t" << expected_results[i] << endl;
+            cout << "Bin " << i << ":\t" << output;
+            cout << ", expect:\t" << expected_results[i] << endl;
         }
 
         delete party;
