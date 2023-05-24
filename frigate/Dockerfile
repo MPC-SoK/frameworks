@@ -1,17 +1,22 @@
-FROM ubuntu:18.04
+FROM ubuntu:22.04
 WORKDIR /root
 RUN apt-get update && apt-get install -y \
   g++ \
   git \
   flex \
   make \
-  python \
+  python3 \
   vim \
+  flex \
+  bison \
+  libbison-dev \
   wget
-ADD source/ /root/source
-ADD README.md .
-ADD install.sh .
 
+ADD README.md .
+COPY source/frigate.vim /root/source/frigate.vim
+ADD install.sh .
 RUN ["bash", "install.sh"]
+
+ADD source/ /root/frigaterelease/src/tests
 CMD ["/bin/bash"]
 
