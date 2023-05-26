@@ -1,13 +1,15 @@
+set -ex
+
 
 # install bison dependencies
-wget http://ftp.br.debian.org/debian/pool/main/b/bison/libbison-dev_3.6.3+dfsg-1_amd64.deb
-dpkg -i libbison-dev_3.6.3+dfsg-1_amd64.deb
-
-wget http://ftp.br.debian.org/debian/pool/main/b/bison/bison_3.6.3+dfsg-1_amd64.deb
-dpkg -i bison_3.6.3+dfsg-1_amd64.deb
-
-rm libbison-dev_3.6.3+dfsg-1_amd64.deb
-rm bison_3.6.3+dfsg-1_amd64.deb
+#wget http://ftp.br.debian.org/debian/pool/main/b/bison/libbison-dev_3.6.3+dfsg-1_amd64.deb
+#dpkg -i libbison-dev_3.6.3+dfsg-1_amd64.deb
+#
+#wget http://ftp.br.debian.org/debian/pool/main/b/bison/bison_3.6.3+dfsg-1_amd64.deb
+#dpkg -i bison_3.6.3+dfsg-1_amd64.deb
+#
+#rm libbison-dev_3.6.3+dfsg-1_amd64.deb
+#rm bison_3.6.3+dfsg-1_amd64.deb
 
 # install frigate
 git clone https://bitbucket.org/bmood/frigaterelease.git
@@ -15,9 +17,6 @@ cd frigaterelease/src
 
 make
 cp frigate /bin/
-
-# copy our examples
-cp -r ~/source/* tests
 
 # add a vim syntax file :)
 cd
