@@ -5,7 +5,7 @@ usage = sys.argv[0] + " -i <inputFile> -o <outputFile>"
 try:
   opts, args = getopt.getopt(sys.argv[1:], 'i:o:', ['inputFile', 'outputFile'])
 except getopt.GetoptError:
-  print usage
+  print(usage)
   sys.exit(0)
 
 inputDefined = False
@@ -22,7 +22,7 @@ for opt, arg in opts:
     outputDefined = True
 
 if not (inputDefined and outputDefined):
-  print usage
+  print(usage)
   sys.exit(2)
 
 
