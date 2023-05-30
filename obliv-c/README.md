@@ -52,12 +52,6 @@ $ ./a.out 1234 -- <inputFile1> &
 $ ./a.out 1234 localhost <inputFile2>
 ```
 
-Obliv-C also includes automated testing functions. 
-```
-$ cd /root/obliv-c/test
-$ ./test2.sh ../naive
-```
-
 ## Modifying examples
 Modifying examples is straightforward. Oblivious keywords must be in the `.oc`
 file. Rerun `make` to rebuild. The `Makefiles` included in our examples are
