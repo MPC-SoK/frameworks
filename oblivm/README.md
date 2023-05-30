@@ -33,8 +33,8 @@ $ ./run-compiler.sh [PORT] examples/<program>/<program>.lcc
 
 ObliVM reads input in a binary format- we have provided a script to facilitate this. It can be run as follows:
 ```
-$ python ./genInput.py -i examples/<program>/human_input_alice.txt -o examples/<program>/input_alice.txt
-$ python ./genInput.py -i examples/<program>/human_input_bob.txt -o examples/<program>/input_bob.txt
+$ python3 ./genInput.py -i examples/<program>/human_input_alice.txt -o examples/<program>/input_alice.txt
+$ python3 ./genInput.py -i examples/<program>/human_input_bob.txt -o examples/<program>/input_bob.txt
 ```
 
 Following this, the examples can be run as follows:

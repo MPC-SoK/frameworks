@@ -1,3 +1,7 @@
+#!/bin/sh
+
+set -ex
+
 git clone https://github.com/oblivm/ObliVMLang
 
 cd ObliVMLang
