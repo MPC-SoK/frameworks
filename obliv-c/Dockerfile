@@ -1,10 +1,16 @@
-FROM ubuntu:16.04
+# We cannot use anythingmore recent than ubuntu 20.04,
+# because otherwise we get the error "Cabs2cil had some errors".
+# Details are described in this issue: https://github.com/samee/obliv-c/issues/109
+FROM ubuntu:20.04
+
 WORKDIR /root
 
 RUN apt-get update && apt-get install -y \
   ocaml \
   libgcrypt20-dev \
   ocaml-findlib \
+  ocamlbuild \
+  ocaml-batteries-included \
   opam \
   m4 \
   git \
