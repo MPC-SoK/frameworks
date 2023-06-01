@@ -1,14 +1,14 @@
-FROM ubuntu:16.04
+FROM ubuntu:22.04
 WORKDIR /root
 RUN apt-get update && apt-get install -y \
-  bison \
   flex \
+  bison \
   g++ \
   git \
   libgmp-dev \
   libssl-dev \
   make \
-  python \
+  python3 \
   vim
 ADD source/ /root/source
 ADD README.md .

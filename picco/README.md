@@ -44,7 +44,7 @@ We have done the following steps (see `install.sh` for details)
 First, you must generate input and shares for the correct number of servers
 (we use 3 computation servers, 1-2 input parties, and 1 output party in our
 examples. These parameters are set in the `smc_config` file). 
-The PICCO team describes the correct input file format in their [manual](https://github.com/PICCO-Team/picco/blob/master/picco-manual.pdf).
+The PICCO developers describe the correct input file format in their [README](https://github.com/applied-crypto-lab/picco/blob/master/README.md).
 ```
 $ picco-utility -I <input ID> <input file> util_config secure_servers/share
 ```
@@ -72,4 +72,4 @@ The result of the computation is in the file `result`.
 
 
 ## Modifying examples
-We've hardcoded a configuration for our sample programs, but PICCO is configurable. They include extensive documentation on configuring, compiling, and running examples in their [manual](https://github.com/PICCO-Team/picco/blob/master/picco-manual.pdf) 
+We've hardcoded a configuration for our sample programs, but PICCO is configurable. They include extensive documentation on configuring, compiling, and running examples in their [README](https://github.com/applied-crypto-lab/picco/blob/master/README.md) 
