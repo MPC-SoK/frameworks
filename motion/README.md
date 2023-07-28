@@ -4,7 +4,7 @@
 It currently implements three MPC protocols for two or more parties: arithmetic and Boolean GMW as well as the BMR protocol, 
 which is the multi-party version of the constant-round Yao's garbled circuit protocol.
 All three protocols provide security against all but one passively corrupted parties, i.e., parties are supposed to follow the protocol but try to learn additional information from what they observe in the protocol.
-MOTION allows to convert between all three protocols and provides both high-level interfaces such as secure integers as well as low-level APIs 
+MOTION allows to freely switch between all three protocols and provides both high-level interfaces such as secure integers as well as low-level APIs 
 for oblivious transfer and fine-grained control over MOTION's internal mechanisms.
 Two design aspects, asynchronous circuit evaluation and serialized communication, enable very flexible use of protocols and primitives, e.g.,
 it is possible to use multiple different flavors of oblivious transfer and various MPC protocols all in parallel, which will wait for particular events to happen, 
@@ -16,7 +16,7 @@ Thomas Schneider and Oleksandr Tkachenko ([ENCRYPTO group](https://encrypto.de),
 Our recommendation: MOTION provides a powerful low-level crytographic interface that gives the developer significant control over performance. 
 We recommend MOTION for users who are familiar with MPC protocols, their relative tradeoffs, and the circuit model of computation.
 Furthermore, MOTION is well-suited for (non-invasive) prototyping and mixing of (new) protocols and conversions due to its asynchronous design. 
-More details can be found in [our paper](https://ia.cr/2020/1137).
+More details can be found in [the original paper](https://ia.cr/2020/1137).
 
 ## Docker setup
 
@@ -40,8 +40,7 @@ implement the MPC protocols. It is written in an object-oriented way.
 Secure data is currently limited to unsigned C integer types.
 Support for floating and fixed-point operations is under active development. 
 MOTION supports SIMD operations for efficient parallelization.
-MOTION is significantly more memory and running time efficient when using SIMD 
-and needs slightly less communication due to better packing of messages, so we strongly encourage to use it.
+Using SIMD leads to higher efficiency in terms of memory and run time, and also slightly less communication due to better packing of messages.
 
 ### Format of examples
 
@@ -59,16 +58,16 @@ Each `Wire` contains `number_of_simd` data values, e.g., 10 integer values in ar
 There is also currently no notion of circuit layers in MOTION.
 In a nutshell, all `Gates` have `Shares` as both inputs and outputs.
 The `Gates` wait for their input `Shares` to become "ready" to start their own evaluation.
-After their evaluation, `Gates` set their output wires and mark them "ready" which gives the green light for the waiting gates to start their evaluation.
-This procedure is done completely asynchronously using stackfull coroutines, namely `Boost.Fibers`. 
+After their evaluation, `Gates` set their output wires and mark them "ready" which gives green light for the waiting gates to start their evaluation.
+This procedure is done completely asynchronously using stackful coroutines, namely `Boost.Fibers`. 
 
 ### Communication serialization
 
-The communication in MOTION is serialized completely using the efficient `flatbuffers` serialization library.
+Communication in MOTION is completely serial using the efficient `flatbuffers` serialization library.
 
 ### Benchmarks
 
-We provide `Statistics` classes for analyzing communication and computation costs.
+MOTION's authors provide `Statistics` classes for analyzing communication and computation costs.
 They have APIs to convert the collected statistics to either a human-readable format, e.g.,
 to print them into the terminal, or to a machine-readable format, namely JSON, using `Boost.JSON`. 
 
@@ -85,9 +84,9 @@ Expected result: 621
 
 Executables are located in the `MOTION/<build>/bin/` directory. 
 In general, at least two parties must run each example.
-You will find more details regarding the settings enabled in particular 
+You can find more details regarding the settings enabled in particular 
 tutorial examples in the [tutorial README](https://github.com/encryptogroup/MOTION/blob/master/src/examples/tutorial/README.md). 
-You can do it in one line as here, or in two separate terminals.
+You can run each example in one terminal as shown below, or in two separate terminals.
 ```
 $ cd ~/MOTION/<build>/bin
 $ my_parties="0,<ip0>,<port0> 1,<ip1>,<port1>"
@@ -117,6 +116,4 @@ which allows to either pass inputs directly or pass a filename that contains the
 To build your example, add it to `MOTION/src/examples/CMakeLists.txt` and re-run `make` in the `MOTION/<build>` directory.
 
 For an overview of the classes and their connections in MOTION, check out the [online doxygen documentation](https://motion-documentation.github.io).
-Also, we are actively working on a developer guide that will contain more implementation guidelines and details about MOTION.
-It will soon be available [here](https://motion-documentation.github.io/motiondevguide.pdf).
 
