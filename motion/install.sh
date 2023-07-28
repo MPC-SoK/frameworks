@@ -1,6 +1,13 @@
+#!/bin/sh
+
+set -ex
+
 # get MOTION
-git clone --recursive --config core.autocrlf=input https://github.com/encryptogroup/MOTION.git
+git clone https://github.com/encryptogroup/MOTION.git
 cd MOTION
+git checkout 1e082c9 
+
 # build MOTION
-cmake -DMOTION_BUILD_TESTS=On -DMOTION_BUILD_EXE=On -DMOTION_LINK_TCMALLOC=On -B build
-cmake --build build -- -j 4
+mkdir build && cd build
+cmake ..
+make -j4
