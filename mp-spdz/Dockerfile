@@ -1,4 +1,7 @@
 FROM python:3.9.16-bullseye
+
+ARG fromsource=no
+
 WORKDIR /root
 RUN apt-get update && apt-get install -y \
   curl \
@@ -19,7 +22,7 @@ RUN apt-get update && apt-get install -y \
   python3
 
 ADD install.sh .
-RUN ["bash", "install.sh"]
+RUN ./install.sh $fromsource
 
 ADD README.md test_readme.sh ./
 ADD source/* ./MP-SPDZ/Programs/Source/

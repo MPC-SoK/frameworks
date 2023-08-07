@@ -2,14 +2,20 @@
 
 set -ex
 
-MP_SPDZ_VERSION="v0.3.6"
+fromsource=$1
+MP_SPDZ_VERSION="0.3.6"
 
-git clone https://github.com/data61/MP-SPDZ.git
-cd MP-SPDZ
-git checkout $MP_SPDZ_VERSION
+if [ $fromsource = "yes" ]; then
+    # this may take a long time
+    git clone https://github.com/data61/MP-SPDZ.git
+    cd MP-SPDZ
+    git checkout v$MP_SPDZ_VERSION
 
-make setup
-make mascot-party.x 
-# The above line can be replaced with `make all` in order get access
-# to all MPC protocols implemented by MP-SPDZ. However, compilation of
-# all protocols takes a long time.
+    make setup
+    make all
+else
+    curl -L https://github.com/data61/MP-SPDZ/releases/download/v$MP_SPDZ_VERSION/mp-spdz-$MP_SPDZ_VERSION.tar.xz | tar xJv
+    mv mp-spdz-$MP_SPDZ_VERSION MP-SPDZ
+    cd MP-SPDZ
+    Scripts/tldr.sh
+fi

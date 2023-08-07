@@ -10,6 +10,12 @@ once.
 $ docker build -t mp-spdz .
 ```
 
+**Note in case of errors**: If you receive an error along the lines of `Binaries are not available for aarch64 Use the source distribution: https://github.com/data61/MP-SPDZ/#tldr-source-distribution` during build time, this means that there is no pre-built version of MP-SPDZ available for your architecture.
+You can work around this by building MP-SPDZ from source.
+For this, use `docker build -t mp-spdz --build-arg fromsource=yes .` to build the docker image.
+Note, however, that executing this command may take a long time.
+
+
 Spin up a Docker container from the image.
 ```
 $ docker run -it --rm mp-spdz
