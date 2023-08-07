@@ -1,4 +1,4 @@
-modulus:32
+modulus:48
 comp-parties:3
 threshold:1
 input-parties:2

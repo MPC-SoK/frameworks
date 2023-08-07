@@ -45,13 +45,31 @@ First, you must generate input and shares for the correct number of servers
 (we use 3 computation servers, 1-2 input parties, and 1 output party in our
 examples. These parameters are set in the `smc_config` file). 
 The PICCO developers describe the correct input file format in their [README](https://github.com/applied-crypto-lab/picco/blob/master/README.md).
+We also provide a script that can generate inputs for `mult3` and `innerprod` (generating inputs for `xtabs` is currently not supported).
+Run this script by executing `cd /root/tests/; python3 geninput.py -e <example>`.
+This generates input values for `<example>` and stores them into `<example>/data/input.<ID>.dat`.
+
+These input values need to be split into shares. 
+PICCO's authors provide a convenient command for this. 
+Change directories to the example you want to execute (`cd <example>`) and run:
+
 ```
 $ picco-utility -I <input ID> <input file> util_config secure_servers/share
 ```
 
-To run the computation, enter the `secure_servers` directory and start the servers. If you get an error (`ERROR, on binding`, `Error connecting 111 - Connection refused `, `ERROR, connecting to node: Connection refused`) or if the program hangs, kill the processes and try again. Note that order matters here: the highest-numbered server must be started first. 
+For example, in order to generate input shares for the `mult3` example, the following steps are necessary:
+
 ```
-$ cd secure_servers
+cd /root/tests/
+python3 geninput.py -e mult3
+cd mult3
+picco-utility -I 1 data/input.A.dat util_config secure_server/share
+```
+
+
+To run the computation, enter the `secure_server` directory and start the servers. If you get an error (`ERROR, on binding`, `Error connecting 111 - Connection refused `, `ERROR, connecting to node: Connection refused`) or if the program hangs, kill the processes and try again. Note that order matters here: the highest-numbered server must be started first. 
+```
+$ cd secure_server
 $ ./mult3 3 run_config keys/private3.pem 1 1 share3 output &
 $ ./mult3 2 run_config keys/private2.pem 1 1 share2 output &
 $ ./mult3 1 run_config keys/private1.pem 1 1 share1 output &

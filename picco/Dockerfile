@@ -10,9 +10,14 @@ RUN apt-get update && apt-get install -y \
   make \
   python3 \
   vim
+
+ADD install_picco.sh .
+RUN sh install_picco.sh
+
 ADD source/ /root/source
-ADD README.md .
-ADD install.sh .
-RUN ["bash", "install.sh"]
+ADD install_examples.sh .
+RUN sh install_examples.sh
+WORKDIR /root/tests
+
 CMD ["/bin/bash"]
 
