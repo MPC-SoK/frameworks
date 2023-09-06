@@ -6,6 +6,9 @@ SCALE-MAMBA is developed by a team at KU Leuven and is available [on Github](htt
 
 Our recommendation: SCALE-MAMBA is an actively maintained, highly flexible, [extensively documented](https://homes.esat.kuleuven.be/~nsmart/SCALE/Documentation.pdf) framework. It supports an arbitrary number of parties and has strong security guarantees and we recommend it for most use cases. Our only caveat is that it may consume significant computing resources.
 
+Note on the project's maintenance status: in June '22, the authors have announced that the project is no longer actively maintained.
+Visit the project website for details.
+
 ## Docker Setup
 Create a Docker image. This will take a few minutes. You only have to do this
 once.

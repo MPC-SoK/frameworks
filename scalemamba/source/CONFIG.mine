@@ -1,5 +1,5 @@
 ROOT = /root/SCALE-MAMBA
-OSSL =
+OSSL = 
 
 # Debug flags
 #   SH_DEBUG = Share debugging (for development only)
@@ -8,13 +8,14 @@ OSSL =
 
 # MAX_MOD = 7 should be OK for 128 bit based FHE operations
 MAX_MOD = 7
+MAX_GFP = 3
 
 # Benchmark flags
 #   BENCH_NETDATA = Enable benchmarking of network data
 #   BENCH_MEMORY  = Enable benchmarking of memory 
 
 #FLAGS = -DSH_DEBUG -DDEBUG -DMAX_MOD_SZ=$(MAX_MOD) -DDETERMINISTIC -DBENCH_NETDATA -DBENCH_MEMORY
-FLAGS = -DMAX_MOD_SZ=$(MAX_MOD) 
+FLAGS = -DMAX_MOD_SZ=$(MAX_MOD) -DMAX_GFP_SZ=$(MAX_GFP) 
 
 OPT = -O3 
 
