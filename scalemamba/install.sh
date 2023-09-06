@@ -1,9 +1,11 @@
+set -ex
 
-# download SCALE-MAMBA v1.5
+
+# download SCALE-MAMBA v1.14
 cd 
 git clone https://github.com/KULeuven-COSIC/SCALE-MAMBA.git
 cd SCALE-MAMBA
-git checkout -b v1.8.1 e3488e646ed71e8d3264e2f3fe8e2226d4d503a9
+git checkout -b v1.14 c111516e3ebc1efd12a2bd47dd2122b160e13d1e
 cp /root/source/CONFIG.mine .
 make progs
 

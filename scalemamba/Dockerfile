@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:22.04
 
 WORKDIR /root
 
@@ -16,11 +16,17 @@ RUN apt-get update && apt-get install -y \
   m4 \
   make \
   patch \
-  python \
+  python3 \
+  python2 \
+  python-is-python3 \
   vim \
   wget \
   yasm \
-  zip
+  zip \
+  autotools-dev \
+  autoconf \
+  libtool \
+  texinfo
 
 ADD install_dependencies.sh .
 RUN ["bash", "install_dependencies.sh"]
