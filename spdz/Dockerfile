@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM ubuntu:22.04
 WORKDIR /root
 RUN apt-get update && apt-get install -y \
   bzip2 \
@@ -9,12 +9,19 @@ RUN apt-get update && apt-get install -y \
   m4 \
   make \
   man \
-  python \
+  python2 \
   tar \
   valgrind \
   vim \
   wget \
-  yasm
+  yasm \
+  autotools-dev \
+  autoconf \
+  libtool \
+  texinfo
+
+ADD install_dependencies.sh .
+RUN bash install_dependencies.sh
 
 ADD install.sh .
 RUN ["bash", "install.sh"]
