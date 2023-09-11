@@ -1,4 +1,5 @@
 FROM ubuntu:16.04
+# Can't upgrade to ubuntu:22:04 since this causes bison 3.8.2 to be installed, which is incompatible
 WORKDIR /root
 RUN apt-get update && apt-get install -y \
   bison \
@@ -8,13 +9,21 @@ RUN apt-get update && apt-get install -y \
   libwww-perl \
   make \
   patch \
-  python \
+  python3 \
   wget \
   vim
-ADD source/ /root/source
-ADD README.md .
+
 ADD install.sh .
 RUN ["bash", "install.sh"]
+
+WORKDIR /root/CBMC-GC-2
+
+ADD source/ ./examples/
+
+ADD README.md .
+
+ADD runall.sh .
+
 CMD ["/bin/bash"]
 
 

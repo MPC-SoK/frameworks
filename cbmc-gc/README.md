@@ -45,7 +45,7 @@ explore.
 
 CBMC-GC is purely a circuit compiler: it does not run an MPC computation. In order to test the correctness of a circuit, you can specify a test set and run it _in the clear_. We've provided a tool to generate sample test files for each of our examples.
 ```
-$ python geninput.py -e <program> -t <# trials>
+$ python3 geninput.py -e <program> -t <# trials>
 $ cd <program>
 $ make run-sim
 ...
@@ -73,7 +73,7 @@ your code:
 ```
 $ make
 ...
-$ make run_sim
+$ make run-sim
 ```
 
 Some language limitations are discussed [in the wiki](https://github.com/mpc-sok/frameworks/wiki/CBMC-GC-v2).
