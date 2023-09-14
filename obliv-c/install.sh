@@ -1,6 +1,9 @@
+#!/bin/sh
+set -ex
+
 git clone https://github.com/samee/obliv-c
 
 cd obliv-c
-git checkout -b MPCSOK 2bacf0480ee5920c6a08f8737c1e30d8b3a56184
+git checkout -b MPCSOK e02e5c590523ef4dae06e167a7fa00037bb3fdaf
 
 ./configure && make
