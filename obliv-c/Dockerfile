@@ -1,4 +1,4 @@
-# We cannot use anythingmore recent than ubuntu 20.04,
+# We cannot use anything more recent than ubuntu 20.04,
 # because otherwise we get the error "Cabs2cil had some errors".
 # Details are described in this issue: https://github.com/samee/obliv-c/issues/109
 FROM ubuntu:20.04
