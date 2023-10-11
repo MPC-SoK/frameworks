@@ -1,4 +1,4 @@
-import argparse, random, os, math, functools
+import argparse, random, os, math, functools, errno
 from operator import mul
 
 def create_dirs(program):

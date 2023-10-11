@@ -32,7 +32,7 @@ Generate input. EMP-toolkit supports arbitrary size integers, replace the `-n` a
 
 ```
 $ cd sh_test
-$ python geninput.py -e <ex> -n 32
+$ python3 geninput.py -e <ex> -n 32
 ```
 
 Run the example. The executable takes three arguments and must be run from the `sh_test` directory. 
