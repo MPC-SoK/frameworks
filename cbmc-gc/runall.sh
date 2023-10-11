@@ -15,3 +15,4 @@ for ex in $examples; do
     cd ..
 done
 
+echo "Successfully ran all examples"
