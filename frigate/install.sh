@@ -11,6 +11,11 @@ set -ex
 #rm libbison-dev_3.6.3+dfsg-1_amd64.deb
 #rm bison_3.6.3+dfsg-1_amd64.deb
 
+wget http://launchpadlibrarian.net/140087283/libbison-dev_2.7.1.dfsg-1_amd64.deb
+wget http://launchpadlibrarian.net/140087282/bison_2.7.1.dfsg-1_amd64.deb
+dpkg -i libbison-dev_2.7.1.dfsg-1_amd64.deb
+dpkg -i bison_2.7.1.dfsg-1_amd64.deb
+
 # install frigate
 git clone https://bitbucket.org/bmood/frigaterelease.git
 cd frigaterelease/src

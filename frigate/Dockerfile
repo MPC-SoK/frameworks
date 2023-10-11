@@ -11,9 +11,6 @@ RUN apt-get update && apt-get install -y \
   make \
   python3 \
   vim \
-  flex \
-  bison \
-  libbison-dev \
   wget
 
 ADD README.md .
