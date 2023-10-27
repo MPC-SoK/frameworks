@@ -1,11 +1,12 @@
 # All of the sources participating in the build are defined here
--include smc-compute/ops/ops.mk
+-include smc-compute/ops/shamir/ops.mk
 -include smc-compute/smc-compute.mk
+-include objects.mk
 
 LIBS := -lgmp -lpthread -lcrypto -lssl -ldl
 
 #Add test program to the build variables
-CPP_SRCS += xtabs.gen.cpp
+CPP_SRCS += xtabs.cpp
 
 OBJS += \
 #test-code.o 
@@ -36,7 +37,9 @@ endif
 # All Target
 
 xtabs: $(OBJS) $(USER_OBJS) 
-	g++ -o secure_server/$@ $@.gen.cpp $(OBJS) $(USER_OBJS) $(LIBS) 
+	g++ -c -w $@.cpp
+	g++ -o secure_server/$@ $@.o $(OBJS) $(USER_OBJS) $(LIBS)
+
 # replace the line above with this one for multi-threaded programs
 #	g++ -o test-code test-code.o -I ./ompi/include/ompi $(OBJS) $(USER_OBJS) $(LIBS) -L ./ompi/lib/ompi -L ./ompi/lib/ompi/default -lort -lrt -lboost_thread 
 
