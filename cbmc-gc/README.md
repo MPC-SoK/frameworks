@@ -1,12 +1,15 @@
 # CBMC-GC
 
-[CBMC-GC](https://gitlab.com/securityengineering/CBMC-GC-2) is a circuit compiler that produces Boolean circuits from a subset of ANSI-C. It is based on CBMC, a bounded model checker that translates a C program into a boolean constraint; CBMC-GC adapts the output of this tool to produce an optimized circuit. 
-Optimization can be for minimal size or minimal depth circuts (depending on your use case). It supports an arbitrary number of parties.
+[CBMC-GC](https://gitlab.com/securityengineering/CBMC-GC-2) is a circuit compiler that produces Boolean circuits from a subset of ANSI-C. 
+It is based on CBMC, a bounded model checker that translates a C program into a boolean constraint; CBMC-GC adapts the output of this tool to produce an optimized circuit. 
+Optimization can be for minimal size or minimal depth circuts (depending on your use case). 
+It supports an arbitrary number of parties.
 
-CBMC-GC includes a tool for running circuits with [ABY](https://github.com/MPC-SoK/frameworks/tree/master/aby), but we weren't able to use it; the CMBC-GC adapter seems to reference a deprecated ABY API. 
+CBMC-GC includes a tool for running circuits with [ABY](https://github.com/MPC-SoK/frameworks/tree/master/aby), but we weren't able to use it; the CBMC-GC adapter seems to reference a deprecated ABY API. 
 CBMC-GC also includes a tool to output circuits in other formats, but we weren't able to successfully execute any of these (not clear whose fault that is).
 
-CBMC-GC is a circuit compiler produced by Niklas Büscher and others in the [security engineering group at TU Darmstadt](https://forsyte.at/software/cbmc-gc/). This work examines v2.
+CBMC-GC was created by Niklas Büscher and others in the security engineering group at TU Darmstadt. 
+This work examines v2.
 
 Our recommendation: CBMC-GC uses powerful tools to produce optimized circuits, but we were unable to successfully execute any of the circuits it produced.
 
@@ -39,21 +42,21 @@ $ cd ~/CBMC-GC-2/examples/<program>
 $ make
 ```
 
-We have included four example programs: `mult3`, `innerprod`, `xtabs`, and
-`xtabs-hash`. There are also four examples provided by the library that you can
-explore.
+We have included four example programs: `mult3`, `innerprod`, `xtabs`, and `xtabs-hash`. 
+There are also four examples provided by the library that you can explore.
 
 CBMC-GC is purely a circuit compiler: it does not run an MPC computation. In order to test the correctness of a circuit, you can specify a test set and run it _in the clear_. We've provided a tool to generate sample test files for each of our examples.
 ```
-$ python geninput.py -e <program> -t <# trials>
+$ python3 geninput.py -e <program> -t <# trials>
 $ cd <program>
 $ make run-sim
 ...
 ```
 This runs a _simulation in the clear_. This is not a secure computation.
 
-To run a secure computation, you must use an outside library. CBMC-GC includes
-support to export circuits to ABY, Bristol, Fairplay's SHDL, or the JustGarble format. We have not (yet) explored this functionality.
+To run a secure computation, you must use an outside library. 
+CBMC-GC includes support to export circuits to ABY, Bristol, Fairplay's SHDL, or the JustGarble format. 
+We have not (yet) explored this functionality.
 
 
 ## Modifying Examples
@@ -73,9 +76,7 @@ your code:
 ```
 $ make
 ...
-$ make run_sim
+$ make run-sim
 ```
 
-Some language limitations are discussed [in the wiki](https://github.com/mpc-sok/frameworks/wiki/CBMC-GC-v2).
-
-
+Some language limitations are discussed [in the wiki](https://github.com/mpc-sok/frameworks/wiki/CBMC-GC).
