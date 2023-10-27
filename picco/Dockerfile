@@ -1,18 +1,24 @@
-FROM ubuntu:16.04
+FROM ubuntu:22.04
 WORKDIR /root
 RUN apt-get update && apt-get install -y \
-  bison \
   flex \
+  bison \
   g++ \
   git \
   libgmp-dev \
   libssl-dev \
   make \
-  python \
+  python3 \
+  libcrypto++-dev \
   vim
-ADD source/ /root/source
-ADD README.md .
-ADD install.sh .
-RUN ["bash", "install.sh"]
+
+ADD install_picco.sh .
+RUN sh install_picco.sh
+
+ADD source/ /root/source/
+ADD install_examples.sh .
+RUN sh install_examples.sh
+WORKDIR /root/source
+
 CMD ["/bin/bash"]
 
