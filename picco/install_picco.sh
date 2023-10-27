@@ -5,7 +5,7 @@ set -ex
 # download
 git clone https://github.com/applied-crypto-lab/picco
 cd picco
-git checkout 4518a90c91332e726484215814dfcccb0c537727 
+git checkout aa2e71e7f8a0f7a313ac76a1ab3639e95637cd31 # Latest as of 27 October 2023
 
 # build and install 
 cd compiler
