@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM ubuntu:20.04
 # Can't upgrade to ubuntu:22:04 since this causes bison 3.8.2 to be installed, which is incompatible
 WORKDIR /root
 RUN apt-get update && apt-get install -y \
