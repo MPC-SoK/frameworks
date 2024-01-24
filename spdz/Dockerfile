@@ -28,4 +28,5 @@ RUN bash install.sh
 
 ADD README.md .
 ADD run_example.sh ./SPDZ-2
-ADD source/* ./SPDZ-2/Programs/Source/
+ADD source/*.mpc ./SPDZ-2/Programs/Source/
+ADD source/InputData ./SPDZ-2/Programs/InputData
