@@ -22,7 +22,7 @@ tar -xf libsodium-1.0.16.tar.gz
 rm libsodium-1.0.16.tar.gz 
 cd libsodium-1.0.16/  
 ./configure
-make
+make -j8
 make install
 cd ..
 
@@ -32,7 +32,7 @@ tar -xf ntl-10.5.0.tar.gz
 rm ntl-10.5.0.tar.gz
 cd ntl-10.5.0/src/
 ./configure
-make
+make -j8
 make install
 cd ../..
 

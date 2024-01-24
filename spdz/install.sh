@@ -12,7 +12,7 @@ echo ARCH = -march=native >> CONFIG.mine
 sed -i s/-Werror//g CONFIG # needed because recent versions of gcc cannot compile SPDZ w/o warnings.
 sed -i s/python/python2/g compile.py # The command is now called "python2" instead of "python".
 
-make
+make -j8
 mkdir Player-Data
 
 

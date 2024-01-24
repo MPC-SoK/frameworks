@@ -10,13 +10,13 @@ SPDZ source code is available [on Github](https://github.com/bristolcrypto/SPDZ-
 
 Create a Docker image. This will take a few minutes. You only have to do this
 once.
-```
-$ docker build -t spdz .
+```sh
+docker build -t spdz .
 ```
 
 Spin up a Docker container from the image.
-```
-$ docker run -it --rm spdz
+```sh
+docker run -it --rm spdz
 ```
 
 ## Generating pre-processing data
@@ -29,14 +29,14 @@ SPDZ has two parts:
 - An online phase which uses pre-processing data to evaluate any function. This is quite fast.
 
 Once in the docker, run the pre-processing phase for, say, 3 parties by executing the following:
-```
-$ cd SPDZ-2
-$ ./spdz2-offline.x -p 0 -N 3 &
-$ ./spdz2-offline.x -p 1 -N 3 &
-$ ./spdz2-offline.x -p 2 -N 3
+```sh
+cd SPDZ-2
+./spdz2-offline.x -p 0 -N 3 &
+./spdz2-offline.x -p 1 -N 3 &
+./spdz2-offline.x -p 2 -N 3
 ```
 
-This will run for a while to generate the pre-processing data. After the program outputs "Inv. 9500 out of 9600" wait a further 5 minutes. Then kill the process and the other spdz2-offline.x background processes. (If you wait longer than 5 minutes before killing them, it will generate more shared randomness, but for most applications 5 minutes worth should suffice.)
+This will run for a while to generate the pre-processing data. After the program outputs `Inv. 9500 out of 9600` wait a further 5 minutes. Then kill the process and the other spdz2-offline.x background processes. (If you wait longer than 5 minutes before killing them, it will generate more shared randomness, but for most applications 5 minutes worth should suffice.)
 
 You should be able to see the pre-processing data files in SPDZ-2/Player-Data.
 
@@ -44,46 +44,45 @@ See ./spdz2-offline.cpp for other cmd line options, such as how to specify IP ad
 
 ## Running examples
 
-First, compile the example source. We provide three examples (mult3, innerprod,
-xtabs).
-```
-$ cd SPDZ-2
-$ ./compile.py -p 128 <ex>
+First, compile the example source. We provide three examples (mult3, innerprod, xtabs).
+```sh
+cd SPDZ-2
+./compile.py -p 128 <ex>
 ```
 
 Generate input for each party and transform it into the SPDZ binary format.
 You'll need to fill in `<ex>.P<x>` with correctly-formatted data for each party
 `<x>`.
-```
-$ cd SPDZ-2
-$ mkdir Programs/InputData
-$ touch Programs/InputData/<ex>.P<x> 
-$ ./gen_input_fp.x -N 3 -i ./Programs/InputData/<ex>.P<x> -o ./Player-Data/Private-Input-<x>
+```sh
+cd SPDZ-2
+mkdir Programs/InputData
+touch Programs/InputData/<ex>.P<x> 
+./gen_input_fp.x -N 3 -i ./Programs/InputData/<ex>.P<x> -o ./Player-Data/Private-Input-<x>
 ```
 
 For example, to run mult3 with inputs 14, 12, and 8, we'd do the following:
-```
-$ cd SPDZ-2
-$ mkdir Programs/InputData
-$ printf "1\n14\n" > Programs/InputData/mult3.P0 
-$ printf "1\n12\n" > Programs/InputData/mult3.P1 
-$ printf "1\n8\n" > Programs/InputData/mult3.P2 
-$ ./gen_input_fp.x -N 3 -i ./Programs/InputData/mult3.P0 -o ./Player-Data/Private-Input-0
-$ ./gen_input_fp.x -N 3 -i ./Programs/InputData/mult3.P1 -o ./Player-Data/Private-Input-1
-$ ./gen_input_fp.x -N 3 -i ./Programs/InputData/mult3.P2 -o ./Player-Data/Private-Input-2
+```sh
+cd SPDZ-2
+mkdir Programs/InputData
+printf "1\n14\n" > Programs/InputData/mult3.P0 
+printf "1\n12\n" > Programs/InputData/mult3.P1 
+printf "1\n8\n" > Programs/InputData/mult3.P2 
+./gen_input_fp.x -N 3 -i ./Programs/InputData/mult3.P0 -o ./Player-Data/Private-Input-0
+./gen_input_fp.x -N 3 -i ./Programs/InputData/mult3.P1 -o ./Player-Data/Private-Input-1
+./gen_input_fp.x -N 3 -i ./Programs/InputData/mult3.P2 -o ./Player-Data/Private-Input-2
 ```
 
 Execute the server and each player. The output transcript will include the
 computed solution.
-``` 
-$ ./Server.x <# players> <port #> 
-$ ./Player-Online.x <player ID> <ex>
+```sh
+./Server.x <# players> <port #> 
+./Player-Online.x <player ID> <ex>
 ```
 
 For example, the output from the following will include `Mult3 prod = 1344`. 
-```
-$ ./Server.x 3 5000 &
-$ ./Player-Online.x 0 mult3 & ./Player-Online.x 1 mult3 & ./Player-Online.x 2 mult3
+```sh
+./Server.x 3 5000 &
+./Player-Online.x 0 mult3 & ./Player-Online.x 1 mult3 & ./Player-Online.x 2 mult3
 ```
 
 ## Modifying examples

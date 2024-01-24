@@ -24,7 +24,8 @@ ADD install_dependencies.sh .
 RUN bash install_dependencies.sh
 
 ADD install.sh .
-RUN ["bash", "install.sh"]
+RUN bash install.sh
 
-add README.md .
-add source/* ./SPDZ-2/Programs/Source/
+ADD README.md .
+ADD run_example.sh ./SPDZ-2
+ADD source/* ./SPDZ-2/Programs/Source/
