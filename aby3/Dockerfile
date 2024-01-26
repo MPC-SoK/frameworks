@@ -9,4 +9,8 @@ ADD install.sh .
 RUN ./install.sh
 
 WORKDIR /root/aby3
-ADD source .
+ADD source ./samples
+# build our examples
+RUN python3 build.py
+
+ADD run_example.sh .
