@@ -9,9 +9,7 @@ git checkout -b MPCSOK e57333b19484
 
 # make and install cmbc-gc executables
 make minisat2-download
-make
+make -j2
 
 cp bin/cbmc* /usr/bin/
 cp bin/circuit* /usr/bin/
-
-

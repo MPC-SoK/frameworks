@@ -1,4 +1,5 @@
 #!/bin/sh
+
 set -ex
 
 git clone https://github.com/samee/obliv-c

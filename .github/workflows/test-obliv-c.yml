@@ -1,0 +1,28 @@
+name: Build and test the Docker container for Obliv-C
+
+on:
+  push:
+    branches: [ master ]
+    paths:
+      - obliv-c/*
+  pull_request:
+    branches: [ master ]
+    paths:
+      - obliv-c/*
+
+jobs:
+    build:
+        name: Build container for obliv-c
+        runs-on: ubuntu-latest
+        steps:
+          - name: Check out the repo
+            uses: actions/checkout@v3
+          - uses: docker/setup-buildx-action@v2
+          - uses: docker/build-push-action@v4
+            with:
+              context: obliv-c
+              tags: obliv-c
+              load: true
+              cache-from: type=gha
+              cache-to: type=gha,mode=max
+              push: false

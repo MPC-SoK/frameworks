@@ -1,0 +1,28 @@
+name: Build and test the Docker container for SPDZ-2
+
+on:
+  push:
+    branches: [ master ]
+    paths:
+      - spdz/*
+  pull_request:
+    branches: [ master ]
+    paths:
+      - spdz/*
+
+jobs:
+    build:
+        name: Build container for SPDZ-2
+        runs-on: ubuntu-latest
+        steps:
+          - name: Check out the repo
+            uses: actions/checkout@v3
+          - uses: docker/setup-buildx-action@v2
+          - uses: docker/build-push-action@v4
+            with:
+              context: spdz
+              tags: spdz
+              load: true
+              cache-from: type=gha
+              cache-to: type=gha,mode=max
+              push: false
