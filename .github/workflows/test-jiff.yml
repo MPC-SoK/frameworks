@@ -7,7 +7,7 @@ on:
   push:
     branches: [ master ]
     paths:
-      - '$FRAMEWORK/*'
+      - $FRAMEWORK/*
   pull_request:
     branches: [ master ]
 

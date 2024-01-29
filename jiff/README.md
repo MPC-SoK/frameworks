@@ -6,11 +6,11 @@
 
 Create a Docker image. This will take a few minutes. You only have to do this once.
 ```
-$ docker build -t jiff .
+docker build -t jiff .
 ```
 Spin up a Docker container from the image. 
 ```
-$ docker run -it --rm jiff 
+docker run -it --rm jiff 
 ```
 Please note that any changes you make in the container are not persistent.
 
