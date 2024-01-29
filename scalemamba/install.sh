@@ -1,3 +1,5 @@
+#!/bin/bash
+
 set -ex
 
 
@@ -7,7 +9,7 @@ git clone https://github.com/KULeuven-COSIC/SCALE-MAMBA.git
 cd SCALE-MAMBA
 git checkout -b v1.14 c111516e3ebc1efd12a2bd47dd2122b160e13d1e
 cp /root/source/CONFIG.mine .
-make progs
+make progs -j
 
 # set up certificate authority
 touch ~/.rnd # see: https://github.com/openssl/openssl/issues/7754
