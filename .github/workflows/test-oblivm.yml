@@ -1,0 +1,28 @@
+name: Build and test the Docker container for ObliVM
+
+on:
+  push:
+    branches: [ master ]
+    paths:
+      - oblivm/*
+  pull_request:
+    branches: [ master ]
+    paths:
+      - oblivm/*
+
+jobs:
+    build:
+        name: Build container for oblivm
+        runs-on: ubuntu-latest
+        steps:
+          - name: Check out the repo
+            uses: actions/checkout@v3
+          - uses: docker/setup-buildx-action@v2
+          - uses: docker/build-push-action@v4
+            with:
+              context: oblivm
+              tags: oblivm
+              load: true
+              cache-from: type=gha
+              cache-to: type=gha,mode=max
+              push: false
