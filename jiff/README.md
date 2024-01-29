@@ -44,8 +44,8 @@ Note that the `xtabs` test is relatively slow to execute.
 
 To run interactively in the browser, first run the server node
 ```
-$ cd ~/jiff
-$ node demos/<ex>/server.js
+cd ~/jiff
+node demos/<ex>/server.js
 ```
 
 This starts a server on the Docker localhost. To find the correct IP address, find the docker container name and inspect it to find the correct IP. Run this on your host machine (not in your Docker container):
