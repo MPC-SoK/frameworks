@@ -1,0 +1,30 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ master, ci-test ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+    build:
+        name: Build containers for modified frameworks
+        runs-on: ubuntu-latest
+        steps:
+          - name: Check out the repo
+            uses: actions/checkout@v3
+          - name: Get changed files
+            id: changed-files
+            uses: tj-actions/changed-files@v41.0.1
+            with:
+              dir_names: "true"
+              dir_names_exclude_current_dir: "true"
+              dir_names_max_depth: '1'
+              files_ignore: |
+                .github/*/*
+                .github/*
+          - name: test changed files
+            run: echo ${{ steps.changed-files.outputs.all_changed_files }}
+
+          - name: Build the Docker image
+            run: .github/build_containers.sh ${{ steps.changed-files.outputs.all_changed_files }}
