@@ -15,3 +15,5 @@ for dirname in $CONTAINERS; do
     docker build . --tag "$dirname"
     cd ..
 done
+
+echo "successfully built $CONTAINERS"

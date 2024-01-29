@@ -1,8 +1,8 @@
-name: Docker Image CI
+name: Build modified Docker containers
 
 on:
   push:
-    branches: [ master, ci-test ]
+    branches: [ master ]
   pull_request:
     branches: [ master ]
 
