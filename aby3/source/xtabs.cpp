@@ -49,7 +49,7 @@ void xtabs_test(u64 partyIdx, std::vector<int> ids, std::vector<int> values)
       valCols = {ColumnInfo{"key", TypeID::IntID, keyBitCount},
                  ColumnInfo{"val", TypeID::IntID, keyBitCount}};
 
-  u64 rows = 10;
+  u64 rows = ids.size();
   assert(ids.size() == rows);
   assert(values.size() == rows);
 
@@ -61,7 +61,7 @@ void xtabs_test(u64 partyIdx, std::vector<int> ids, std::vector<int> values)
     if (partyIdx == 0)
     {
       catData.mColumns[0].mData(i, 0) = ids[i];
-      catData.mColumns[0].mData(i, 1) = values[i] % 5;
+      catData.mColumns[0].mData(i, 1) = values[i];
     }
     else if (partyIdx == 1)
     {
@@ -70,28 +70,32 @@ void xtabs_test(u64 partyIdx, std::vector<int> ids, std::vector<int> values)
     }
   }
 
-  /*
-   *prints out data in the clear
-  for (u64 i = 0; i < rows; ++i) {
-    for (u64 j=0; j < catData.mColumns[0].mData.cols(); ++j) {
-      cout << valData.mColumns[0].mData(i,j) << ", ";
-    }
-    cout << endl;
-  }
-  */
-
   SharedTable catTable, valTable;
   catTable = (partyIdx == 0) ? srv.localInput(catData) : srv.remoteInput(0);
   valTable = (partyIdx == 1) ? srv.localInput(valData) : srv.remoteInput(1);
 
-  Table revealTable(rows, catCols);
-  // catTable.mColumns[0] is a SharedColumn, which extends sbMatrix (shared binary matrix). This has a similar interface to si64 matrix, but with the element-wise access removed (e.g. can't do sbmat(0,0)).
-  // TODO: explore ways around this?
-  // srv.mEnc.revealAll(srv.mRt, catTable.mColumns[0], revealTable.mColumns[0].mData(0,0))
+  // i64Matrix keys(catTable.mColumns[0].rows(), catTable.mColumns[0].i64Cols());
+  // srv.mEnc.revealAll(srv.mRt.mComm, catTable.mColumns[0], keys);
+  //
+  // if (partyIdx == 0)
+  //{
+  //  std::cout << keys << std::endl;
+  //}
 
-  /*
-  SelectQuery select;
-  auto keyjoin= select.joinOn(catTable["key"], valTable["key"]);
-  select.addOutput("key", keyjoin);
-  */
+  auto res = srv.join(catTable["key"], valTable["key"], {catTable["cat"], valTable["val"]});
+  cout << "not reached " << endl;
+  // for (auto c : res.mColumns) {
+  //   cout << c.mName << "xXx";
+  // }
+
+  aby3::i64Matrix cats(res.mColumns[0].rows(), res.mColumns[0].i64Cols());
+  aby3::i64Matrix vals(res.mColumns[1].rows(), res.mColumns[1].i64Cols());
+
+  srv.mEnc.revealAll(srv.mRt.mComm, res.mColumns[0], cats);
+  srv.mEnc.revealAll(srv.mRt.mComm, res.mColumns[1], vals);
+
+  if (partyIdx == 0)
+  {
+    std::cout << cats << std::endl;
+  }
 }

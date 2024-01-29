@@ -69,14 +69,14 @@ int main(int argc, char **argv)
 				// expected result: (0*0) + (1*2) + (2*4) + ... = 570
 				for (uint i = 0; i < values.size(); i++)
 				{
-					values[i] = (player+1) * i;
+					values[i] = (player + 1) * i;
 				}
 				innerprod_test(player, values);
 			}
 			if (cmd.getOr(unitTestTag, none).compare("xtabs") == 0)
 			{
-				std::vector<int> ids{1,2,3,4};
-				std::vector<int> values{4,5,6,7};
+				std::vector<int> ids{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+				std::vector<int> values{11, 12, 13, 14, 15, 16, 17, 18, 19, 20};
 				xtabs_test(player, ids, values);
 			}
 

@@ -14,3 +14,5 @@ ADD source ./samples
 RUN python3 build.py
 
 ADD run_example.sh .
+
+ENTRYPOINT ./run_example.sh xtabs
