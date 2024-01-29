@@ -18,8 +18,12 @@ jobs:
             uses: tj-actions/changed-files@v41.0.1
             with:
               dir_names: "true"
+              dir_names_exclude_current_dir: "true"
+              dir_names_max_depth: '1'
+              files_ignore: |
+                .github/*/*
           - name: test changed files
             run: echo ${{ steps.changed-files.outputs.all_changed_files }}
 
           - name: Build the Docker image
-            run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+            run: .github/build_containers.sh ${{ steps.changed-files.outputs.all_changed_files }}
