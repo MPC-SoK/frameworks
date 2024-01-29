@@ -4,14 +4,13 @@
 
 ## Docker setup
 
-Create a Docker image. This will take a few minutes. You only have to do this
-once.
+Create a Docker image. This will take a few minutes. You only have to do this once.
 ```
-$ docker build -t jiff .
+docker build -t jiff .
 ```
 Spin up a Docker container from the image. 
 ```
-$ docker run -it --rm jiff 
+docker run -it --rm jiff 
 ```
 Please note that any changes you make in the container are not persistent.
 
@@ -38,15 +37,15 @@ Run the Docker container. We implemented three examples, `mult3`, `innerprod`, a
 
 To run tests, execute
 ```
-$ cd ~/jiff
-$ npm run-script test-demo -- demos/<ex>
+cd ~/jiff
+npm run-script test-demo -- demos/<ex>
 ```
 Note that the `xtabs` test is relatively slow to execute.
 
 To run interactively in the browser, first run the server node
 ```
-$ cd ~/jiff
-$ node demos/<ex>/server.js
+cd ~/jiff
+node demos/<ex>/server.js
 ```
 
 This starts a server on the Docker localhost. To find the correct IP address, find the docker container name and inspect it to find the correct IP. Run this on your host machine (not in your Docker container):

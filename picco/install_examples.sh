@@ -10,5 +10,5 @@ for DIR in mult3 innerprod xtabs; do
   ln -s /root/keys secure_server/keys 
   ln -s /root/picco/compute/smc-compute smc-compute
   picco $DIR.c smc_config $DIR utility_config
-  make
+  make -j
 done

@@ -1,0 +1,28 @@
+name: Build and test the Docker container for Picco
+
+on:
+  push:
+    branches: [ master ]
+    paths:
+      - picco/*
+  pull_request:
+    branches: [ master ]
+    paths:
+      - picco/*
+
+jobs:
+    build:
+        name: Build container for Picco
+        runs-on: ubuntu-latest
+        steps:
+          - name: Check out the repo
+            uses: actions/checkout@v3
+          - uses: docker/setup-buildx-action@v2
+          - uses: docker/build-push-action@v4
+            with:
+              context: picco
+              tags: picco
+              load: true
+              cache-from: type=gha
+              cache-to: type=gha,mode=max
+              push: false
