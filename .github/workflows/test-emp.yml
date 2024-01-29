@@ -1,0 +1,26 @@
+name: Build and test the Docker container for EMP
+
+on:
+  push:
+    branches: [ master ]
+    paths:
+      - emp/*
+  pull_request:
+    branches: [ master ]
+
+jobs:
+    build:
+        name: Build container for EMP
+        runs-on: ubuntu-latest
+        steps:
+          - name: Check out the repo
+            uses: actions/checkout@v3
+          - uses: docker/setup-buildx-action@v2
+          - uses: docker/build-push-action@v4
+            with:
+              context: emp
+              tags: emp
+              load: true
+              cache-from: type=gha
+              cache-to: type=gha,mode=max
+              push: false
