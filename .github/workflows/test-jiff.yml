@@ -7,6 +7,8 @@ on:
       - jiff/*
   pull_request:
     branches: [ master ]
+    paths:
+      - jiff/*
 
 jobs:
     build:

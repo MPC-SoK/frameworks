@@ -7,6 +7,8 @@ on:
       - emp/*
   pull_request:
     branches: [ master ]
+    paths:
+      - emp/*
 
 jobs:
     build:
