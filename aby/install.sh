@@ -17,5 +17,5 @@ cp ~/source/geninput.py src/examples/
 # build ABY
 mkdir build && cd build
 cmake -DABY_BUILD_EXE=On ..
-make 
+make -j
 
