@@ -1,27 +1,24 @@
 name: Build and test the Docker container for Jiff
 
-env:
-  FRAMEWORK: jiff
-
 on:
   push:
     branches: [ master ]
     paths:
-      - $FRAMEWORK/*
+      - jiff/*
   pull_request:
     branches: [ master ]
 
 jobs:
     build:
-        name: Build container for $FRAMEWORK
+        name: Build container for Jiff
         runs-on: ubuntu-latest
         steps:
           - name: Check out the repo
             uses: actions/checkout@v3
           - uses: docker/build-push-action@v4
             with:
-              context: $FRAMEWORK
-              tags: $FRAMEWORK
+              context: jiff
+              tags: jiff
               load: true
               cache-from: type=gha
               cache-to: type=gha,mode=max

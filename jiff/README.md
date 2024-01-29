@@ -37,8 +37,8 @@ Run the Docker container. We implemented three examples, `mult3`, `innerprod`, a
 
 To run tests, execute
 ```
-$ cd ~/jiff
-$ npm run-script test-demo -- demos/<ex>
+cd ~/jiff
+npm run-script test-demo -- demos/<ex>
 ```
 Note that the `xtabs` test is relatively slow to execute.
 
