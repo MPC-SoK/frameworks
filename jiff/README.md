@@ -4,8 +4,7 @@
 
 ## Docker setup
 
-Create a Docker image. This will take a few minutes. You only have to do this
-once.
+Create a Docker image. This will take a few minutes. You only have to do this once.
 ```
 $ docker build -t jiff .
 ```
