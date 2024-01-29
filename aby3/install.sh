@@ -2,9 +2,9 @@
 
 set -ex
 
-git clone https://github.com/gutjuri/aby3.git
+git clone https://github.com/ladnir/aby3.git
 cd aby3/
-git checkout fix-buildscript-fix
+git checkout 0849df6
 python3 build.py --setup
 python3 build.py
 
