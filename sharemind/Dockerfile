@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM ubuntu:22.04
 WORKDIR /root
 RUN apt-get update && apt-get install -y \
   bison \
@@ -13,25 +13,25 @@ RUN apt-get update && apt-get install -y \
   libboost-iostreams-dev \
   libboost-program-options-dev \
   libboost-system-dev \
-  libbz2-dev \
+  #libbz2-dev \
   libcrypto++-dev \
-  libgmp-dev \
-  libgnutls28-dev \
+  #libgmp-dev \
+  #libgnutls28-dev \
   libhdf5-dev \
   libhiredis-dev \
   libmpfr-dev \
-  libssl-dev \
+  #libssl-dev \
   m4 \
   make \
-  nettle-dev \
-  patch \
-  pkg-config \
+  #nettle-dev \
+  #patch \
+  #pkg-config \
   vim \
   wget \
   xz-utils
 RUN apt-get install -y --no-install-recommends doxygen
 ADD source/ /root/source
-ENV LD_LIBRARY_PATH /root/build-sdk/prefix/lib
+#ENV LD_LIBRARY_PATH /root/build-sdk/prefix/lib
 #ADD README.md .
 ADD install.sh .
 RUN ["bash", "install.sh"]
