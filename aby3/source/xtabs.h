@@ -1,6 +1,6 @@
 #pragma once
 #include <cryptoTools/Common/CLP.h>
-void xtabs_test(oc::u64 partyIdx, std::vector<int> ids, std::vector<int> values);
+void xtabs_test(oc::u64 partyIdx, std::vector<int> ids, std::vector<int> values, int nCats);
 
 #include <cryptoTools/Network/IOService.h>
 #include "aby3/sh3/Sh3Runtime.h"

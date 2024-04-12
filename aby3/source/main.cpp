@@ -75,9 +75,9 @@ int main(int argc, char **argv)
 			}
 			if (cmd.getOr(unitTestTag, none).compare("xtabs") == 0)
 			{
-				std::vector<int> ids{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-				std::vector<int> values{11, 12, 13, 14, 15, 16, 17, 18, 19, 20};
-				xtabs_test(player, ids, values);
+				std::vector<int> ids{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+				std::vector<int> values{0, 2, 2, 3, 4, 5, 6, 7, 8, 9};
+				xtabs_test(player, ids, values, 10);
 			}
 
 			return 0;

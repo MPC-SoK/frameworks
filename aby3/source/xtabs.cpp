@@ -13,7 +13,7 @@ using namespace oc;
 using namespace aby3;
 using namespace std;
 
-void xtabs_test(u64 partyIdx, std::vector<int> ids, std::vector<int> values)
+void xtabs_test(u64 partyIdx, std::vector<int> ids, std::vector<int> values, int nCats)
 {
   std::cout << "testing xtabs..." << std::endl;
 
@@ -91,11 +91,18 @@ void xtabs_test(u64 partyIdx, std::vector<int> ids, std::vector<int> values)
   aby3::i64Matrix cats(res.mColumns[0].rows(), res.mColumns[0].i64Cols());
   aby3::i64Matrix vals(res.mColumns[1].rows(), res.mColumns[1].i64Cols());
 
-  srv.mEnc.revealAll(srv.mRt.mComm, res.mColumns[0], cats);
+  srv.mEnc.revealAll(srv.mRt.mComm, res.mColumns[0], cats); //debug
   srv.mEnc.revealAll(srv.mRt.mComm, res.mColumns[1], vals);
 
   if (partyIdx == 0)
   {
     std::cout << cats << std::endl;
+  }
+
+  std::vector<si64> sums(nCats);
+  for (int i = 0; i < res.mColumns[0].rows(); i++) {
+    for(int c = 0; c < nCats; c++) {
+      // if res(0, i) == c then 
+    }
   }
 }
