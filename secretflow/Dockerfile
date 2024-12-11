@@ -6,8 +6,8 @@ WORKDIR /root
 
 ADD source ./
 
-RUN ./mult3.py 1 2 3
-RUN ./innerprod.py 10
-RUN ./xtabs.py 10
-RUN ./xtabs_jax.py 10
-RUN ./cmp.py 10
+# RUN time ./mult3.py 1 2 3
+# RUN time ./innerprod.py 10
+# RUN time ./xtabs.py 10
+# RUN time ./xtabs_jax.py 10
+# RUN time ./cmp.py 10
